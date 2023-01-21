@@ -1,0 +1,68 @@
+{
+  "hello": "Xin chào {{name}}",
+  "admin": {
+    "employee": "Nhân viên",
+    "jobLevelManagement": {
+      "jobLevelManagement": "Quản lý cấp độ công việc",
+      "createJobLevel": "Tạo cấp độ công việc",
+      "editJobLevel": "Sửa cấp độ công việc",
+      "name": "Tên",
+      "description": "Mô tả",
+      "functions": "Chức năng",
+      "save": "Lưu",
+      "cancel": "Hủy bỏ",
+      "ok": "OK",
+      "enterName": "Nhập tên...",
+      "enterDescription": "Nhập mô tả...",
+      "deleteWarning": "Bạn có muốn xóa cấp độ công việc này không?",
+      "requiredWarning": "Trường này không được để trống!",
+      "nameExistedWarning": "Giá trị này đã tồn tại!"
+    }
+  },
+  "form": {
+    "error": "Tên đăng nhập hoặc mật khẩu không đúng.",
+    "errorServer": "The server is not responding."
+  },
+  "dateRange": "Khoảng thời gian",
+  "hidePassword": "Hiển thị mật khẩu",
+  "showPassword": "Ẩn mật khẩu",
+  "header": {
+    "myLeave": "Ngày nghỉ của tôi",
+    "workingHours": "Giờ làm việc",
+    "myRequest": "Yêu cầu của tôi",
+    "profile": "Hồ sơ",
+    "signOut": "Đăng xuất"
+  },
+  "notification": {
+    "": "Thông báo",
+    "new": "Mới",
+    "requestSubmission": "Yêu cầu đã gửi",
+    "onlyShowUnread": "Chỉ hiển thị chưa đọc",
+    "markAllAsRead": "Đánh dấu tất cả đã đọc",
+    "requestManagement": "Quản lý yêu cầu",
+    "markAsRead": "Đánh dấu đã đọc",
+    "removeTheNotification": "Xóa thông báo"
+  },
+  "leave type": "Loại nghỉ phép",
+  "date from": "Từ ngày",
+  "date to": "Đến ngày",
+  "department": "Phòng",
+  "employee": "Nhân viên",
+  "entitlement": "Quyền Lợi",
+  "days": "ngày",
+  "functions": "Chức năng",
+  "pages": "Tổng số trang",
+  "lines per page": "Số dòng mỗi trang",
+  "of": "trên",
+  "copy": "Sao chép",
+  "copied": "Đã sao chép!",
+  "login": {
+    "username": "Tên người dùng",
+    "enterUsername": "Nhập tên người dùng",
+    "password": "Mật khẩu",
+    "enterPassword": "Nhập mật khẩu",
+    "remember": "Ghi nhớ phiên đăng nhập của tôi trên máy này",
+    "contact": "Không thể truy cập tài khoản? Vui lòng liên hệ <1>quản trị viên</1> của bạn.",
+    "btn": "Đăng nhập"
+  }
+}

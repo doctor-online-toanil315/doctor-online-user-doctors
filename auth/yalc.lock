@@ -1,0 +1,11 @@
+{
+  "version": "v1",
+  "packages": {
+    "@nexthcm/components": {
+      "signature": "cf670dfa743fb130a60a9637ffdb33f4"
+    },
+    "@nexthcm/common": {
+      "signature": "077465c6d736799adc50387e6cac6847"
+    }
+  }
+}

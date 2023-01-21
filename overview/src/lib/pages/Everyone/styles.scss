@@ -1,0 +1,91 @@
+// Tooltips
+.tooltip-everyone.ant-tooltip .ant-tooltip-inner {
+  font-size: 13px;
+  background-color: #ffffff;
+  color: #000000 !important;
+  width: max-content;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.tooltip-everyone.ant-tooltip {
+  padding-top: 9.3px;
+}
+
+.tooltip-everyone {
+  max-width: max-content;
+
+  .tooltip-container {
+    .tooltips {
+      display: flex;
+
+      .title {
+        min-width: 130px;
+        font-weight: bold;
+      }
+
+      .content-working {
+        display: inline-block;
+        font-weight: 600;
+        margin-left: 4px;
+      }
+
+      .current-state {
+        padding: 2px 12px;
+        color: #ffffff;
+        border-radius: 5px;
+      }
+
+      .content {
+        .action {
+          color: #6c86e2;
+          padding: 8px 12px;
+          border-radius: 5px;
+          background: #dfe3f3;
+        }
+
+        .action:not(:last-child) {
+          margin-right: 4px;
+        }
+
+        .action:hover {
+          background: #d8ddf2;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .tooltips:not(:last-child) {
+      margin-bottom: 14px;
+    }
+  }
+}
+
+// NotificationForm
+.modal-confirm-actions {
+  .ant-modal-content {
+    .ant-modal-body {
+      .title-confirm {
+        margin: 0;
+      }
+
+      .type-action {
+        text-transform: capitalize;
+      }
+
+      .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 26px;
+        font-size: 15px;
+        margin-top: 21px;
+
+        &-cancel {
+          background: #dfe3f3;
+          color: var(--activeBlue);
+        }
+      }
+    }
+  }
+}

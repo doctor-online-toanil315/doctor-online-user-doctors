@@ -1,0 +1,52 @@
+.drawer-import-timelog {
+  .ant-drawer-content-wrapper {
+    height: 100% !important;
+  }
+
+  .title-timelog {
+    font-size: 36px !important;
+    line-height: 40px !important;
+    font-weight: 700 !important;
+  }
+
+  .ant-drawer-wrapper-body {
+    position: relative;
+
+    .ant-drawer-body {
+      padding: 16px 24px;
+    }
+
+    .ant-drawer-header {
+      height: 0;
+      position: static;
+      padding: 0;
+
+      .ant-drawer-header-title {
+        height: 0;
+
+        .ant-drawer-close {
+          margin-right: 0;
+          position: fixed;
+          right: 24px;
+          top: 24px;
+          border-radius: 50%;
+          background-color: var(--primaryText);
+          width: 32px;
+          height: 32px;
+          color: var(--secondaryText);
+          z-index: 999;
+          transition: all 0.3s ease-in-out;
+
+          svg {
+            height: 12px !important;
+            width: 12px !important;
+          }
+
+          &:hover {
+            background-color: var(--strongGray);
+          }
+        }
+      }
+    }
+  }
+}

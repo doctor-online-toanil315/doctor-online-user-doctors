@@ -1,0 +1,37 @@
+.dropdown-menu {
+  min-width: fit-content !important;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 16%);
+  top: 130px !important;
+  border: 1px solid #ededed;
+  border-radius: 10px;
+
+  ul {
+    padding: 8px 0;
+    border-radius: 10px;
+
+    li {
+      padding: 6px 16px;
+
+      span {
+        div {
+          font-size: 15px;
+          height: 32px;
+          line-height: 32px;
+        }
+      }
+    }
+  }
+}
+
+.button-dropdown {
+  svg {
+    transition: transform 400ms ease !important;
+  }
+}
+
+.button-dropdown.visible {
+  svg {
+    transition: transform 400ms ease !important;
+    transform: rotate(90deg) !important;
+  }
+}

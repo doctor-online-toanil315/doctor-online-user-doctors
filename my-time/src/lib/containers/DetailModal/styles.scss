@@ -1,0 +1,19 @@
+.tooltip-assignee {
+  max-width: max-content;
+  .ant-tooltip-inner {
+    border-radius: 8px;
+    padding: 8px 16px;
+  }
+}
+.dropdown-action {
+  .ant-dropdown-menu {
+    border: 1px solid #ededed;
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 16%);
+    border-radius: 8px;
+  }
+
+  .ant-dropdown-menu-item,
+  .ant-dropdown-menu-submenu-title {
+    min-height: 44px;
+  }
+}
