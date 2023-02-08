@@ -1,0 +1,10 @@
+{
+  "overview": {
+    "appName": "overview",
+    "path": "http://prod-overview.com"
+  },
+  "my-time": {
+    "appName": "my_time",
+    "path": "http://prod-my-time.com"
+  }
+}

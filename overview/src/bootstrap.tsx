@@ -39,7 +39,11 @@ const mount = ({
   const router = createRouter({ strategy: routingStrategy, initialPathname });
   const root = createRoot(mountPoint);
   root.render(
-    <StyleSheetManager stylisPlugins={[increaseSpecificityPlugin]}>
+    <StyleSheetManager
+      disableCSSOMInjection
+      target={document.getElementById("root") as any}
+      stylisPlugins={[increaseSpecificityPlugin]}
+    >
       <Provider store={storeHost.store} context={CommonContext}>
         <Provider store={storeHost.apiStore}>
           <ThemeProvider theme={theme}>

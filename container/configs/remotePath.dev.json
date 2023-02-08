@@ -1,0 +1,10 @@
+{
+  "overview": {
+    "appName": "overview",
+    "path": "http://localhost:5174"
+  },
+  "my-time": {
+    "appName": "my_time",
+    "path": "http://localhost:5175"
+  }
+}

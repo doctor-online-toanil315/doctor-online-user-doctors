@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { store, apiStore, CommonContext } from "@nexthcm/common";
+import { store, apiStore } from "@nexthcm/common";
 
 interface Props {
   mountFunc: any;

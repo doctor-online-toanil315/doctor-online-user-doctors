@@ -3,8 +3,32 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const commonConfigs = require("./webpack.common");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const packageJson = require("../package.json");
+const remotePathDev = require("./remotePath.dev.json");
+const remotePathQa = require("./remotePath.qa.json");
 
-const devConfigs = {
+const getRemotePaths = (localApps) => {
+  // remote config
+  const qaConfigs = Object.keys(remotePathQa).reduce(
+    (remoteConfigs, subAppKey) => {
+      // current key is not included in local app => get from qa, else get from dev
+      const configItem =
+        localApps.findIndex((localItem) => localItem === subAppKey) === -1
+          ? remotePathQa[subAppKey]
+          : remotePathDev[subAppKey];
+
+      remoteConfigs[
+        configItem.appName
+      ] = `${configItem.appName}@${configItem.path}/remoteEntry.js`;
+
+      return remoteConfigs;
+    },
+    {}
+  );
+
+  return qaConfigs;
+};
+
+const getDevConfigs = (localApps) => ({
   mode: "development",
   entry: "./src/main.tsx",
   output: {
@@ -20,10 +44,7 @@ const devConfigs = {
   plugins: [
     new ModuleFederationPlugin({
       name: "container",
-      remotes: {
-        overview: "overview@http://localhost:5174/remoteEntry.js",
-        my_time: "my_time@http://localhost:5175/remoteEntry.js",
-      },
+      remotes: getRemotePaths(localApps),
       shared: {
         ...packageJson.dependencies,
         // react: {
@@ -48,6 +69,9 @@ const devConfigs = {
       template: "./public/index.html",
     }),
   ],
-};
+});
 
-module.exports = merge(commonConfigs, devConfigs);
+module.exports = (env) => {
+  const localApps = env.apps.split(",");
+  return merge(commonConfigs, getDevConfigs(localApps));
+};

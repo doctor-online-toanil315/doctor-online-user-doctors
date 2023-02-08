@@ -16,7 +16,7 @@ const colors = [
 concurrently(
   args.map((appName, index) => {
     return {
-      command: `yarn --cwd ${appName} start`,
+      command: `yarn --cwd ${appName} start --env apps=${args.join(",")}`,
       prefixColor: colors[index],
       name: appName,
     };
@@ -25,5 +25,3 @@ concurrently(
     killOthers: ["failure", "success"],
   }
 );
-
-console.log(args);
