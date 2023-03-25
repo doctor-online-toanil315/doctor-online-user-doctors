@@ -1,8 +1,8 @@
-import i18next from 'i18next';
-import vi from './translations/vi.json';
-import en from './translations/en.json';
-import { initReactI18next } from 'react-i18next';
-import { commonEn, commonVi } from '@nexthcm/common';
+import i18next from "i18next";
+import vi from "./translations/vi.json";
+import en from "./translations/en.json";
+import { initReactI18next } from "react-i18next";
+import { commonEn, commonVi } from "doctor-online-common";
 
 export const resources = {
   en: { common: commonEn, translation: en },
@@ -10,7 +10,7 @@ export const resources = {
 } as const;
 
 const i18n = i18next.createInstance({
-  lng: 'en',
+  lng: "en",
   interpolation: {
     escapeValue: false,
   },

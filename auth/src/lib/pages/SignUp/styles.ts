@@ -29,11 +29,10 @@ export const ContainerLogin = styled.div`
   }
 `;
 export const StyledForm = styled.form`
-  width: 50%;
-  padding: 40px;
+  width: 550px;
+  padding: 10px 40px;
   background-color: rgb(255 255 255 / 1);
   border-radius: 10px;
-  width: 450px;
   height: fit-content;
   margin: auto;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

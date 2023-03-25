@@ -57,12 +57,25 @@
   "copy": "Copy",
   "copied": "Copied!",
   "login": {
-    "username": "Username",
-    "enterUsername": "Enter username",
+    "username": "Email",
+    "enterUsername": "Enter email",
     "password": "Password",
     "enterPassword": "Enter password",
+    "confirmPass": "Password Confirmation",
+    "enterConfirmPass": "Enter password Confirmation",
+    "firstName": "First Name",
+    "enterFirstName": "Enter first name",
+    "lastName": "Last Name",
+    "enterLastName": "Enter last name",
+    "phoneNumber": "Phone Number",
+    "enterPhoneNumber": "Enter phone number",
     "remember": "Remember my login on this computer",
-    "contact": "Can't access your account? Please contact your <1>administrators</1>.",
+    "contact": "Don't have an account? <1>Sign Up</1>.",
     "btn": "Login"
+  },
+  "signUp": {
+    "success": "Register successfully! Please login.",
+    "contact": "You have account already? <1>Login</1>.",
+    "btn": "Sign Up"
   }
 }

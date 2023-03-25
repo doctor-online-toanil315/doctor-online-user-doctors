@@ -1,13 +1,13 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { KeycloakAPI } from '../services/GatewayApp';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { AuthAPI } from "../services/Auth";
 
 const rootReducer = combineReducers({
-  [KeycloakAPI.reducerPath]: KeycloakAPI.reducer,
+  [AuthAPI.reducerPath]: AuthAPI.reducer,
 });
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(KeycloakAPI.middleware),
+    getDefaultMiddleware().concat(AuthAPI.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

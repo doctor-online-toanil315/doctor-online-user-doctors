@@ -1,11 +1,13 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import ModulesAuth from './lib/modules-auth';
-import { createRouter, RoutingStrategy } from './lib/routes';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import ModulesAuth from "./lib/modules-auth";
+import { createRouter, RoutingStrategy } from "./lib/routes";
 
-import { ThemeProvider } from 'styled-components';
-import { apiStore, CommonContext, store, theme } from '@nexthcm/common';
-import { Provider } from 'react-redux';
+import { ThemeProvider } from "styled-components";
+import { apiStore, CommonContext, store, theme } from "doctor-online-common";
+import { Provider } from "react-redux";
+import "antd/dist/antd.css";
+import "doctor-online-common/dist/styles/variables.css";
 
 const mount = ({
   mountPoint,

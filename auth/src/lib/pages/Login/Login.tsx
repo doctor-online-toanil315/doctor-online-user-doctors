@@ -1,19 +1,12 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
-import { AlertMobile, Button, Checkbox, Input } from "@nexthcm/components";
+import { Button, Checkbox, Input, LogoPrimary } from "doctor-online-components";
 import { AuthResponse } from "../../types/Responses";
-import imgLogo from "../../assets/logo.png";
-import {
-  RootState,
-  saveRemember,
-  setDisplayed,
-  setIsOpenApp,
-  useCommonSelector,
-} from "@nexthcm/common";
-import { useCommonDispatch } from "@nexthcm/common";
+import { saveRemember } from "doctor-online-common";
+import { useCommonDispatch } from "doctor-online-common";
 
 import {
   Contact,
@@ -23,27 +16,15 @@ import {
   StyledButton,
   StyledForm,
   StyledGroupRemembers,
-  StyledLogo,
 } from "./styles";
 import { useEffect, useState } from "react";
-import { StyledModalNotification } from "./styledNotification";
-import {
-  usePreFlightMutation,
-  useLoginMutation,
-} from "../../services/GatewayApp";
-import CryptoJS from "crypto-js";
+import { useLoginMutation } from "../../services/Auth";
+import { Link } from "react-router-dom";
+import { LoginRequest } from "src/lib/types/AuthTypes";
 
 const Login = () => {
   const dispatch = useCommonDispatch();
   const { t } = useTranslation();
-  const { isOpenApp } = useCommonSelector(
-    (state: RootState) => state.mobileAlertSlice
-  );
-  const { isDisplayed } = useCommonSelector(
-    (state: RootState) => state.mobileAlertSlice
-  );
-
-  const navigate = useNavigate();
   const location = useLocation();
   const [isRememberMe, setIsRememberMe] = useState(false);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -55,15 +36,15 @@ const Login = () => {
   });
 
   const [login, { isLoading }] = useLoginMutation();
-  const [preFlight, { isLoading: isLoadingPreFlight }] = usePreFlightMutation();
 
   const form = useForm({
     defaultValues: {
-      username: "",
+      email: "",
+      password: "",
     },
     resolver: yupResolver(
       yup.object({
-        username: yup.string().required(t("common:form.required")),
+        email: yup.string().required(t("common:form.required")),
         password: yup.string().required(t("common:form.required")),
       })
     ),
@@ -71,55 +52,38 @@ const Login = () => {
 
   const { watch } = form;
 
-  const onSubmit = (data: any) => {
-    preFlight({ data: data.username })
+  const onSubmit = (data: LoginRequest) => {
+    login({
+      email: data.email,
+      password: data.password,
+    })
       .unwrap()
-      .then((response) => {
-        const key = CryptoJS.enc.Base64.parse(response.data.secret).toString(
-          CryptoJS.enc.Utf8
-        );
-        login({
-          username: data.username,
-          password: CryptoJS.AES.encrypt(data.password, key).toString(
-            CryptoJS.format.OpenSSL
-          ),
-        })
-          .unwrap()
-          .then((data: AuthResponse) => {
-            if (isRememberMe) {
-              dispatch(saveRemember({ isRemember: true } as any));
-              localStorage.setItem("access_token", data.access_token);
-            } else {
-              dispatch(saveRemember({ isRemember: false } as any));
-              sessionStorage.setItem("access_token", data.access_token);
-            }
-
-            localStorage.setItem("refresh_token", data.refresh_token);
-            if (location.search) {
-              window.location.replace(location.search.replace("?from=", ""));
-            } else {
-              window.location.replace("http://127.0.0.1:8000/overview/me");
-            }
-          })
-          .catch((e) => {
-            if (e.status === 401) {
-              setError({
-                isCheck: true,
-                type: "error",
-              });
-            } else {
-              setError({
-                isCheck: true,
-                type: "errorServer",
-              });
-            }
-          });
+      .then((data) => {
+        if (isRememberMe) {
+          dispatch(saveRemember({ isRemember: true } as any));
+          localStorage.setItem("access_token", data.accessToken);
+        } else {
+          dispatch(saveRemember({ isRemember: false } as any));
+          sessionStorage.setItem("access_token", data.accessToken);
+        }
+        if (location.search) {
+          window.location.replace(location.search.replace("?from=", ""));
+        } else {
+          window.location.replace("http://127.0.0.1:8000/overview/me");
+        }
       })
-      .catch(() => {
-        setError({
-          isCheck: true,
-          type: "errorServer",
-        });
+      .catch((e) => {
+        if (e.status === 401) {
+          setError({
+            isCheck: true,
+            type: "error",
+          });
+        } else {
+          setError({
+            isCheck: true,
+            type: "errorServer",
+          });
+        }
       });
   };
 
@@ -145,35 +109,17 @@ const Login = () => {
     }
   }, []);
 
-  const userAgent = navigator.userAgent.toLowerCase();
-
-  useEffect(() => {
-    if (
-      !isDisplayed &&
-      (/android/i.test(userAgent) || /iphone/i.test(userAgent))
-    ) {
-      dispatch(setIsOpenApp(true));
-      dispatch(setDisplayed());
-    }
-
-    return () => {
-      dispatch(setIsOpenApp(false));
-    };
-  }, []);
-
-  const handleExit = () => {
-    dispatch(setIsOpenApp(false));
-  };
-
   return (
     <ContainerLogin>
       <FormProvider {...form}>
         <StyledForm onSubmit={form.handleSubmit(onSubmit)}>
-          <StyledLogo src={imgLogo} />
+          <div className="logo">
+            <LogoPrimary />
+          </div>
           <Input
             label={t("login.username")}
             placeholder={t("login.enterUsername")}
-            name="username"
+            name="email"
             required
           />
           <br />
@@ -198,36 +144,22 @@ const Login = () => {
               {t("login.remember")}
             </LabelRemember>
           </StyledGroupRemembers>
-          <Contact>
-            <Trans
-              i18nKey="login.contact"
-              components={{
-                1: (
-                  <a
-                    href="https://jira.banvien.com.vn/servicedesk/customer/portal/9"
-                    target="_blank"
-                    rel="noreferrer"
-                  />
-                ),
-              }}
-            />
-          </Contact>
           <StyledButton>
-            <Button loading={isLoading || isLoadingPreFlight} htmlType="submit">
+            <Button loading={isLoading} htmlType="submit">
               {t("login.btn")}
             </Button>
+            <Contact>
+              <Trans
+                i18nKey="login.contact"
+                components={{
+                  1: <Link to={"/sign-up"} />,
+                }}
+              />
+            </Contact>
           </StyledButton>
         </StyledForm>
       </FormProvider>
-      <StyledModalNotification
-        visible={isOpenApp}
-        title="Do you want open to myBv App ?"
-        onCancel={handleExit}
-        type="confirm"
-        confirmIcon="?"
-      >
-        <AlertMobile handleExit={handleExit} userAgent={userAgent} />
-      </StyledModalNotification>
+      <div className="bg-holder"></div>
     </ContainerLogin>
   );
 };

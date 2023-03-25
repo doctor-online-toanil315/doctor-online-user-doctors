@@ -1,8 +1,8 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query";
-import { getToken } from "@nexthcm/common";
+import { getToken } from "doctor-online-common";
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: process.env["API_ACCOUNT_URL"],
+  baseUrl: process.env["API_URL"],
   prepareHeaders: (headers) => {
     const token = getToken();
     if (token) {
