@@ -1,4 +1,13 @@
 {
   "consultationFee": "Consultation Fee",
-  "selectSpecialList": "Select Specialist"
+  "selectSpecialList": "Select Specialist",
+  "profileInfo": "Profile Info",
+  "availableTime": "Available Time",
+  "reviews": "Reviews",
+  "biography": "Biography",
+  "education": "Education",
+  "workAndExperience": "Work & Experience",
+  "achievements": "Achievements",
+  "specializations": "Specializations",
+  "timeSlot": "Time slot"
 }

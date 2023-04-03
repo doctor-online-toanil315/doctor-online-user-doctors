@@ -67,7 +67,7 @@ const FilterDoctor = () => {
           />
         </div>
         <div style={{ marginTop: 70 }} className="form-group">
-          <h3>{t("selectSpecialList")}</h3>
+          <h3>{t("selectSpecialList")}:</h3>
           <ul className="special-list">
             {specialList.map((special) => {
               return (

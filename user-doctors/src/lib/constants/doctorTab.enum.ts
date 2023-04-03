@@ -1,0 +1,5 @@
+export enum DOCTOR_TAB_ENUM {
+  DOCTOR_INFOS = "1",
+  DOCTOR_AVAILABLE_TIME = "2",
+  DOCTOR_REVIEWES = "3",
+}

@@ -1,11 +1,13 @@
 import {
   Button,
+  ClockIcon,
   LikeIcon,
   MoneyIcon,
   RoundedPersonIcon,
   StarGold,
 } from "doctor-online-components";
 import React from "react";
+import { Link } from "react-router-dom";
 import { StyledDoctorCardContainer, StyledDoctorListContainer } from "./styled";
 
 const DoctorListContainer = () => {
@@ -28,7 +30,10 @@ const DoctorListContainer = () => {
               <span className="dot" />
               <span>45+ reviews</span>
             </div>
-            <p>MDS - Periodonyology and Oral Impantology, BDS</p>
+            <p>
+              MDS - Periodonyology and Oral Impantology, BDS <br />
+              17 Years Of Experience
+            </p>
             <p>
               <RoundedPersonIcon /> Dentist
             </p>
@@ -39,9 +44,14 @@ const DoctorListContainer = () => {
             <LikeIcon /> 98% (250 votes)
           </p>
           <p>
+            <ClockIcon /> Avilabale Today
+          </p>
+          <p>
             <MoneyIcon /> $1000
           </p>
-          <Button type="primary">Book Appointment</Button>
+          <Link to="/123222">
+            <Button type="primary">Book Appointment</Button>
+          </Link>
         </div>
       </StyledDoctorCardContainer>
     </StyledDoctorListContainer>

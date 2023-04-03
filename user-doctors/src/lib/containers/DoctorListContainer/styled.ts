@@ -15,13 +15,13 @@ export const StyledDoctorCardContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  gap: 25px;
+  gap: 40px;
 
   .doctor-infos {
     width: 70%;
     display: flex;
     flex-flow: row nowrap;
-    gap: 40px;
+    gap: 20px;
 
     .doctor-img {
       width: 150px;
@@ -84,7 +84,6 @@ export const StyledDoctorCardContainer = styled.div`
   .appointment-infos {
     display: flex;
     flex-flow: column nowrap;
-    gap: 15px;
 
     p {
       display: flex;
