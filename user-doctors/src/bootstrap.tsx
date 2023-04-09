@@ -34,7 +34,7 @@ const mount = ({
     <StyleSheetManager
       disableCSSOMInjection
       target={document.getElementById("root") as any}
-      stylisPlugins={[increaseSpecificityPlugin]}
+      // stylisPlugins={[increaseSpecificityPlugin]}
     >
       <ThemeProvider theme={theme}>
         <Provider store={store} context={CommonContext}>

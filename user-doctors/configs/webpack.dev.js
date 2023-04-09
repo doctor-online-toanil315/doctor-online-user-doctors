@@ -31,7 +31,7 @@ const devConfigs = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "userHome",
+      name: "userDoctors",
       filename: "remoteEntry.js",
       exposes: {
         "./Module": "./src/bootstrap.tsx",

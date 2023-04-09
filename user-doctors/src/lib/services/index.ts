@@ -3,6 +3,16 @@ export {
   DoctorAPI,
   useGetDoctorsQuery,
   useLazyGetDoctorsQuery,
+  useGetDoctorByIdQuery,
+  useGetDoctorAchievementsQuery,
+  useGetDoctorEducationQuery,
+  useGetDoctorWorkExperienceQuery,
 } from "./DoctorAPI";
-export { AppointmentAPI, useGetAppointmentByUserQuery } from "./AppointmentAPI";
+export {
+  AppointmentAPI,
+  useGetAppointmentByUserQuery,
+  useAddAppointmentMutation,
+  useGetAppointmentByDoctorQuery,
+  useLazyGetAppointmentByDoctorQuery,
+} from "./AppointmentAPI";
 export { NotificationAPI, useGetNotificationsQuery } from "./NotificationAPI";

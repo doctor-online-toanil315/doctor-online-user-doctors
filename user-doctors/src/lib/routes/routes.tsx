@@ -8,13 +8,17 @@ import {
 import { NavigationManager } from "../HOC";
 import { HocPermissionRoute } from "../HOC/HocPermissionRoute";
 import { DoctorDetailPage, DoctorListPage } from "../pages";
+import { Header } from "../containers/Header";
 
 const routes = createRoutesFromElements(
   <Route
     path="/"
     element={
       <NavigationManager>
-        <Outlet />
+        <div>
+          <Header />
+          <Outlet />
+        </div>
       </NavigationManager>
     }
   >

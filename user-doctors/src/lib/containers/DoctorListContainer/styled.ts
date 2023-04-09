@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledDoctorListContainer = styled.div`
+  flex: 1;
   display: flex;
   flex-flow: column nowrap;
   gap: 15px;

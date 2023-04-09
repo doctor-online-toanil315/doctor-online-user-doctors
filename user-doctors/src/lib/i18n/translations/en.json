@@ -9,5 +9,13 @@
   "workAndExperience": "Work & Experience",
   "achievements": "Achievements",
   "specializations": "Specializations",
-  "timeSlot": "Time slot"
+  "timeSlot": "Time slot",
+  "patientDetails": "Patient Details",
+  "provideInformation": "Please Provide Following information",
+  "fullName": "Full Name",
+  "email": "Your Email",
+  "phoneNumber": "Phone Number",
+  "reasonForAppointment": "Reason for appointment",
+  "bookingSummary": "Booking Summary",
+  "payment": "Payment"
 }

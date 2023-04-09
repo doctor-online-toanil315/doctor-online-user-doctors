@@ -7,10 +7,17 @@ import DoctorAvailableTime from "./DoctorAvailableTime";
 import DoctorInfos from "./DoctorInfos";
 import DoctorReviewes from "./DoctorReviewes";
 import { Line, StyledDoctorDetailContainer, Title } from "./styled";
+import { useGetDoctorByIdQuery } from "src/lib/services";
+import { useParams } from "react-router-dom";
 
 const DoctorDetailContainer = () => {
   const { t } = useTranslation();
+  const { doctorId } = useParams();
   const [activeTab, setActiveTab] = useState<string>("1");
+  const { data: doctorById } = useGetDoctorByIdQuery(doctorId ?? "", {
+    skip: !doctorId,
+    refetchOnMountOrArgChange: true,
+  });
 
   const tabContents = useMemo(() => {
     return [
@@ -44,15 +51,25 @@ const DoctorDetailContainer = () => {
       <div className="content">
         <div className="summary">
           <img
-            src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=2000"
+            src={
+              doctorById?.data.user?.avatar ??
+              '"https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=2000"'
+            }
             alt="doctor avatar"
           />
-          <h3>Dr. Jacob Jones</h3>
+          <h3>
+            Dr.{" "}
+            {`${doctorById?.data.user?.firstName} ${doctorById?.data.user?.lastName}`}
+          </h3>
           <span className="rating">
-            <StarGold /> 4.7
+            <StarGold /> {doctorById?.data.rating.toFixed(1)}
           </span>
-          <p>MDS - Periodonyology and Oral Impantology, BDS</p>
-          <p>18 Years Experience Overall (18 years as specialist)</p>
+          <p>{doctorById?.data.specializeTitle}</p>
+          <p>
+            {doctorById?.data.yearOfExperience} Years Experience Overall (
+            {doctorById?.data.yearOfExperience}
+            years as specialist)
+          </p>
           <div className="bold">
             <p>
               <LikeIcon /> 98% (250 votes)

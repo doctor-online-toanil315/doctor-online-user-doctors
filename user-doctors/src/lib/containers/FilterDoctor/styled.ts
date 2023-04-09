@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledFilterDoctorContainer = styled.div`
-  width: 200px;
+  width: 250px;
   .special-list {
     padding: 0;
     margin: 0;

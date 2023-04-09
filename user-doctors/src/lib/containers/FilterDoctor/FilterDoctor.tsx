@@ -57,6 +57,7 @@ const FilterDoctor = () => {
             onChange={handleSliderChange}
             min={10}
             max={500}
+            value={[100, 300]}
             range
             name="consultationFee"
             tooltip={{

@@ -7,10 +7,6 @@ import { StyledDoctorListContainer } from "./styled";
 const DoctorListPage = () => {
   return (
     <StyledDoctorListContainer>
-      <p className="back-to-home">
-        <LongArrowLeftIcon />
-        Back to home
-      </p>
       <p className="total-result">
         156 matches found for : Dentist In Sylhet, Bangladesh
       </p>

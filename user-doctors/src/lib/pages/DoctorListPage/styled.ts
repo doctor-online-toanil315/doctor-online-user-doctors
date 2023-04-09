@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const StyledDoctorListContainer = styled.div`
+  padding-top: 20px;
+
   .container {
     display: flex;
     flex-flow: row nowrap;
-    gap: 40px;
+    gap: 50px;
 
-    margin-top: 40px;
+    padding-top: 20px;
   }
 
   .back-to-home {

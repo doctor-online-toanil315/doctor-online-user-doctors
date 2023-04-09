@@ -154,8 +154,8 @@ export const Title = styled.h3`
 
 export const Line = styled.span`
   width: 100%;
-  height: 1.5px;
-  background-color: ${({ theme }) => theme.baseGray02};
+  height: 1px;
+  background-color: ${({ theme }) => theme.lightGray};
 `;
 
 export const StyledCalendar = styled(Calendar)`
@@ -186,6 +186,10 @@ export const StyledCalendar = styled(Calendar)`
 
 export const StyledDoctorAvailableTimeContainer = styled.div`
   && {
+    .time-slot-panel {
+      width: 70%;
+    }
+
     .time-slots {
       list-style-type: none;
       display: flex;
@@ -211,7 +215,253 @@ export const StyledDoctorAvailableTimeContainer = styled.div`
         &:hover {
           background: ${({ theme }) => theme.baseGray02};
         }
+
+        &.inactive {
+          text-decoration-line: line-through;
+          background: ${({ theme }) => theme.baseGray02};
+          cursor: no-drop;
+        }
+
+        &.my-time-slot {
+          background: ${({ theme }) => theme.strongBlue};
+          color: white;
+          cursor: no-drop;
+        }
       }
     }
+  }
+`;
+
+export const StyledDoctorReviewsContainer = styled.div`
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  .header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      &.feedback {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        text-decoration-line: underline;
+        color: ${({ theme }) => theme.strongBlue};
+
+        margin-bottom: 0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .number-of-result {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: ${({ theme }) => theme.baseGray03};
+    margin-bottom: 15px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+`;
+
+export const StyledDoctorReviewsItem = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 15px;
+  margin-top: 20px;
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .review-content {
+    .header {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: baseline;
+
+      .content {
+        width: 50%;
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 10px;
+
+        h5 {
+          margin-bottom: 0;
+        }
+
+        p {
+          margin-bottom: 0;
+
+          &.used-service {
+            font-weight: 500;
+          }
+
+          &.recommend {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            gap: 5px;
+
+            font-weight: 500;
+            color: ${({ theme }) => theme.strongBlue};
+
+            svg {
+              path {
+                stroke: ${({ theme }) => theme.strongBlue} !important;
+              }
+            }
+          }
+        }
+      }
+
+      .rating {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 10px;
+      }
+    }
+
+    .review {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+
+      margin-top: 15px;
+    }
+
+    .happy-with {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      gap: 10px;
+
+      span {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+
+        &.happy-item {
+          color: ${({ theme }) => theme.primaryText};
+          padding: 4px 14px;
+          background-color: ${({ theme }) => theme.lightGray};
+          border-radius: 6px;
+          cursor: default;
+        }
+      }
+    }
+  }
+`;
+
+export const StyledAppointmentModal = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+
+  .patient-infos {
+    width: 48%;
+  }
+
+  .book-summary {
+    width: 48%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: ${({ theme }) => theme.grayBlue};
+
+    .time-appointment {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+
+      span {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 6px;
+
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 24px;
+        color: ${({ theme }) => theme.baseGray03};
+
+        .bold {
+          font-weight: 500;
+          color: ${({ theme }) => theme.primaryText};
+        }
+      }
+    }
+
+    .doctor-infos {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 15px;
+      margin-top: 20px;
+
+      h3,
+      p {
+        margin-bottom: 0;
+      }
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    }
+
+    .payment {
+      margin-top: 20px;
+      .payment-infos {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        p {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 24px;
+          margin-bottom: 0;
+          color: ${({ theme }) => theme.baseGray03};
+        }
+      }
+    }
+  }
+
+  .user-ctrl {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+`;
+
+export const StyledSuccessFullModal = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 15px;
+
+  img {
+    width: 80%;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  button {
+    margin-top: 20px;
   }
 `;

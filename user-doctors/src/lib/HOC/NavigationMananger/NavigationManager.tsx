@@ -29,7 +29,7 @@ export default function NavigationManager({
 
   useEffect(() => {
     window.dispatchEvent(
-      new CustomEvent("[user-home] navigated", { detail: location.pathname })
+      new CustomEvent("[user-doctors] navigated", { detail: location.pathname })
     );
   }, [location]);
 
