@@ -5,6 +5,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const packageJson = require("../package.json");
 const remotePathDev = require("./remotePath.dev.json");
 const remotePathQa = require("./remotePath.qa.json");
+const path = require("path");
 
 const getRemotePaths = (localApps) => {
   // remote config
@@ -69,6 +70,14 @@ const getDevConfigs = (localApps) => ({
       template: "./public/index.html",
     }),
   ],
+  resolve: {
+    modules: [__dirname, "node_modules"],
+    extensions: ["", ".js", ".jsx", ".ts", ".tsx"],
+    alias: {
+      src: path.resolve(__dirname, "../", "src/"),
+    },
+    symlinks: true,
+  },
 });
 
 module.exports = (env) => {

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { store, apiStore } from "@nexthcm/common";
 
 interface Props {
   mountFunc: any;
@@ -44,6 +43,12 @@ const RemoteAppWrapper = ({ mountFunc, remoteAppName }: Props) => {
           detail: location.pathname.replace(remoteAppBaseName.current, ""),
         })
       );
+
+      window.dispatchEvent(
+        new CustomEvent("[host] change sidebar", {
+          detail: remoteAppBaseName.current,
+        })
+      );
     }
   }, [location]);
 
@@ -58,10 +63,6 @@ const RemoteAppWrapper = ({ mountFunc, remoteAppName }: Props) => {
     mountFunc({
       mountPoint: wrapperRef.current!,
       initialPathname: location.pathname.replace(remoteAppBaseName.current, ""),
-      storeHost: {
-        store,
-        apiStore,
-      },
     });
 
     isFirstRunRef.current = false;

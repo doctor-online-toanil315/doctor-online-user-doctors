@@ -1,10 +1,10 @@
 {
-  "overview": {
-    "appName": "overview",
-    "path": "http://prod-overview.com"
+  "user-home": {
+    "appName": "userHome",
+    "path": "http://localhost:5174"
   },
-  "my-time": {
-    "appName": "my_time",
-    "path": "http://prod-my-time.com"
+  "user-doctors": {
+    "appName": "userDoctors",
+    "path": "http://localhost:5175"
   }
 }

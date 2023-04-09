@@ -24,8 +24,6 @@ const getEnvVariables = () => {
   // Set the path parameter in the dotenv config
   const fileEnv = dotenv.config({ path: finalPath }).parsed;
 
-  console.log("==============fileEnv: ", fileEnv);
-
   // reduce it to a object
   const envKeys = Object.keys(fileEnv).reduce((envObj, key) => {
     envObj[key] = fileEnv[key];

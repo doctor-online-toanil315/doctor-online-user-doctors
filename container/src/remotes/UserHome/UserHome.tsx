@@ -1,15 +1,15 @@
 import React from "react";
 import { REMOTE_APP_ROUTING_PREFIX } from "../../constants";
-import { mount } from "overview/Module";
+import { mount } from "userHome/Module";
 import { RemoteAppWrapper } from "../../HOCs";
 
-const Overview = () => {
+const UserHome = () => {
   return (
     <RemoteAppWrapper
       mountFunc={mount}
-      remoteAppName={REMOTE_APP_ROUTING_PREFIX.OVERVIEW}
+      remoteAppName={REMOTE_APP_ROUTING_PREFIX.USER_HOME}
     />
   );
 };
 
-export default Overview;
+export default UserHome;

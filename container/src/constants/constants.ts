@@ -1,9 +1,4 @@
 export const REMOTE_APP_ROUTING_PREFIX = {
-  CART: 'cart',
-  AUTH: 'auth',
-  OVERVIEW: 'overview',
-  NOTIFICATION: 'notifications',
-  NOTIFICATION_COMPONENT: 'noti',
-  LAYOUT: 'layout',
-  MY_TIME: 'my-time',
+  USER_HOME: "user-home",
+  USER_DOCTORS: "user-doctors",
 };

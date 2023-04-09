@@ -9,6 +9,8 @@
     "@fullcalendar/core": "^6.0.3",
     "@fullcalendar/daygrid": "^6.0.3",
     "@fullcalendar/react": "^6.0.4",
+    "doctor-online-common": "^0.0.7",
+    "doctor-online-components": "^0.0.6",
     "@hookform/resolvers": "^2.9.7",
     "@reduxjs/toolkit": "^1.8.4",
     "@sbzen/cron-core": "^2.0.1",

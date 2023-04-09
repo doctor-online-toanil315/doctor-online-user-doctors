@@ -1,13 +1,10 @@
-import { StrictMode } from "react";
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { CommonContext, theme, store, i18n, apiStore } from "@nexthcm/common";
-import { StyleSheetManager, ThemeProvider } from "styled-components";
-
 import App from "./App";
-import { I18nextProvider } from "react-i18next";
-import { repeatClassName } from "@nexthcm/common";
+import { repeatClassName, theme } from "doctor-online-common";
+import { ThemeProvider } from "styled-components";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,19 +17,11 @@ Object.defineProperty(increaseSpecificityPlugin, "name", {
 });
 
 root.render(
-  <StrictMode>
-    <StyleSheetManager stylisPlugins={[increaseSpecificityPlugin]}>
-      <Provider store={store} context={CommonContext}>
-        <Provider store={apiStore}>
-          <ThemeProvider theme={theme}>
-            <I18nextProvider i18n={i18n}>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
-            </I18nextProvider>
-          </ThemeProvider>
-        </Provider>
-      </Provider>
-    </StyleSheetManager>
-  </StrictMode>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>
+  </Provider>
 );
