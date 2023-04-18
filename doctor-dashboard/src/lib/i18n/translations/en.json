@@ -1,0 +1,21 @@
+{
+  "homeSearch": "Search Appointment, Patient or etc",
+  "haveANiceDay": "Have a nice day at great work",
+  "appointmentRequest": "Appointment Request",
+  "viewAll": "View All",
+  "patients": "Patients",
+  "gender": "Gender",
+  "todayAppointments": "Today Appointment",
+  "recentPatient": "Recent Patients",
+  "newPatient": "New Patient",
+  "oldPatient": "Old Patient",
+  "areUSure": "Are you sure?",
+  "cancel": "Following processes will be canceled.This operation can’t be undone",
+  "confirm": "Following processes will be confirmed. This operation can be canceled later",
+  "selectReasonDecline": "Select reason decline",
+  "patientName": "Patient Name",
+  "date": "Date",
+  "disease": "Disease",
+  "status": "Status",
+  "symptom": "Symptom"
+}
