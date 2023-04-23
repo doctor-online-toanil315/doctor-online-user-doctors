@@ -83,8 +83,6 @@ const DoctorAvailableTime = () => {
     appointmentModal.handleOpen();
   };
 
-  console.log(occupiedTimeSlotByStartTime);
-
   return (
     <StyledDoctorAvailableTimeContainer>
       <Title>{t("availableTime")}</Title>

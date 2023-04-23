@@ -72,21 +72,6 @@ export function ModuleUserDoctors({
     };
   }, []);
 
-  useEffect(() => {
-    if (currentUserLogin) {
-      const socket = io("http://localhost:8001", {
-        query: {
-          token: sessionStorage.getItem(ACCESS_TOKEN),
-        },
-      });
-      dispatch(
-        saveClient({
-          client: socket,
-        })
-      );
-    }
-  }, [JSON.stringify(currentUserLogin)]);
-
   if (!currentUserLogin) {
     const hiddenStyle = {
       position: "absolute",

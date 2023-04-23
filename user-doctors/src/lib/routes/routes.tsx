@@ -16,7 +16,6 @@ const routes = createRoutesFromElements(
     element={
       <NavigationManager>
         <div>
-          <Header />
           <Outlet />
         </div>
       </NavigationManager>

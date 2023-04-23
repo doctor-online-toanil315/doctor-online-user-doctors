@@ -4427,10 +4427,10 @@ doctor-online-common@^0.0.7:
   resolved "https://registry.yarnpkg.com/doctor-online-common/-/doctor-online-common-0.0.7.tgz#3943216980d29d0971951ba6e4ddbcf7bf95fead"
   integrity sha512-ehtJ011rExuWtEIRJyr+Tzo0Ap3SCeuR2TuFQt/r/6UKzC8Tmhg5aUT+gkM44QLO1mwZdRbLm990G18GJUkEcA==
 
-doctor-online-components@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/doctor-online-components/-/doctor-online-components-0.0.6.tgz#b224c86e6a9809b54ae16985cd613ee084f38cc2"
-  integrity sha512-keSXncJ9ygGMDMDFAeGyRcAWeh9msACHIjLpRCleAjxqY5SBQ3/Xa0Xvliz5d1mtWrzvlevj2zetKbO6/9nR6w==
+doctor-online-components@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/doctor-online-components/-/doctor-online-components-0.0.7.tgz#ac8b0fe5450c8e0a401cce5ce92fe21a99611104"
+  integrity sha512-3ACcT6y76HT+4W+SNCfc+VJbY837SOwOEaL7dn6OzuzNgaziEJ7AYfj06Uy8kCFDcjaVqWMIq8k6vD7D9J5RMg==
 
 doctrine@^2.1.0:
   version "2.1.0"
