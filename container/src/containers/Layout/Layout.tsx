@@ -2,6 +2,7 @@ import React from "react";
 import { Sidebar } from "../Sidebar";
 import { Outlet } from "react-router-dom";
 import { LayoutContainer } from "./styled";
+import { Header } from "../Header";
 
 const Layout = () => {
   return (
@@ -10,6 +11,7 @@ const Layout = () => {
         <Sidebar />
       </div>
       <div className="right">
+        <Header />
         <Outlet />
       </div>
     </LayoutContainer>

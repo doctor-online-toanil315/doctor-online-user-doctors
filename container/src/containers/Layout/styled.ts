@@ -19,7 +19,7 @@ export const LayoutContainer = styled.div`
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 5px;
-      background-color: ${({ theme }) => theme.baseGray03};
+      background-color: ${({ theme }) => theme.lightGray};
     }
   }
 

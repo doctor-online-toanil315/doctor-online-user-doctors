@@ -5,4 +5,9 @@ export {
   useLazyGetDoctorsQuery,
 } from "./DoctorAPI";
 export { AppointmentAPI, useGetAppointmentByUserQuery } from "./AppointmentAPI";
-export { NotificationAPI, useGetNotificationsQuery } from "./NotificationAPI";
+export {
+  NotificationAPI,
+  useGetNotificationsQuery,
+  useLazyGetNotificationsQuery,
+  useSeenNotificationMutation,
+} from "./NotificationAPI";

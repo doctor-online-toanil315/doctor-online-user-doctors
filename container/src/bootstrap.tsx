@@ -1,7 +1,13 @@
 import * as ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { repeatClassName, theme } from "doctor-online-common";
+import {
+  CommonContext,
+  apiStore,
+  store as commonStore,
+  repeatClassName,
+  theme,
+} from "doctor-online-common";
 import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -17,11 +23,15 @@ Object.defineProperty(increaseSpecificityPlugin, "name", {
 });
 
 root.render(
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+  <Provider store={commonStore} context={CommonContext}>
+    <Provider store={apiStore}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    </Provider>
   </Provider>
 );

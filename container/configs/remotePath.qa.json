@@ -6,5 +6,9 @@
   "user-doctors": {
     "appName": "userDoctors",
     "path": "http://localhost:5175"
+  },
+  "doctor-dashboard": {
+    "appName": "doctorDashboard",
+    "path": "http://localhost:5176"
   }
 }

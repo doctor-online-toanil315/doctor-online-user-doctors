@@ -1,58 +1,21 @@
-import { Routes, Navigate, Route, Outlet } from "react-router-dom";
+import { Routes, Navigate, Route } from "react-router-dom";
 import "./styles.scss";
-import React, { Suspense, useEffect, useRef } from "react";
+import React, { Suspense, useRef } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Layout } from "./containers";
-import { EVENT_MESSAGES } from "doctor-online-common";
-import { useLazyGetMeQuery } from "./services";
+import useInitApp from "./hooks/useInitApp";
 
 const ModuleUserHome = React.lazy(() => import("./remotes/UserHome/UserHome"));
 const ModuleUserDoctors = React.lazy(
   () => import("./remotes/UserDoctors/UserDoctors")
 );
+const ModuleDoctorDashboard = React.lazy(
+  () => import("./remotes/DoctorDashboard/DoctorDashboard")
+);
 
 export function App() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [getMe, { data: currentUserLogin }] = useLazyGetMeQuery();
-
-  // Handlers to notice when iframe loaded
-  const handleIframeOnLoad = () => {
-    iframeRef.current?.contentWindow?.postMessage(
-      EVENT_MESSAGES.GET_AUTH_DATA,
-      "*"
-    );
-  };
-
-  // Handler get tokens from auth app
-  const handleGetTokens = (event: any) => {
-    // http://127.0.0.1:5173 is auth app domain
-    if (event.origin !== "http://127.0.0.1:5173") return;
-    // handle event message
-    switch (event.data) {
-      case EVENT_MESSAGES.HAND_SHAKE:
-        handleIframeOnLoad();
-        break;
-
-      case EVENT_MESSAGES.NEED_TO_LOGIN:
-        window.location.href = `http://127.0.0.1:5173/login?from=${window.location.href}`;
-        break;
-
-      default:
-        sessionStorage.setItem("accessToken", event.data.accessToken);
-        getMe();
-        break;
-    }
-  };
-
-  useEffect(() => {
-    // Subscription event
-    window.addEventListener("message", handleGetTokens);
-
-    // unSubscribe when unmount
-    return () => {
-      window.removeEventListener("message", handleGetTokens);
-    };
-  }, []);
+  const currentUserLogin = useInitApp(iframeRef);
 
   if (!currentUserLogin) {
     const hiddenStyle = {
@@ -93,6 +56,14 @@ export function App() {
           element={
             <Suspense fallback={<LoadingOutlined />}>
               <ModuleUserDoctors />
+            </Suspense>
+          }
+        />
+        <Route
+          path="doctor-dashboard/*"
+          element={
+            <Suspense fallback={<LoadingOutlined />}>
+              <ModuleDoctorDashboard />
             </Suspense>
           }
         />

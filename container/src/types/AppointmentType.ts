@@ -1,6 +1,13 @@
 import { ConsultationType } from "./ConsultionType";
 import { UserType } from "./UserTypes";
 
+export interface BaseAppointmentType {
+  startTime: string;
+  endTime: string;
+  reasonForAppointment: string;
+  doctorId: string;
+}
+
 export interface AppointmentType {
   id: string;
   status: string;
@@ -23,4 +30,13 @@ export interface AppointmentType {
     user: UserType;
   };
   consultion: ConsultationType;
+}
+
+export interface UpdateAppointmentStatus {
+  id: string;
+  status: string;
+  reasonDeclined: string;
+  startTime: string;
+  endTime: string;
+  reasonForAppointment: string;
 }

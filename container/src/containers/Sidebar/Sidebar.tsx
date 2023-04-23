@@ -26,6 +26,27 @@ const Sidebar = () => {
         },
       ];
     }
+
+    return [
+      {
+        id: 1,
+        href: "doctor-dashboard",
+        icon: null,
+        label: "Home",
+      },
+      {
+        id: 2,
+        href: "doctor-appointments",
+        icon: null,
+        label: "Appointments",
+      },
+      {
+        id: 3,
+        href: "doctor-patients",
+        icon: null,
+        label: "Patients",
+      },
+    ];
   }, [me]);
 
   return (

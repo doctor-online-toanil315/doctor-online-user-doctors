@@ -36,4 +36,8 @@ export const NotificationAPI = createApi({
   }),
 });
 
-export const { useGetNotificationsQuery } = NotificationAPI;
+export const {
+  useGetNotificationsQuery,
+  useLazyGetNotificationsQuery,
+  useSeenNotificationMutation,
+} = NotificationAPI;

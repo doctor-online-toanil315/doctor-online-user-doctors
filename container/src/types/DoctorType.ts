@@ -1,6 +1,8 @@
-import { ROLE_ENUM } from ".yalc/doctor-online-common/dist";
+import { ROLE_ENUM } from "doctor-online-common";
+import { UserType } from "./UserTypes";
 
 export interface DoctorType {
+  id: string;
   doctorId: string;
   certificate: string;
   identityCardFrontSide: string;
@@ -19,4 +21,22 @@ export interface DoctorType {
   role: ROLE_ENUM;
   specializeTitle: string;
   rating: number;
+  price: number;
+  biography: string;
+  user?: UserType;
 }
+
+export interface DoctorAchievement {
+  id: string;
+  title: string;
+  date: string;
+  description: string;
+}
+
+export interface DoctorEducation {
+  id: string;
+  title: string;
+  date: string;
+}
+
+export interface DoctorWorkExperience extends DoctorEducation {}
