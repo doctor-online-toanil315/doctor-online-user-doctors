@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import { NavigationManager } from "../HOC";
 import { HocPermissionRoute } from "../HOC/HocPermissionRoute";
-import { Header } from "../containers/Header";
 import { DashBoard } from "../pages/DashBoard";
 
 const routes = createRoutesFromElements(
@@ -16,7 +15,6 @@ const routes = createRoutesFromElements(
     element={
       <NavigationManager>
         <div>
-          <Header />
           <Outlet />
         </div>
       </NavigationManager>

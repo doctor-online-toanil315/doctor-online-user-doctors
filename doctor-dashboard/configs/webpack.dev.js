@@ -27,7 +27,6 @@ const devConfigs = {
     },
     open: true,
     liveReload: true,
-    // devMiddleware: { writeToDisk: true },
   },
   plugins: [
     new ModuleFederationPlugin({
