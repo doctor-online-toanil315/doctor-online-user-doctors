@@ -1,13 +1,13 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import {
   ApiQueryType,
+  ApiResponseImpl,
   ApiResponseWithPaginate,
   AppointmentQueryType,
   AppointmentType,
   BaseAppointmentType,
   PatientType,
   UpdateAppointmentStatus,
-  UserType,
 } from "../types";
 import { baseQuery } from "./baseQuery";
 
@@ -19,6 +19,18 @@ export const AppointmentAPI = createApi({
   tagTypes: ["Appointment"],
   keepUnusedDataFor: 500,
   endpoints: (builder) => ({
+    getAppointmentById: builder.query<ApiResponseImpl<AppointmentType>, string>(
+      {
+        query: (appointmentId: string) => ({
+          url: `${BASE_URL}/${appointmentId}`,
+          method: "GET",
+        }),
+        providesTags: (result, error, appointmentId) => [
+          { type: "Appointment", id: appointmentId },
+        ],
+      }
+    ),
+
     getAppointmentByUser: builder.query<
       ApiResponseWithPaginate<AppointmentType[]>,
       ApiQueryType & { userId: string }
@@ -76,6 +88,7 @@ export const AppointmentAPI = createApi({
 });
 
 export const {
+  useGetAppointmentByIdQuery,
   useGetAppointmentByUserQuery,
   useAddAppointmentMutation,
   useGetAppointmentByDoctorQuery,

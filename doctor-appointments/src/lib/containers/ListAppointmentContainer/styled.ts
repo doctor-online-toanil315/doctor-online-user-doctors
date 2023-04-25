@@ -150,6 +150,17 @@ export const StyledListAppointmentContainer = styled.div`
                 }
               }
             }
+
+            &.blue {
+              background-color: ${({ theme }) => theme.lightBlue} !important;
+              color: white;
+
+              svg {
+                path {
+                  fill: white;
+                }
+              }
+            }
           }
         }
 

@@ -23,5 +23,14 @@
   "confirmAppointment": "Confirm appointment",
   "timeAndDuration": "Time & Duration",
   "consultationTime": "Consultation time (30 Mins)",
-  "confirmSuccess": "Confirm successfully!"
+  "confirmSuccess": "Confirm successfully!",
+  "appointmentDetail": "Appointment Detail",
+  "appointmentDate": "Appointment Date",
+  "appointmentHour": "Appointment Time",
+  "patientEmail": "Patient Email",
+  "patientPhoneNumber": "Phone Number",
+  "reasonForAppointment": "Reason For Appointment",
+  "appointments": "Appointments",
+  "serviceDuration": "Service Duration",
+  "consultingTimings": "Consulting Timings"
 }

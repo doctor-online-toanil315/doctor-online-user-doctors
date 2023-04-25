@@ -10,6 +10,7 @@ export {
 } from "./DoctorAPI";
 export {
   AppointmentAPI,
+  useGetAppointmentByIdQuery,
   useGetAppointmentByUserQuery,
   useAddAppointmentMutation,
   useGetAppointmentByDoctorQuery,

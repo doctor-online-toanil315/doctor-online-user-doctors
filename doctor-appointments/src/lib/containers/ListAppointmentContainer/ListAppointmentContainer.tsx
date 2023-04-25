@@ -1,16 +1,18 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { StyledListAppointmentContainer } from "./styled";
 import {
   CheckIcon,
   ClockIcon,
   CloseIcon,
+  EyeIcon,
   LongArrowLeftIcon,
   LongArrowRightIcon,
   Modal,
   PaperIcon,
   PhoneIcon,
+  Tooltip,
 } from "doctor-online-components";
 import { APPOINTMENT_STATUS, CHANGE_DATE_ACTION_ENUM } from "src/lib/constants";
 import {
@@ -26,6 +28,7 @@ import { ConfirmModal } from "../ConfirmModal";
 
 const ListAppointmentContainer = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDate, setSelectedDate] = useState<number>(0);
   const [selectedAppointment, setSelectedAppointment] =
@@ -148,6 +151,14 @@ const ListAppointmentContainer = () => {
                   <PhoneIcon /> Start Video Call
                 </div>
               )}
+              <Tooltip title="View detail">
+                <div
+                  className="action blue"
+                  onClick={() => navigate(`/${appointment.id}`)}
+                >
+                  <EyeIcon style={{ width: 20 }} />
+                </div>
+              </Tooltip>
             </div>
             <p
               className={`status ${
