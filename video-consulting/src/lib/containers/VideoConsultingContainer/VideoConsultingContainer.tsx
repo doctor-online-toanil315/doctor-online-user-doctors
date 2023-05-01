@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
-import { StyledVideoConsultingContainer } from "./styled";
+import React, { useEffect, useState } from "react";
+import { StyledNoteModal, StyledVideoConsultingContainer } from "./styled";
 import { useSearchParams } from "react-router-dom";
 import { useGetMeQuery, useGetUserByIdQuery } from "src/lib/services";
 import {
+  Button,
   CameraIcon,
+  DangerIcon,
   HangUpIcon,
   MicroPhoneIcon,
+  Modal,
 } from "doctor-online-components";
 import useSocket from "src/lib/hooks/useSocket";
-import { RootState, useCommonSelector } from "doctor-online-common";
+import { useModal } from "doctor-online-common";
 
 const VideoConsultingContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,9 +22,10 @@ const VideoConsultingContainer = () => {
     skip: !targetUserId || !currentUserLogin,
     refetchOnMountOrArgChange: true,
   });
-  const { client } = useCommonSelector((state: RootState) => state.webSocket);
+  const [triggerAnswerCall, setTriggerAnswerCall] = useState(false);
 
   const {
+    call,
     callAccepted,
     callEnded,
     stream,
@@ -32,17 +36,32 @@ const VideoConsultingContainer = () => {
     establishHandShake,
     callUser,
     answerCall,
-  } = useSocket(client);
+    connectEstablish,
+  } = useSocket();
 
-  // useEffect(() => {
-  //   if (client && from === currentUserLogin?.data.id) {
-  //     handShake(to);
-  //   }
+  useEffect(() => {
+    if (from === currentUserLogin?.data.id) {
+      handShake(targetUserId);
+    }
 
-  //   if (client && to === currentUserLogin?.data.id) {
-  //     establishHandShake(from);
-  //   }
-  // }, [client, from, currentUserLogin]);
+    if (to === currentUserLogin?.data.id) {
+      establishHandShake(from);
+    }
+  }, [from, currentUserLogin]);
+
+  useEffect(() => {
+    if (connectEstablish) {
+      callUser(targetUserId);
+    }
+  }, [connectEstablish]);
+
+  useEffect(() => {
+    if (Object.keys(call).length > 0) {
+      modal.handleOpen();
+    }
+  }, [call]);
+
+  const modal = useModal();
 
   return (
     <StyledVideoConsultingContainer>
@@ -62,26 +81,38 @@ const VideoConsultingContainer = () => {
       {callAccepted && !callEnded && (
         <video ref={bigVideoRef} className="big-video" playsInline autoPlay />
       )}
-      {stream && (
-        <video
-          ref={smallVideoRef}
-          className="small-video"
-          playsInline
-          muted
-          autoPlay
-        />
-      )}
+      <video
+        ref={smallVideoRef}
+        className="small-video"
+        playsInline
+        autoPlay
+        muted
+      />
       <div className="footer">
         <div className="action">
           <MicroPhoneIcon />
         </div>
-        <div className="hang-up" onClick={() => callUser(targetUserId)}>
+        <div className="hang-up">
           <HangUpIcon />
         </div>
-        <div className="action" onClick={() => answerCall()}>
+        <div className="action">
           <CameraIcon />
         </div>
       </div>
+      <Modal open={modal.isOpen} width={450} onCancel={modal.handleClose}>
+        <StyledNoteModal>
+          <DangerIcon />
+          <p>Note that during the meeting, the camera will always be on</p>
+          <Button
+            onClick={() => {
+              answerCall();
+              modal.handleClose();
+            }}
+          >
+            Ok
+          </Button>
+        </StyledNoteModal>
+      </Modal>
     </StyledVideoConsultingContainer>
   );
 };

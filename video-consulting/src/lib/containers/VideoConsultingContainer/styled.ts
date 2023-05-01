@@ -87,8 +87,34 @@ export const StyledVideoConsultingContainer = styled.div`
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 151px;
+    width: 121px;
     height: 171px;
     border-radius: 10px;
+  }
+`;
+
+export const StyledNoteModal = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 15px;
+
+  svg {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  p {
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    color: ${({ theme }) => theme.strongBlue};
+    margin-bottom: 0;
+  }
+
+  button {
+    height: 40px !important;
+    padding: 0 50px !important;
   }
 `;

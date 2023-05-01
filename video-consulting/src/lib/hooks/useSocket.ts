@@ -1,22 +1,33 @@
-import { useCommonSelector, RootState } from "doctor-online-common";
 import { useEffect, useRef, useState } from "react";
 import Peer from "simple-peer";
 import { useGetMeQuery } from "../services";
+import { ACCESS_TOKEN } from "../constants";
+import { io } from "socket.io-client";
 
-const useSocket = (client: any) => {
+const useSocket = () => {
   const { data: currentUserLogin } = useGetMeQuery();
   const [stream, setStream] = useState<MediaStream | undefined>(undefined);
   const [call, setCall] = useState<any>({});
   const [callAccepted, setCallAccepted] = useState(false);
   const [callEnded, setCallEnded] = useState(false);
-
+  const [connectEstablish, setConnectEstablish] = useState(false);
+  const clientRef = useRef<any>(null);
   const bigVideoRef = useRef<HTMLVideoElement>(null);
   const smallVideoRef = useRef<HTMLVideoElement>(null);
   const peerRef = useRef<any>(null);
   const connection = useRef<any>(null);
 
+  const isFirstRunRef = useRef<boolean>(true);
   useEffect(() => {
-    if (client) {
+    if (currentUserLogin && isFirstRunRef.current) {
+      const client = io("http://localhost:8001", {
+        query: {
+          token: sessionStorage.getItem(ACCESS_TOKEN),
+        },
+      });
+      clientRef.current = client;
+      isFirstRunRef.current = false;
+
       navigator.mediaDevices
         .getUserMedia({ video: true, audio: true })
         .then((currentStream) => {
@@ -24,51 +35,50 @@ const useSocket = (client: any) => {
           if (smallVideoRef.current) {
             smallVideoRef.current.srcObject = currentStream;
           }
+        })
+        .catch((error) => {
+          console.log("===================error get stream: ", error);
         });
 
       client.on("handShakeEstablished", ({ from }: { from: string }) => {
-        callUser(from);
+        setConnectEstablish(true);
       });
 
       client.on("callUser", ({ signal, from }) => {
-        console.log("==================================callUser: ", {
-          signal,
-          from,
-        });
         setCall({ isReceiveCall: true, from, signal });
       });
 
       client.on("callEnded", () => {
         leaveCall();
       });
+
+      client.on("callAccepted", (signal) => {
+        setCallAccepted(true);
+        peerRef.current.signal(signal);
+        connection.current = peerRef.current;
+      });
     }
 
     return () => {
-      client?.off("callAccepted");
-      client?.off("handShakeEstablished");
-      client?.off("callUser");
-      client?.off("callEnded");
+      clientRef.current?.off("callAccepted");
+      clientRef.current?.off("handShakeEstablished");
+      clientRef.current?.off("callUser");
+      clientRef.current?.off("callEnded");
     };
   }, []);
 
-  // const isFirstRunRef = useRef<boolean>(true);
-  // useEffect(() => {
-  //   if (Object.keys(call).length > 0 && client && isFirstRunRef.current) {
-  //     console.log("===========call: ", call);
-  //     answerCall();
-  //     isFirstRunRef.current = false;
-  //   }
-  // }, [call, client]);
-
   const handShake = (to: string) => {
-    if (client) {
-      client.emit("handShake", { from: currentUserLogin?.data.id, to });
+    if (clientRef.current) {
+      clientRef.current.emit("handShake", {
+        from: currentUserLogin?.data.id,
+        to,
+      });
     }
   };
 
   const establishHandShake = (to: string) => {
-    if (client) {
-      client.emit("handShakeEstablished", {
+    if (clientRef.current) {
+      clientRef.current.emit("handShakeEstablished", {
         to,
         from: currentUserLogin?.data.id,
       });
@@ -76,11 +86,15 @@ const useSocket = (client: any) => {
   };
 
   const answerCall = () => {
-    if (client) {
+    if (clientRef.current && call.signal) {
       setCallAccepted(true);
-      peerRef.current = new Peer({ initiator: false, trickle: false, stream });
+      peerRef.current = new Peer({
+        initiator: false,
+        trickle: false,
+        stream,
+      });
       peerRef.current.on("signal", (data: any) => {
-        client.emit("answerCall", { signal: data, to: call.from });
+        clientRef.current.emit("answerCall", { signal: data, to: call.from });
       });
       peerRef.current.on("stream", (currentStream: any) => {
         if (bigVideoRef.current) {
@@ -93,10 +107,10 @@ const useSocket = (client: any) => {
   };
 
   const callUser = (id: string) => {
-    if (client) {
+    if (clientRef.current) {
       peerRef.current = new Peer({ initiator: true, trickle: false, stream });
       peerRef.current.on("signal", (data: any) => {
-        client.emit("callUser", {
+        clientRef.current.emit("callUser", {
           userToCall: id,
           signalData: data,
           from: currentUserLogin?.data.id,
@@ -106,19 +120,6 @@ const useSocket = (client: any) => {
         if (bigVideoRef.current) {
           bigVideoRef.current.srcObject = currentStream;
         }
-      });
-
-      client.on("callAccepted", (signal) => {
-        console.log("=======================call Accepted: ", signal);
-        setCallAccepted(true);
-        peerRef.current.signal(signal);
-        connection.current = peerRef.current;
-      });
-      peerRef.current.on("close", () => {
-        setCallAccepted(false);
-        setCallEnded(true);
-        setCall(null);
-        client.off("callAccepted");
       });
     }
   };
@@ -130,9 +131,9 @@ const useSocket = (client: any) => {
   };
 
   return {
-    client,
     call,
     callAccepted,
+    connectEstablish,
     callEnded,
     stream,
     bigVideoRef,
