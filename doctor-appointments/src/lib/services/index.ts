@@ -17,5 +17,11 @@ export {
   useLazyGetAppointmentByDoctorQuery,
   useUpdateAppointmentMutation,
   useGetPatientOfDoctorQuery,
+  useAddConsultationMutation,
+  useUpdateConsultationMutation,
+  useAddMedicineMutation,
+  useAddTestMutation,
 } from "./AppointmentAPI";
 export { NotificationAPI, useGetNotificationsQuery } from "./NotificationAPI";
+export { MedicineAPI, useGetMedicinesQuery } from "./MedicineAPI";
+export { LabTestAPI, useGetLabTestsQuery } from "./LabTestAPI";

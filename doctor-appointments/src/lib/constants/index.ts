@@ -6,3 +6,7 @@ export * from "./reasonDeclinedOption.enum";
 export * from "./patientStatus.enum";
 export * from "./typeOfList.enum";
 export * from "./changeDateAction.enum";
+export * from "./methodOfIntake.enum";
+export * from "./formMedicine.enum";
+export * from "./when.enum";
+export * from "./testPriority.enum";

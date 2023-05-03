@@ -30,7 +30,7 @@ export default function NavigationManager({
   useEffect(() => {
     window.dispatchEvent(
       new CustomEvent("[doctor-appointments] navigated", {
-        detail: location.pathname,
+        detail: location.pathname + (location.search ?? ""),
       })
     );
   }, [location]);

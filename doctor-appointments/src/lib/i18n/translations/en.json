@@ -32,5 +32,9 @@
   "reasonForAppointment": "Reason For Appointment",
   "appointments": "Appointments",
   "serviceDuration": "Service Duration",
-  "consultingTimings": "Consulting Timings"
+  "consultingTimings": "Consulting Timings",
+  "updateConsultationSuccess": "Update consultation successfully.",
+  "addConsultationSuccess": "Add new consultation successfully.",
+  "addMedicineSuccessfully": "Add new medicine successfully.",
+  "addTestSuccessfully": "Add new test successfully"
 }

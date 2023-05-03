@@ -1,9 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  StyledAppointmentOption,
-  StyledEventContent,
-  StyledWeekAppointment,
-} from "./styled";
+import { StyledWeekAppointment } from "./styled";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { useTranslation } from "react-i18next";
@@ -17,22 +13,15 @@ import { useModal } from "doctor-online-common";
 import moment from "moment";
 import { APPOINTMENT_STATUS, CHANGE_DATE_ACTION_ENUM } from "src/lib/constants";
 import {
-  CalendarIcon,
-  CheckIcon,
-  ClockIcon,
-  CloseIcon,
-  EditIcon,
-  EyeIcon,
   LongArrowLeftIcon,
   LongArrowRightIcon,
   Modal,
-  MoreVertIcon,
-  PhoneIcon,
 } from "doctor-online-components";
 import { Divider, Dropdown, Tooltip } from "antd";
 import { RescheduleModal } from "../RescheduleModal";
 import { DeclineModal } from "../DeclineModal";
 import { ConfirmModal } from "../ConfirmModal";
+import CustomEventContent from "../CustomEventContent/CustomEventContent";
 
 const WeekAppointmentContainer = () => {
   const calendarRef = useRef<FullCalendar>(null!);
@@ -141,45 +130,47 @@ const WeekAppointmentContainer = () => {
           </div>
         </div>
       </div>
-      <FullCalendar
-        plugins={[timeGridPlugin]}
-        weekends={true}
-        initialView="timeGridWeek"
-        slotDuration="00:30:00"
-        slotLabelFormat={{
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
-        }}
-        slotLabelInterval="00:30:00"
-        slotMinTime="07:00"
-        slotMaxTime="18:00"
-        headerToolbar={{
-          left: "",
-          center: "",
-          right: "",
-        }}
-        ref={calendarRef}
-        initialDate={new Date(Number(from ?? Date.now()))}
-        events={appointments?.data.map((appointment) => {
-          console.log(appointment);
-          return {
-            title: appointment.id,
-            start: Number(appointment.startTime),
-            end: Number(appointment.endTime),
-            ...appointment,
-          };
-        })}
-        eventContent={(eventInfo) => (
-          <CustomEventContent
-            eventInfo={eventInfo}
-            handleConfirm={handleOpenConfirm}
-            handleDecline={handleOpenDecline}
-            handleReschedule={handleOpenReSchedule}
-          />
-        )}
-        expandRows={true}
-      />
+      <div className="calendar">
+        <FullCalendar
+          plugins={[timeGridPlugin]}
+          weekends={true}
+          initialView="timeGridWeek"
+          slotDuration="00:30:00"
+          slotLabelFormat={{
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true,
+          }}
+          slotLabelInterval="00:30:00"
+          slotMinTime="07:00"
+          slotMaxTime="18:00"
+          headerToolbar={{
+            left: "",
+            center: "",
+            right: "",
+          }}
+          ref={calendarRef}
+          initialDate={new Date(Number(from ?? Date.now()))}
+          events={appointments?.data.map((appointment) => {
+            console.log(appointment);
+            return {
+              title: appointment.id,
+              start: Number(appointment.startTime),
+              end: Number(appointment.endTime),
+              ...appointment,
+            };
+          })}
+          eventContent={(eventInfo) => (
+            <CustomEventContent
+              eventInfo={eventInfo}
+              handleConfirm={handleOpenConfirm}
+              handleDecline={handleOpenDecline}
+              handleReschedule={handleOpenReSchedule}
+            />
+          )}
+          expandRows={true}
+        />
+      </div>
       <Modal
         width={500}
         open={rescheduleModal.isOpen}
@@ -210,123 +201,5 @@ const WeekAppointmentContainer = () => {
     </StyledWeekAppointment>
   );
 };
-
-function CustomEventContent({
-  eventInfo,
-  handleConfirm,
-  handleDecline,
-  handleReschedule,
-}: any) {
-  const navigate = useNavigate();
-  const appointment: AppointmentType = eventInfo.event.extendedProps;
-  const color =
-    appointment.status === APPOINTMENT_STATUS.CONFIRMED
-      ? "strongBlue"
-      : appointment.status === APPOINTMENT_STATUS.WAITING
-      ? "lightOrange"
-      : "red";
-
-  const shouldShowAction = !(
-    appointment.status === APPOINTMENT_STATUS.DECLINED ||
-    moment(eventInfo.event.start).valueOf() < Date.now()
-  );
-
-  const menu = [
-    {
-      key: "1",
-      label: (
-        <div onClick={() => navigate(eventInfo.event.title)}>
-          <StyledAppointmentOption>
-            <EyeIcon />
-            View Detail
-          </StyledAppointmentOption>
-        </div>
-      ),
-    },
-    {
-      key: "5",
-      label: appointment.status === APPOINTMENT_STATUS.WAITING && (
-        <div onClick={() => handleReschedule(eventInfo.event.title)}>
-          <StyledAppointmentOption>
-            <EditIcon />
-            Reschedule
-          </StyledAppointmentOption>
-        </div>
-      ),
-    },
-    {
-      key: "2",
-      label: appointment.status === APPOINTMENT_STATUS.WAITING && (
-        <div onClick={() => handleConfirm(eventInfo.event.title)}>
-          <StyledAppointmentOption>
-            <CheckIcon />
-            Confirm
-          </StyledAppointmentOption>
-        </div>
-      ),
-    },
-    {
-      key: "3",
-      label: appointment.status === APPOINTMENT_STATUS.CONFIRMED && (
-        <div>
-          <StyledAppointmentOption>
-            <PhoneIcon />
-            Start Video Call
-          </StyledAppointmentOption>
-        </div>
-      ),
-    },
-    {
-      key: "4",
-      label: appointment.status === APPOINTMENT_STATUS.WAITING && (
-        <div onClick={() => handleDecline(eventInfo.event.title)}>
-          <StyledAppointmentOption>
-            <CloseIcon />
-            Decline
-          </StyledAppointmentOption>
-        </div>
-      ),
-    },
-  ];
-
-  return (
-    <Tooltip
-      title={
-        !shouldShowAction ? "This Appointment Request cant process now!" : null
-      }
-    >
-      <StyledEventContent
-        color={color}
-        isDisable={
-          appointment.status === APPOINTMENT_STATUS.DECLINED ||
-          moment(eventInfo.event.start).valueOf() < Date.now()
-        }
-      >
-        <h4>{`${appointment.user.firstName} ${appointment.user.lastName}`}</h4>
-        <p>{eventInfo.timeText}</p>
-        <div className="user-ctrl">
-          {shouldShowAction ? (
-            <Dropdown
-              trigger={["click"]}
-              menu={{ items: menu }}
-              dropdownRender={(menu) => (
-                <div>
-                  {React.cloneElement(menu as React.ReactElement)}
-                  <Divider style={{ margin: 8 }} />
-                </div>
-              )}
-              placement="bottomRight"
-              arrow={{ pointAtCenter: true }}
-            >
-              <MoreVertIcon />
-            </Dropdown>
-          ) : (
-            <MoreVertIcon />
-          )}
-        </div>
-      </StyledEventContent>
-    </Tooltip>
-  );
-}
 
 export default WeekAppointmentContainer;

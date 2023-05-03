@@ -25,6 +25,7 @@ import { AppointmentType } from "src/lib/types";
 import { useTranslation } from "react-i18next";
 import { DeclineModal } from "../DeclineModal";
 import { ConfirmModal } from "../ConfirmModal";
+import DoctorNotFoundImg from "src/lib/assets/doctor-not-found.png";
 
 const ListAppointmentContainer = () => {
   const { t } = useTranslation();
@@ -212,7 +213,18 @@ const ListAppointmentContainer = () => {
           </div>
         </div>
       </div>
-      <div className="appointment-list">{renderAppointmentList()}</div>
+      <div className="appointment-list">
+        {appointments?.data.length ? (
+          renderAppointmentList()
+        ) : (
+          <div className="empty">
+            <img src={DoctorNotFoundImg} alt="not found appointments" />
+            <p>
+              No appointments on {moment(selectedDate).format("MMM DD, YYYY")}
+            </p>
+          </div>
+        )}
+      </div>
       <Modal
         width={500}
         open={rescheduleModal.isOpen}

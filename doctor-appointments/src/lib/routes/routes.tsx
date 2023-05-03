@@ -2,7 +2,7 @@ import { PrivateRoute, ROLE_ENUM } from "doctor-online-common";
 import { createRoutesFromElements, Outlet, Route } from "react-router-dom";
 import { NavigationManager } from "../HOC";
 import { HocPermissionRoute } from "../HOC/HocPermissionRoute";
-import { ListAppointments } from "../pages";
+import { ListAppointments, LogConsultation } from "../pages";
 import { AppointmentDetail } from "../pages/AppointmentDetail";
 
 const routes = createRoutesFromElements(
@@ -25,15 +25,26 @@ const routes = createRoutesFromElements(
         }
       />
 
-      <Route
-        path="/:appointmentId"
-        element={
-          <HocPermissionRoute
-            role={ROLE_ENUM.DOCTOR}
-            component={<AppointmentDetail />}
-          />
-        }
-      />
+      <Route path="/:appointmentId" element={<Outlet />}>
+        <Route
+          index
+          element={
+            <HocPermissionRoute
+              role={ROLE_ENUM.DOCTOR}
+              component={<AppointmentDetail />}
+            />
+          }
+        />
+        <Route
+          path="consultation"
+          element={
+            <HocPermissionRoute
+              role={ROLE_ENUM.DOCTOR}
+              component={<LogConsultation />}
+            />
+          }
+        />
+      </Route>
     </Route>
   </Route>
 );

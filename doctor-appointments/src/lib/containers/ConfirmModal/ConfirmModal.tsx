@@ -39,7 +39,7 @@ const ConfirmModal = ({ modal, appointment }: Props) => {
           modal.handleClose();
           openNotification({
             type: "success",
-            message: t("declineSuccess"),
+            message: t("confirmSuccess"),
           });
         });
     }

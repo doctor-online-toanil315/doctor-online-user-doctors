@@ -41,12 +41,6 @@ export const StyledWeekAppointment = styled.div`
     }
   }
 
-  .fc-timegrid-cols {
-    table {
-      height: 2540px !important;
-    }
-  }
-
   .fc-scroller {
     overflow-y: hidden !important;
   }
@@ -95,14 +89,6 @@ export const StyledWeekAppointment = styled.div`
   .fc-v-event {
     background-color: unset;
     border: none;
-  }
-
-  .fc-timegrid-col-events {
-    margin: 0 1px 0 1px;
-
-    .fc-timegrid-event-harness.fc-timegrid-event-harness-inset {
-      inset: 556px 0% -670px;
-    }
   }
 
   .calendar {

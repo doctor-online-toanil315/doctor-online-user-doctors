@@ -42,7 +42,7 @@ export const StyledListAppointments = styled.div`
       line-height: 17px;
       text-transform: capitalize;
 
-      background-color: ${({ theme }) => theme.baseGray02};
+      background-color: white;
       color: ${({ theme }) => theme.primaryText};
       border-radius: 6px;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);

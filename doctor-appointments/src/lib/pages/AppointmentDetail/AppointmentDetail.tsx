@@ -22,6 +22,7 @@ import {
 } from "./styled";
 import moment from "moment";
 import { APPOINTMENT_STATUS } from "src/lib/constants";
+import { forceChangeUrl } from "src/lib/utils";
 
 const AppointmentDetail = () => {
   const { t } = useTranslation();
@@ -100,9 +101,9 @@ const AppointmentDetail = () => {
 
   return (
     <StyledAppointmentDetail>
-      <Link to="/" className="back">
+      <div onClick={() => navigate(-1)} className="back">
         <LongArrowLeftIcon /> Back
-      </Link>
+      </div>
       <div className="body">
         <div className="left">
           <h1>{t("appointmentDetail")}</h1>
@@ -162,12 +163,29 @@ const AppointmentDetail = () => {
                 </Col>
               </Row>
               <div className="user-ctrl">
-                <Button onClick={() => navigate("/")} border="outline">
+                <Button onClick={() => navigate(-1)} border="outline">
                   Cancel
                 </Button>
                 {appointmentById?.data.status ===
                   APPOINTMENT_STATUS.CONFIRMED && (
-                  <Button>Start Video Call</Button>
+                  <Button
+                    onClick={() =>
+                      window.open(
+                        `/video-consulting?to=${appointmentById.data.user.id}&from=${appointmentById.data.doctor.user.id}`
+                      )
+                    }
+                  >
+                    Start Video Call
+                  </Button>
+                )}
+                {appointmentById?.data.status ===
+                  APPOINTMENT_STATUS.CONFIRMED && (
+                  <Button
+                    className="orange"
+                    onClick={() => navigate("consultation")}
+                  >
+                    Log Consultation
+                  </Button>
                 )}
               </div>
             </FormProvider>

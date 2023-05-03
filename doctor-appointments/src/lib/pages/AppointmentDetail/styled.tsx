@@ -6,12 +6,14 @@ export const StyledAppointmentDetail = styled.div`
     flex-flow: row nowrap;
     align-items: center;
     gap: 10px;
+    margin-top: 20px;
 
     font-weight: 400;
     font-size: 14px;
     color: ${({ theme }) => theme.baseGray03};
 
     margin-bottom: 15px;
+    cursor: pointer;
   }
 
   h1 {
@@ -36,11 +38,21 @@ export const StyledAppointmentDetail = styled.div`
         flex-flow: row nowrap;
         justify-content: flex-end;
         gap: 15px;
+
+        button {
+          height: 50px !important;
+        }
+
+        .orange {
+          background-color: ${({ theme }) => theme.lightOrange};
+        }
       }
     }
 
     .right {
+      height: 570px;
       width: 30%;
+      background-color: white;
       padding: 30px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       border-radius: 10px;

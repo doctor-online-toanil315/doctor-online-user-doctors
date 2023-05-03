@@ -224,5 +224,24 @@ export const StyledListAppointmentContainer = styled.div`
         }
       }
     }
+
+    .empty {
+      margin-top: 20px;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      gap: 20px;
+
+      img {
+        width: 350px;
+      }
+
+      p {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        color: ${({ theme }) => theme.strongBlue};
+      }
+    }
   }
 `;
