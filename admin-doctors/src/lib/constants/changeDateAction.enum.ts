@@ -1,0 +1,4 @@
+export enum CHANGE_DATE_ACTION_ENUM {
+  INCREASE = 1,
+  DECREASE = -1,
+}
