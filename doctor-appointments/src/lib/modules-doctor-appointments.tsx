@@ -5,6 +5,7 @@ import i18n from "./i18n/config";
 import { createRouter, RoutingStrategy } from "./routes";
 import "./index.css";
 import { useInitApp } from "./hooks";
+import { ACCESS_TOKEN } from "./constants";
 
 /* eslint-disable-next-line */
 export interface ModuleDoctorAppointmentsProps {
@@ -19,7 +20,7 @@ export function ModuleDoctorAppointments({
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const currentUserLogin = useInitApp(iframeRef);
 
-  if (!currentUserLogin) {
+  if (!currentUserLogin && !sessionStorage.getItem(ACCESS_TOKEN)) {
     const hiddenStyle = {
       position: "absolute",
       opacity: "0",
@@ -35,7 +36,7 @@ export function ModuleDoctorAppointments({
           id="iframeContainer"
           width={0.1}
           height={0.1}
-          src="http://127.0.0.1:5173/"
+          src={process.env.CENTRAL_AUTH_APP_URL}
         />
       </>
     );

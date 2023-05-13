@@ -5,6 +5,7 @@ export interface BaseAppointmentType {
   startTime: string;
   endTime: string;
   reasonForAppointment: string;
+  attachment?: string;
   doctorId: string;
 }
 
@@ -17,6 +18,7 @@ export interface AppointmentType {
   reasonForAppointment: string;
   isActive: boolean;
   user: UserType;
+  attachment?: string;
   doctor: {
     id: string;
     certificate: string;
@@ -29,7 +31,7 @@ export interface AppointmentType {
     isActive: boolean;
     user: UserType;
   };
-  consultion: ConsultationType;
+  consultion?: ConsultationType;
 }
 
 export interface UpdateAppointmentStatus {

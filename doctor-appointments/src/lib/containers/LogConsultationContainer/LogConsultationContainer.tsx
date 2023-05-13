@@ -23,6 +23,7 @@ import moment from "moment";
 import { useFormat, yup } from "doctor-online-common";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
+import { FileUpload } from "../FileUpload";
 
 const LogConsultationContainer = () => {
   const { t } = useTranslation();
@@ -63,6 +64,7 @@ const LogConsultationContainer = () => {
           Number(appointmentById.data.startTime)
         ).format(format),
         reasonForAppointment: appointmentById.data.reasonForAppointment,
+        attachment: appointmentById.data.attachment,
       });
 
       if (appointmentById.data.consultion) {
@@ -178,6 +180,15 @@ const LogConsultationContainer = () => {
                     name="reasonForAppointment"
                     label="Reason For Appointment"
                     readOnly
+                  />
+                </Col>
+                <Col span={24}>
+                  <FileUpload
+                    baseUrl={process.env.API_URL ?? ""}
+                    label="Add Attachment (Optional)"
+                    value={appointmentForm.getValues("attachment")}
+                    name="attachment"
+                    readonly
                   />
                 </Col>
               </Row>

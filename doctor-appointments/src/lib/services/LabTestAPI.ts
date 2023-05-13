@@ -1,12 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { ApiQueryType, ApiResponseWithPaginate, LabTest } from "../types";
-import { baseQuery } from "./baseQuery";
+import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
 
 const BASE_URL = "/tests";
 
 export const LabTestAPI = createApi({
   reducerPath: "LabTestAPI",
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReAuth,
   keepUnusedDataFor: 300,
   endpoints: (builder) => ({
     getLabTests: builder.query<

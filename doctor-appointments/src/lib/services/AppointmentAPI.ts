@@ -13,14 +13,14 @@ import {
   UpdateAppointmentStatus,
   UpdateConsultationType,
 } from "../types";
-import { baseQuery } from "./baseQuery";
+import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
 
 const APPOINTMENT_BASE_URL = "/appointments";
 const CONSULTATION_BASE_URL = "/consultions";
 
 export const AppointmentAPI = createApi({
   reducerPath: "AppointmentAPI",
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReAuth,
   tagTypes: ["Appointment"],
   keepUnusedDataFor: 500,
   endpoints: (builder) => ({

@@ -56,9 +56,9 @@ const LabTestContainer = () => {
       </div>
       <Table
         columns={columns}
-        dataSource={appointmentById?.data.consultion.consultionTests}
+        dataSource={appointmentById?.data.consultion?.consultionTests}
         totalElements={
-          appointmentById?.data.consultion.consultionTests.length ?? 0
+          appointmentById?.data.consultion?.consultionTests.length ?? 0
         }
         totalPages={1}
         loading={isLoading}
@@ -71,7 +71,7 @@ const LabTestContainer = () => {
         width={710}
       >
         <AddLabTestModal
-          consultationId={appointmentById?.data.consultion.id}
+          consultationId={appointmentById?.data.consultion?.id}
           handleClose={modal.handleClose}
         />
       </Modal>

@@ -62,9 +62,9 @@ const PrescriptionContainer = () => {
       </div>
       <Table
         columns={columns}
-        dataSource={appointmentById?.data.consultion.prescriptions}
+        dataSource={appointmentById?.data.consultion?.prescriptions}
         totalElements={
-          appointmentById?.data.consultion.prescriptions.length ?? 0
+          appointmentById?.data.consultion?.prescriptions.length ?? 0
         }
         totalPages={1}
         loading={isLoading}
@@ -77,7 +77,7 @@ const PrescriptionContainer = () => {
         width={710}
       >
         <AddMedicineModal
-          consultationId={appointmentById?.data.consultion.id}
+          consultationId={appointmentById?.data.consultion?.id}
           handleClose={modal.handleClose}
         />
       </Modal>

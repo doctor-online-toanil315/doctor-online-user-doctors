@@ -1,9 +1,10 @@
 {
-  "name": "module-doctor-dashboard",
+  "name": "doctor-online-doctor-appointments",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start": "webpack serve --config configs/webpack.dev.js"
+    "start": "webpack serve --config configs/webpack.dev.js",
+    "build": "webpack --config configs/webpack.prod.js"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.0.3",
@@ -15,9 +16,10 @@
     "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
     "@toast-ui/react-editor": "^3.2.0",
     "antd": "^4.22.4",
+    "axios": "^1.4.0",
     "core-js": "^3.6.5",
     "doctor-online-common": "^0.0.8",
-    "doctor-online-components": "^0.0.8",
+    "doctor-online-components": "^0.1.1",
     "env-cmd": "^10.1.0",
     "file-saver": "^2.0.5",
     "i18next": "^21.9.0",

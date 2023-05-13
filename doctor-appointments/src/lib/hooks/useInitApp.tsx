@@ -29,8 +29,7 @@ export const useInitApp = (iframeRef: RefObject<HTMLIFrameElement>) => {
 
   // Handler get tokens from auth app
   const handleGetTokens = (event: any) => {
-    // http://127.0.0.1:5173 is auth app domain
-    if (event.origin !== "http://127.0.0.1:5173") return;
+    if (event.origin !== process.env.CENTRAL_AUTH_APP_URL) return;
     // handle event message
     switch (event.data) {
       case EVENT_MESSAGES.HAND_SHAKE:
@@ -38,7 +37,7 @@ export const useInitApp = (iframeRef: RefObject<HTMLIFrameElement>) => {
         break;
 
       case EVENT_MESSAGES.NEED_TO_LOGIN:
-        window.location.href = `http://127.0.0.1:5173/login?from=${window.location.href}`;
+        window.location.href = `${process.env.CENTRAL_AUTH_APP_URL}/login?from=${window.location.href}`;
         break;
 
       default:

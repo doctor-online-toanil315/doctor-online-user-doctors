@@ -23,6 +23,7 @@ import {
 import moment from "moment";
 import { APPOINTMENT_STATUS } from "src/lib/constants";
 import { forceChangeUrl } from "src/lib/utils";
+import { FileUpload } from "src/lib/containers/FileUpload";
 
 const AppointmentDetail = () => {
   const { t } = useTranslation();
@@ -95,6 +96,7 @@ const AppointmentDetail = () => {
         patientEmail: appointment.user.email,
         phoneNumber: appointment.user.phoneNumber,
         reasonForAppointment: appointment.reasonForAppointment,
+        attachment: appointment.attachment,
       });
     }
   }, [appointmentById]);
@@ -159,6 +161,15 @@ const AppointmentDetail = () => {
                     name="reasonForAppointment"
                     required
                     readOnly
+                  />
+                </Col>
+                <Col span={24}>
+                  <FileUpload
+                    baseUrl={process.env.API_URL ?? ""}
+                    label="Add Attachment (Optional)"
+                    value={form.getValues("attachment")}
+                    name="attachment"
+                    readonly
                   />
                 </Col>
               </Row>
