@@ -1,10 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Progress, ProgressBar, StyledFileUpload } from "./styled";
 import Upload from "./upload";
-import {
-  DeleteIcon,
-  UploadIcon,
-} from "../../../../../../../banvien/nexthcm-components/src/components/Icons";
+import { DeleteIcon, UploadIcon } from "doctor-online-components";
 
 export interface FileUploadProps {
   label?: string;
