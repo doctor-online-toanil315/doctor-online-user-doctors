@@ -6,6 +6,7 @@ export interface BaseAppointmentType {
   endTime: string;
   reasonForAppointment: string;
   doctorId: string;
+  attachment?: string;
 }
 
 export interface AppointmentType {
@@ -15,6 +16,7 @@ export interface AppointmentType {
   startTime: string;
   endTime: string;
   reasonForAppointment: string;
+  attachment?: string;
   isActive: boolean;
   user: UserType;
   doctor: {

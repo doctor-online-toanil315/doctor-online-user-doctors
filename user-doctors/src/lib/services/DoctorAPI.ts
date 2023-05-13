@@ -8,16 +8,19 @@ import {
 import {
   DoctorAchievement,
   DoctorEducation,
+  DoctorReview,
+  DoctorReviewDto,
   DoctorType,
   DoctorWorkExperience,
 } from "../types/DoctorType";
-import { baseQuery } from "./baseQuery";
+import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
 
 const BASE_URL = "/doctors";
 
 export const DoctorAPI = createApi({
   reducerPath: "DoctorAPI",
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReAuth,
+  tagTypes: ["Review"],
   keepUnusedDataFor: 300,
   endpoints: (builder) => ({
     getDoctors: builder.query<
@@ -67,6 +70,23 @@ export const DoctorAPI = createApi({
         method: "GET",
       }),
     }),
+
+    getDoctorReviews: builder.query<ApiResponseImpl<DoctorReview[]>, string>({
+      query: (id) => ({
+        url: `${BASE_URL}/${id}/reviews`,
+        method: "GET",
+      }),
+      providesTags: ["Review"],
+    }),
+
+    createDoctorReview: builder.mutation<void, DoctorReviewDto>({
+      query: (body) => ({
+        url: `${BASE_URL}/review`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Review"],
+    }),
   }),
 });
 
@@ -77,4 +97,6 @@ export const {
   useGetDoctorAchievementsQuery,
   useGetDoctorEducationQuery,
   useGetDoctorWorkExperienceQuery,
+  useCreateDoctorReviewMutation,
+  useGetDoctorReviewsQuery,
 } = DoctorAPI;

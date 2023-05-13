@@ -39,3 +39,23 @@ export interface DoctorEducation {
 }
 
 export interface DoctorWorkExperience extends DoctorEducation {}
+
+export interface BaseDoctorReview {
+  recommend: boolean;
+  problem: string;
+  reasonHappyWith: string;
+  rate: number;
+  experience: string;
+}
+
+export interface DoctorReview extends BaseDoctorReview {
+  id: string;
+  created_at: Date;
+  updated_at: Date;
+  doctor: DoctorType;
+  user: UserType;
+}
+
+export interface DoctorReviewDto extends BaseDoctorReview {
+  doctorId: string;
+}

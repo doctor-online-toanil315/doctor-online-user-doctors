@@ -67,8 +67,7 @@ const DoctorDetailContainer = () => {
           <p>{doctorById?.data.specializeTitle}</p>
           <p>
             {doctorById?.data.yearOfExperience} Years Experience Overall (
-            {doctorById?.data.yearOfExperience}
-            years as specialist)
+            {doctorById?.data.yearOfExperience} years as specialist)
           </p>
           <div className="bold">
             <p>

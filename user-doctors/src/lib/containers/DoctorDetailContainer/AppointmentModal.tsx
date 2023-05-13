@@ -21,6 +21,7 @@ import {
 } from "doctor-online-components";
 import moment from "moment";
 import SuccessFullModal from "./SuccessFullModal";
+import { FileUpload } from "../FileUpload";
 
 interface Props {
   handleClose: () => void;
@@ -42,6 +43,7 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
   const form = useForm({
     defaultValues: {
       reasonForAppointment: "",
+      attachment: "",
     },
     resolver: yupResolver(
       yup.object().shape({
@@ -64,7 +66,7 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
     }
   };
 
-  console.log(doctorById);
+  console.log(form.getValues());
 
   return (
     <StyledAppointmentModal>
@@ -109,6 +111,18 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
                 type="textarea"
                 name="reasonForAppointment"
                 label={t("reasonForAppointment")}
+              />
+            </Col>
+            <Col span={24}>
+              <FileUpload
+                baseUrl={process.env.API_URL ?? ""}
+                label="Add Attachment (Optional)"
+                value={form.getValues("attachment")}
+                name="attachment"
+                error={{ message: form.formState.errors.attachment?.message }}
+                onChange={(value) =>
+                  form.setValue("attachment", value, { shouldValidate: true })
+                }
               />
             </Col>
           </Row>

@@ -17,5 +17,6 @@
   "phoneNumber": "Phone Number",
   "reasonForAppointment": "Reason for appointment",
   "bookingSummary": "Booking Summary",
-  "payment": "Payment"
+  "payment": "Payment",
+  "addReviewSuccess": "Add review for doctor successfully."
 }

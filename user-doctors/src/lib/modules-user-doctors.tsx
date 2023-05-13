@@ -12,7 +12,6 @@ import i18n from "./i18n/config";
 import { ACCESS_TOKEN } from "./constants";
 import { createRouter, RoutingStrategy } from "./routes";
 import { useLazyGetMeQuery } from "./services";
-import { io } from "socket.io-client";
 
 /* eslint-disable-next-line */
 export interface ModuleUserDoctorsProps {
@@ -43,8 +42,7 @@ export function ModuleUserDoctors({
 
   // Handler get tokens from auth app
   const handleGetTokens = (event: any) => {
-    // http://127.0.0.1:5173 is auth app domain
-    if (event.origin !== "http://127.0.0.1:5173") return;
+    if (event.origin !== process.env.CENTRAL_AUTH_APP_URL) return;
     // handle event message
     switch (event.data) {
       case EVENT_MESSAGES.HAND_SHAKE:
@@ -52,7 +50,7 @@ export function ModuleUserDoctors({
         break;
 
       case EVENT_MESSAGES.NEED_TO_LOGIN:
-        window.location.href = `http://127.0.0.1:5173/login?from=${window.location.href}`;
+        window.location.href = `${process.env.CENTRAL_AUTH_APP_URL}/login?from=${window.location.href}`;
         break;
 
       default:
@@ -72,7 +70,7 @@ export function ModuleUserDoctors({
     };
   }, []);
 
-  if (!currentUserLogin) {
+  if (!currentUserLogin && !sessionStorage.getItem(ACCESS_TOKEN)) {
     const hiddenStyle = {
       position: "absolute",
       opacity: "0",
@@ -88,7 +86,7 @@ export function ModuleUserDoctors({
           id="iframeContainer"
           width={0.1}
           height={0.1}
-          src="http://127.0.0.1:5173/"
+          src={process.env.CENTRAL_AUTH_APP_URL}
         />
       </>
     );

@@ -100,5 +100,8 @@ module.exports = {
   resolve: {
     modules: [__dirname, "node_modules"],
     extensions: ["", ".js", ".jsx", ".ts", ".tsx"],
+    fallback: {
+      stream: false,
+    },
   },
 };

@@ -5,6 +5,7 @@ export const StyledDoctorDetailContainer = styled.div`
   .content {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: center;
     gap: 40px;
 
     .summary {
@@ -463,5 +464,141 @@ export const StyledSuccessFullModal = styled.div`
 
   button {
     margin-top: 20px;
+  }
+`;
+
+export const StyledCreateReviewModal = styled.div`
+  padding: 30px 85px;
+
+  h2 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 39px;
+    text-align: center;
+    color: ${({ theme }) => theme.primaryText};
+    margin-bottom: 40px;
+  }
+
+  .form {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 30px;
+
+    p,
+    label {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 22px;
+      color: ${({ theme }) => theme.primaryText};
+      margin-bottom: 10px;
+    }
+
+    .recommend {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      gap: 15px;
+
+      p {
+        white-space: nowrap;
+      }
+
+      .action {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 6px;
+        background-color: ${({ theme }) => theme.grayBlue};
+        border: 2px solid ${({ theme }) => theme.lightGray};
+
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+        color: ${({ theme }) => theme.baseGray03};
+        cursor: pointer;
+
+        &.active {
+          &.red {
+            border-color: ${({ theme }) => theme.red};
+            color: ${({ theme }) => theme.red};
+          }
+
+          &.purple {
+            border-color: ${({ theme }) => theme.strongBlue};
+            color: ${({ theme }) => theme.strongBlue};
+          }
+        }
+      }
+    }
+
+    .reason-happy {
+      p {
+        margin-bottom: 20px;
+      }
+
+      .happy-option-item {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 8px;
+
+        span {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+          color: ${({ theme }) => theme.baseGray03};
+        }
+      }
+    }
+
+    .rating {
+      padding: 12px 16px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      background-color: ${({ theme }) => theme.grayBlue};
+      border-radius: 10px;
+
+      .infos {
+        span {
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 20px;
+          color: ${({ theme }) => theme.primaryText};
+        }
+
+        p {
+          margin-top: 12px;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 27px;
+          color: ${({ theme }) => theme.primaryText};
+          margin-bottom: 0;
+        }
+      }
+
+      .rate {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 8px;
+
+        .rate-text {
+          display: inline-block;
+          text-align: right;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 27px;
+          color: ${({ theme }) => theme.primaryText};
+          margin-bottom: 0;
+        }
+      }
+
+      .button {
+        height: 50px !important;
+        width: 100% !important;
+      }
+    }
   }
 `;
