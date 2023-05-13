@@ -4,6 +4,8 @@ import React, { Suspense, useRef } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Layout } from "./containers";
 import useInitApp from "./hooks/useInitApp";
+import { ROLE_ENUM } from "doctor-online-common";
+import { ACCESS_TOKEN } from "./constants";
 
 const ModuleUserHome = React.lazy(() => import("./remotes/UserHome/UserHome"));
 const ModuleUserDoctors = React.lazy(
@@ -26,7 +28,7 @@ export function App() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const currentUserLogin = useInitApp(iframeRef);
 
-  if (!currentUserLogin) {
+  if (!currentUserLogin && !sessionStorage.getItem(ACCESS_TOKEN)) {
     const hiddenStyle = {
       position: "absolute",
       opacity: "0",
@@ -51,7 +53,16 @@ export function App() {
   return (
     <Routes>
       <Route path="/*" element={<Layout />}>
-        <Route index element={<Navigate to="user-home" />} />
+        <Route
+          index
+          element={
+            currentUserLogin?.data.role === ROLE_ENUM.USER ? (
+              <Navigate to="user-home" />
+            ) : (
+              <Navigate to="doctor-dashboard" />
+            )
+          }
+        />
         <Route
           path="user-home/*"
           element={
