@@ -4481,15 +4481,15 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-doctor-online-common@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/doctor-online-common/-/doctor-online-common-0.0.7.tgz#3943216980d29d0971951ba6e4ddbcf7bf95fead"
-  integrity sha512-ehtJ011rExuWtEIRJyr+Tzo0Ap3SCeuR2TuFQt/r/6UKzC8Tmhg5aUT+gkM44QLO1mwZdRbLm990G18GJUkEcA==
+doctor-online-common@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/doctor-online-common/-/doctor-online-common-0.0.8.tgz#77ebf043dc0af7df57948246cb5819eb404b2488"
+  integrity sha512-6AOnaxAfvJ8dN+amtIbeK6AVX7MYT8eC7KQx908n8gY8cyS6M+tnPKb7QXKUo93tpOXOQMbx2xyGsb0M7b/i8w==
 
-doctor-online-components@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/doctor-online-components/-/doctor-online-components-0.0.7.tgz#ac8b0fe5450c8e0a401cce5ce92fe21a99611104"
-  integrity sha512-3ACcT6y76HT+4W+SNCfc+VJbY837SOwOEaL7dn6OzuzNgaziEJ7AYfj06Uy8kCFDcjaVqWMIq8k6vD7D9J5RMg==
+doctor-online-components@^0.1.1:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/doctor-online-components/-/doctor-online-components-0.1.2.tgz#d65d2843fe14d38b1d77e41929a7d9cb77bb2c43"
+  integrity sha512-YX70jAuzhKJShDWmfwm4bIh/2Xf0a3vQcgvm0beYzWkde2KqTKtRGXgRvF1D3mQzIQ2JOKzG3kHnw6Nq3aH+Dw==
 
 doctrine@^2.1.0:
   version "2.1.0"
