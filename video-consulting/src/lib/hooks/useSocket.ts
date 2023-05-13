@@ -70,7 +70,7 @@ const useSocket = () => {
   const handShake = (to: string) => {
     if (clientRef.current) {
       clientRef.current.emit("handShake", {
-        from: currentUserLogin?.data.id,
+        from: currentUserLogin?.data,
         to,
       });
     }

@@ -1,9 +1,10 @@
 {
-  "name": "module-doctor-dashboard",
+  "name": "doctor-online-video-consulting",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "start": "webpack serve --config configs/webpack.dev.js"
+    "start": "webpack serve --config configs/webpack.dev.js",
+    "build": "webpack --config configs/webpack.prod.js"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.0.3",

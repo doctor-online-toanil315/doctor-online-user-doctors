@@ -26,8 +26,8 @@ export const baseQueryWithReAuth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
   if (result.error && result.error.status === 401) {
-    window.location.href = `http://127.0.0.1:5173/login?from=${window.location.href}`;
-    result = await baseQuery(args, api, extraOptions);
+    sessionStorage.removeItem(ACCESS_TOKEN);
+    window.location.href = `${process.env.CENTRAL_AUTH_APP_URL}/login?from=${window.location.href}`;
   }
   return result;
 };
