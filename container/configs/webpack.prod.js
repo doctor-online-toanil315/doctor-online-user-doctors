@@ -35,7 +35,7 @@ const getDevConfigs = (localApps) => ({
   mode: "development",
   entry: "./src/main.tsx",
   output: {
-    publicPath: "/container/latest",
+    publicPath: "/container/latest/",
   },
   plugins: [
     new ModuleFederationPlugin({
