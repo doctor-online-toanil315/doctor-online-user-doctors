@@ -12,6 +12,15 @@ const ModuleUserDoctors = React.lazy(
 const ModuleDoctorDashboard = React.lazy(
   () => import("./remotes/DoctorDashboard/DoctorDashboard")
 );
+const ModuleDoctorAppointments = React.lazy(
+  () => import("./remotes/DoctorAppointments/DoctorAppointments")
+);
+const ModuleVideoConsulting = React.lazy(
+  () => import("./remotes/VideoConsulting/VideoConsulting")
+);
+const ModuleUserAppointments = React.lazy(
+  () => import("./remotes/UserAppointments/UserAppointments")
+);
 
 export function App() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -33,7 +42,7 @@ export function App() {
           id="iframeContainer"
           width={0.1}
           height={0.1}
-          src="http://127.0.0.1:5173/"
+          src={process.env.CENTRAL_AUTH_APP_URL}
         />
       </>
     );
@@ -67,7 +76,31 @@ export function App() {
             </Suspense>
           }
         />
+        <Route
+          path="doctor-appointments/*"
+          element={
+            <Suspense fallback={<LoadingOutlined />}>
+              <ModuleDoctorAppointments />
+            </Suspense>
+          }
+        />
+        <Route
+          path="user-appointments/*"
+          element={
+            <Suspense fallback={<LoadingOutlined />}>
+              <ModuleUserAppointments />
+            </Suspense>
+          }
+        />
       </Route>
+      <Route
+        path="video-consulting/*"
+        element={
+          <Suspense fallback={<LoadingOutlined />}>
+            <ModuleVideoConsulting />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 }

@@ -10,5 +10,17 @@
   "doctor-dashboard": {
     "appName": "doctorDashboard",
     "path": "http://localhost:5176"
+  },
+  "doctor-appointments": {
+    "appName": "doctorAppointments",
+    "path": "http://localhost:5177"
+  },
+  "video-consulting": {
+    "appName": "videoConsulting",
+    "path": "http://localhost:5178"
+  },
+  "user-appointments": {
+    "appName": "userAppointments",
+    "path": "http://localhost:5179"
   }
 }

@@ -62,7 +62,9 @@ const RemoteAppWrapper = ({ mountFunc, remoteAppName }: Props) => {
 
     mountFunc({
       mountPoint: wrapperRef.current!,
-      initialPathname: location.pathname.replace(remoteAppBaseName.current, ""),
+      initialPathname:
+        location.pathname.replace(remoteAppBaseName.current, "") +
+          location.search ?? "",
     });
 
     isFirstRunRef.current = false;

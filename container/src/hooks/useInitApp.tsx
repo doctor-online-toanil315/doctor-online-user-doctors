@@ -3,13 +3,15 @@ import {
   saveClient,
   useCommonDispatch,
 } from "doctor-online-common";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { ACCESS_TOKEN } from "src/constants";
 import { useLazyGetMeQuery } from "src/services";
 
 const useInitApp = (iframeRef: React.RefObject<HTMLIFrameElement>) => {
   const [getMe, { data: currentUserLogin }] = useLazyGetMeQuery();
+  const navigate = useNavigate();
   const dispatch = useCommonDispatch();
 
   // Handlers to notice when iframe loaded
@@ -23,7 +25,7 @@ const useInitApp = (iframeRef: React.RefObject<HTMLIFrameElement>) => {
   // Handler get tokens from auth app
   const handleGetTokens = (event: any) => {
     // http://127.0.0.1:5173 is auth app domain
-    if (event.origin !== "http://127.0.0.1:5173") return;
+    if (event.origin !== process.env.CENTRAL_AUTH_APP_URL) return;
     // handle event message
     switch (event.data) {
       case EVENT_MESSAGES.HAND_SHAKE:
@@ -31,7 +33,7 @@ const useInitApp = (iframeRef: React.RefObject<HTMLIFrameElement>) => {
         break;
 
       case EVENT_MESSAGES.NEED_TO_LOGIN:
-        window.location.href = `http://127.0.0.1:5173/login?from=${window.location.href}`;
+        window.location.href = `${process.env.CENTRAL_AUTH_APP_URL}/login?from=${window.location.href}`;
         break;
 
       default:
@@ -41,18 +43,29 @@ const useInitApp = (iframeRef: React.RefObject<HTMLIFrameElement>) => {
     }
   };
 
+  const handleForceChange = (event: Event) => {
+    const pathName = (event as CustomEvent<string>).detail;
+    if (pathName === location.pathname) {
+      return;
+    }
+    navigate(pathName);
+  };
+
   useEffect(() => {
     // Subscription event
     window.addEventListener("message", handleGetTokens);
+    window.addEventListener("app-force-change", handleForceChange);
 
     // unSubscribe when unmount
     return () => {
       window.removeEventListener("message", handleGetTokens);
+      window.removeEventListener("app-force-change", handleForceChange);
     };
   }, []);
 
+  const isFirstRunRef = useRef<boolean>(true);
   useEffect(() => {
-    if (currentUserLogin) {
+    if (currentUserLogin && isFirstRunRef.current) {
       const socket = io("http://localhost:8001", {
         query: {
           token: sessionStorage.getItem(ACCESS_TOKEN),
@@ -63,6 +76,7 @@ const useInitApp = (iframeRef: React.RefObject<HTMLIFrameElement>) => {
           client: socket as any,
         })
       );
+      isFirstRunRef.current = false;
     }
   }, [JSON.stringify(currentUserLogin)]);
 

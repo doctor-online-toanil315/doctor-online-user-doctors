@@ -1,14 +1,26 @@
 {
   "user-home": {
     "appName": "userHome",
-    "path": "http://localhost:5174"
+    "path": "/userHome/latest/remoteEntry.js"
   },
   "user-doctors": {
     "appName": "userDoctors",
-    "path": "http://localhost:5175"
+    "path": "/userDoctors/latest/remoteEntry.js"
   },
   "doctor-dashboard": {
     "appName": "doctorDashboard",
-    "path": "http://localhost:5176"
+    "path": "/doctorDashboard/latest/remoteEntry.js"
+  },
+  "doctor-appointments": {
+    "appName": "doctorAppointments",
+    "path": "/doctorAppointments/latest/remoteEntry.js"
+  },
+  "video-consulting": {
+    "appName": "videoConsulting",
+    "path": "/videoConsulting/latest/remoteEntry.js"
+  },
+  "user-appointments": {
+    "appName": "userAppointments",
+    "path": "/userAppointments/latest/remoteEntry.js"
   }
 }

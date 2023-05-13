@@ -2,3 +2,6 @@
 declare module "userHome/Module";
 declare module "userDoctors/Module";
 declare module "doctorDashboard/Module";
+declare module "doctorAppointments/Module";
+declare module "videoConsulting/Module";
+declare module "userAppointments/Module";

@@ -1,16 +1,28 @@
-import React from "react";
-import { NotificationIcon } from "doctor-online-components";
+import React, { useState } from "react";
+import { Modal, NotificationIcon, Button } from "doctor-online-components";
 import { Popover } from "antd";
 import NotificationList from "./NotificationList";
-import { NotificationType } from "src/types";
+import { NotificationType, UserType } from "src/types";
 import useSocket from "src/hooks/useSocket";
+import { useGetMeQuery } from "src/services";
+import { StyledReceiveCallRequest } from "./styled";
+import { useModal } from "doctor-online-common";
 
 const Notification = () => {
+  const [fromUser, setFromUser] = useState<UserType | null>(null);
+  const { data: currentUserLogin } = useGetMeQuery();
+  const modal = useModal();
+
+  const handleReceiveCallRequest = ({ from }: { from: UserType }) => {
+    setFromUser(from);
+    modal.handleOpen();
+  };
+
   const handleEvent = (data: NotificationType) => {
     console.log("============receive: ", data);
   };
 
-  useSocket(handleEvent);
+  useSocket(handleEvent, handleReceiveCallRequest);
 
   return (
     <Popover
@@ -21,6 +33,29 @@ const Notification = () => {
       destroyTooltipOnHide
     >
       <NotificationIcon />
+      <Modal open={modal.isOpen} onCancel={modal.handleClose} width={450}>
+        <StyledReceiveCallRequest>
+          <img
+            src={
+              fromUser?.avatar ??
+              "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=2000"
+            }
+            alt="user avatar"
+          />
+          <p>{`${fromUser?.firstName} ${fromUser?.lastName} is calling you!`}</p>
+          <Button
+            onClick={() => {
+              window.open(
+                `/video-consulting?to=${currentUserLogin?.data.id}&from=${fromUser?.id}`
+              );
+              modal.handleClose();
+              setFromUser(null);
+            }}
+          >
+            Join Now
+          </Button>
+        </StyledReceiveCallRequest>
+      </Modal>
     </Popover>
   );
 };

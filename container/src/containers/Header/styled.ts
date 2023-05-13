@@ -208,3 +208,29 @@ export const StyledNotificationItem = styled.div<{ isSeen: boolean }>`
     color: ${({ theme }) => theme.baseGray03};
   }
 `;
+
+export const StyledReceiveCallRequest = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 15px;
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: ${({ theme }) => theme.strongBlue};
+    margin-bottom: 0;
+  }
+
+  button {
+    height: 40px !important;
+    padding: 0 40px !important;
+  }
+`;

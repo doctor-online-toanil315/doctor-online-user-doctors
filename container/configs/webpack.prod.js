@@ -35,14 +35,7 @@ const getDevConfigs = (localApps) => ({
   mode: "development",
   entry: "./src/main.tsx",
   output: {
-    publicPath: "http://localhost:8000/",
-  },
-  devServer: {
-    port: 8000,
-    historyApiFallback: {
-      index: "/index.html",
-    },
-    open: true,
+    publicPath: "/container/latest",
   },
   plugins: [
     new ModuleFederationPlugin({
