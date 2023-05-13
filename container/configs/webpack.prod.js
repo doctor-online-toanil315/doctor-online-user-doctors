@@ -32,9 +32,9 @@ const getRemotePaths = (localApps) => {
 };
 
 const getDevConfigs = (localApps) => ({
-  mode: "development",
-  entry: "./src/main.tsx",
+  mode: "production",
   output: {
+    filename: "[name].[contenthash].js",
     publicPath: "/container/latest/",
   },
   plugins: [
