@@ -24,7 +24,6 @@ const useInitApp = (iframeRef: React.RefObject<HTMLIFrameElement>) => {
 
   // Handler get tokens from auth app
   const handleGetTokens = (event: any) => {
-    // http://127.0.0.1:5173 is auth app domain
     if (event.origin !== process.env.CENTRAL_AUTH_APP_URL) return;
     // handle event message
     switch (event.data) {
@@ -55,6 +54,10 @@ const useInitApp = (iframeRef: React.RefObject<HTMLIFrameElement>) => {
     // Subscription event
     window.addEventListener("message", handleGetTokens);
     window.addEventListener("app-force-change", handleForceChange);
+
+    if (sessionStorage.getItem(ACCESS_TOKEN)) {
+      getMe();
+    }
 
     // unSubscribe when unmount
     return () => {

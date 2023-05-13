@@ -53,56 +53,60 @@ export function App() {
   return (
     <Routes>
       <Route path="/*" element={<Layout />}>
-        <Route
-          index
-          element={
-            currentUserLogin?.data.role === ROLE_ENUM.USER ? (
-              <Navigate to="user-home" />
-            ) : (
-              <Navigate to="doctor-dashboard" />
-            )
-          }
-        />
-        <Route
-          path="user-home/*"
-          element={
-            <Suspense fallback={<LoadingOutlined />}>
-              <ModuleUserHome />
-            </Suspense>
-          }
-        />
-        <Route
-          path="user-doctors/*"
-          element={
-            <Suspense fallback={<LoadingOutlined />}>
-              <ModuleUserDoctors />
-            </Suspense>
-          }
-        />
-        <Route
-          path="doctor-dashboard/*"
-          element={
-            <Suspense fallback={<LoadingOutlined />}>
-              <ModuleDoctorDashboard />
-            </Suspense>
-          }
-        />
-        <Route
-          path="doctor-appointments/*"
-          element={
-            <Suspense fallback={<LoadingOutlined />}>
-              <ModuleDoctorAppointments />
-            </Suspense>
-          }
-        />
-        <Route
-          path="user-appointments/*"
-          element={
-            <Suspense fallback={<LoadingOutlined />}>
-              <ModuleUserAppointments />
-            </Suspense>
-          }
-        />
+        {currentUserLogin?.data && (
+          <>
+            <Route
+              index
+              element={
+                currentUserLogin?.data.role === ROLE_ENUM.USER ? (
+                  <Navigate to="user-home" />
+                ) : (
+                  <Navigate to="doctor-dashboard" />
+                )
+              }
+            />
+            <Route
+              path="user-home/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleUserHome />
+                </Suspense>
+              }
+            />
+            <Route
+              path="user-doctors/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleUserDoctors />
+                </Suspense>
+              }
+            />
+            <Route
+              path="doctor-dashboard/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleDoctorDashboard />
+                </Suspense>
+              }
+            />
+            <Route
+              path="doctor-appointments/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleDoctorAppointments />
+                </Suspense>
+              }
+            />
+            <Route
+              path="user-appointments/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleUserAppointments />
+                </Suspense>
+              }
+            />
+          </>
+        )}
       </Route>
       <Route
         path="video-consulting/*"

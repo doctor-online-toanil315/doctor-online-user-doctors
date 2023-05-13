@@ -21,7 +21,7 @@ const getRemotePaths = (localApps) => {
 
       remoteConfigs[
         configItem.appName
-      ] = `${configItem.appName}@${domain}${configItem.path}`;
+      ] = `${configItem.appName}@${configItem.path}`;
 
       return remoteConfigs;
     },
