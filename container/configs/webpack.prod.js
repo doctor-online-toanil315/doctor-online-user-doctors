@@ -60,6 +60,5 @@ const getDevConfigs = (localApps) => ({
 });
 
 module.exports = (env) => {
-  const localApps = env.apps.split(",");
-  return merge(commonConfigs, getDevConfigs(localApps));
+  return merge(commonConfigs, getDevConfigs([]));
 };
