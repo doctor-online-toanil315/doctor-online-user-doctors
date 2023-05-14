@@ -65,10 +65,11 @@ const useSocket = () => {
       clientRef.current?.off("callUser");
       clientRef.current?.off("callEnded");
     };
-  }, []);
+  }, [currentUserLogin]);
 
   const handShake = (to: string) => {
     if (clientRef.current) {
+      console.log("handshake work: ", clientRef.current);
       clientRef.current.emit("handShake", {
         from: currentUserLogin?.data,
         to,

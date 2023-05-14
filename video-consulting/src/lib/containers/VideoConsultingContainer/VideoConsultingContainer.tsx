@@ -22,7 +22,6 @@ const VideoConsultingContainer = () => {
     skip: !targetUserId || !currentUserLogin,
     refetchOnMountOrArgChange: true,
   });
-  const [triggerAnswerCall, setTriggerAnswerCall] = useState(false);
 
   const {
     call,
@@ -41,10 +40,12 @@ const VideoConsultingContainer = () => {
 
   useEffect(() => {
     if (from === currentUserLogin?.data.id) {
+      console.log("=============handshake", targetUserId);
       handShake(targetUserId);
     }
 
     if (to === currentUserLogin?.data.id) {
+      console.log("=============establishHandShake", from);
       establishHandShake(from);
     }
   }, [from, currentUserLogin]);
