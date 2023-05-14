@@ -8,9 +8,10 @@ const { cwd } = require("node:process");
 const { resolve } = require("node:path");
 
 const devConfigs = {
-  mode: "development",
+  mode: "production",
   entry: "./src/main.tsx",
   output: {
+    filename: "[name].[contenthash].js",
     publicPath: "/videoConsulting/latest/",
   },
   resolve: {
