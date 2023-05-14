@@ -22,5 +22,13 @@
   "user-appointments": {
     "appName": "userAppointments",
     "path": "/userAppointments/latest/remoteEntry.js"
+  },
+  "admin-doctors": {
+    "appName": "adminDoctors",
+    "path": "/adminDoctors/latest/remoteEntry.js"
+  },
+  "admin-medicines": {
+    "appName": "adminMedicines",
+    "path": "/adminMedicines/latest/remoteEntry.js"
   }
 }

@@ -14,15 +14,16 @@ const getRemotePaths = (localApps) => {
   const qaConfigs = Object.keys(remotePathQa).reduce(
     (remoteConfigs, subAppKey) => {
       // current key is not included in local app => get from qa, else get from dev
+      const localAppIndex = localApps.findIndex(
+        (localItem) => localItem === subAppKey
+      );
       const configItem =
-        localApps.findIndex((localItem) => localItem === subAppKey) === -1
+        localAppIndex === -1
           ? remotePathQa[subAppKey]
           : remotePathDev[subAppKey];
-
-      remoteConfigs[
-        configItem.appName
-      ] = `${configItem.appName}@${configItem.path}`;
-
+      remoteConfigs[configItem.appName] = `${configItem.appName}@${
+        localAppIndex === -1 ? domain : ""
+      }${configItem.path}`;
       return remoteConfigs;
     },
     {}

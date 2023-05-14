@@ -22,5 +22,13 @@
   "user-appointments": {
     "appName": "userAppointments",
     "path": "http://localhost:5179/remoteEntry.js"
+  },
+  "admin-doctors": {
+    "appName": "adminDoctors",
+    "path": "http://localhost:5180/remoteEntry.js"
+  },
+  "admin-medicines": {
+    "appName": "adminMedicines",
+    "path": "http://localhost:5181/remoteEntry.js"
   }
 }

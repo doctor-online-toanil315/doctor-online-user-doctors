@@ -5,4 +5,6 @@ export const REMOTE_APP_ROUTING_PREFIX = {
   DOCTOR_APPOINTMENTS: "doctor-appointments",
   VIDEO_CONSULTING: "video-consulting",
   USER_APPOINTMENTS: "user-appointments",
+  ADMIN_DOCTORS: "admin-doctors",
+  ADMIN_MEDICINES: "admin-medicines",
 };

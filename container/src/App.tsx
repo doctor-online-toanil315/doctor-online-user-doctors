@@ -23,6 +23,12 @@ const ModuleVideoConsulting = React.lazy(
 const ModuleUserAppointments = React.lazy(
   () => import("./remotes/UserAppointments/UserAppointments")
 );
+const ModuleAdminDoctors = React.lazy(
+  () => import("./remotes/AdminDoctors/AdminDoctors")
+);
+const ModuleAdminMedicines = React.lazy(
+  () => import("./remotes/AdminMedicines/AdminMedicines")
+);
 
 export function App() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -60,8 +66,10 @@ export function App() {
               element={
                 currentUserLogin?.data.role === ROLE_ENUM.USER ? (
                   <Navigate to="user-home" />
-                ) : (
+                ) : currentUserLogin?.data.role === ROLE_ENUM.DOCTOR ? (
                   <Navigate to="doctor-dashboard" />
+                ) : (
+                  <Navigate to="admin-doctors" />
                 )
               }
             />
@@ -102,6 +110,22 @@ export function App() {
               element={
                 <Suspense fallback={<LoadingOutlined />}>
                   <ModuleUserAppointments />
+                </Suspense>
+              }
+            />
+            <Route
+              path="admin-doctors/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleAdminDoctors />
+                </Suspense>
+              }
+            />
+            <Route
+              path="admin-medicines/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleAdminMedicines />
                 </Suspense>
               }
             />

@@ -24,6 +24,29 @@ const Sidebar = () => {
           icon: null,
           label: "Doctors",
         },
+        {
+          id: 3,
+          href: "user-appointments",
+          icon: null,
+          label: "Doctors",
+        },
+      ];
+    }
+
+    if (me?.data.role === ROLE_ENUM.ADMIN) {
+      return [
+        {
+          id: 1,
+          href: "admin-doctors",
+          icon: null,
+          label: "Doctors",
+        },
+        {
+          id: 2,
+          href: "admin-medicines",
+          icon: null,
+          label: "Medicines",
+        },
       ];
     }
 
