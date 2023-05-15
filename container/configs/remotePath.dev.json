@@ -30,5 +30,9 @@
   "admin-medicines": {
     "appName": "adminMedicines",
     "path": "http://localhost:5181/remoteEntry.js"
+  },
+  "admin-tests": {
+    "appName": "adminTests",
+    "path": "http://localhost:5182/remoteEntry.js"
   }
 }

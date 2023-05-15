@@ -1,12 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { ApiResponseImpl, UserType } from "../types";
-import { baseQuery } from "./baseQuery";
+import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
 
 const BASE_URL = "/auth";
 
 export const AuthAPI = createApi({
   reducerPath: "AuthAPI",
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReAuth,
   keepUnusedDataFor: 300,
   endpoints: (builder) => ({
     getMe: builder.query<ApiResponseImpl<UserType>, void>({

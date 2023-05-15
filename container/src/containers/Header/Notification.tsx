@@ -14,6 +14,7 @@ const Notification = () => {
   const modal = useModal();
 
   const handleReceiveCallRequest = ({ from }: { from: UserType }) => {
+    console.log("==================handleReceiveCallRequest");
     setFromUser(from);
     modal.handleOpen();
   };

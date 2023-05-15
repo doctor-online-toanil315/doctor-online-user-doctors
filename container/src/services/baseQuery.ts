@@ -19,30 +19,15 @@ export const baseQuery = fetchBaseQuery({
   },
 });
 
-// export const baseQueryWithReAuth: BaseQueryFn<
-//   string | FetchArgs,
-//   unknown,
-//   FetchBaseQueryError
-// > = async (args, api, extraOptions) => {
-//   let result = await baseQuery(args, api, extraOptions);
-//   if (result.error && result.error.status === 401) {
-//     const refreshArgs = {
-//       url: "/auth/refresh",
-//       body: {
-//         refreshToken: localStorage.getItem("refresh_token"),
-//       },
-//       method: "POST",
-//     };
-
-//     const { data }: { [key: string]: any } = await baseQuery(
-//       refreshArgs,
-//       api,
-//       extraOptions
-//     );
-//     if (data) {
-//       sessionStorage.setItem(ACCESS_TOKEN, data.access_token);
-//     }
-//     result = await baseQuery(args, api, extraOptions);
-//   }
-//   return result;
-// };
+export const baseQueryWithReAuth: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  let result = await baseQuery(args, api, extraOptions);
+  if (result.error && result.error.status === 401) {
+    sessionStorage.removeItem(ACCESS_TOKEN);
+    window.location.href = `${process.env.CENTRAL_AUTH_APP_URL}/login?from=${window.location.href}`;
+  }
+  return result;
+};

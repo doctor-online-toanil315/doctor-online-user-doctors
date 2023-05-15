@@ -5,13 +5,13 @@ import {
   ApiResponseWithPaginate,
   NotificationType,
 } from "../types";
-import { baseQuery } from "./baseQuery";
+import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
 
 const BASE_URL = "/notifications";
 
 export const NotificationAPI = createApi({
   reducerPath: "NotificationAPI",
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReAuth,
   keepUnusedDataFor: 500,
   endpoints: (builder) => ({
     getNotifications: builder.query<

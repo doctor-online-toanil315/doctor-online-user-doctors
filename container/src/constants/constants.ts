@@ -7,4 +7,5 @@ export const REMOTE_APP_ROUTING_PREFIX = {
   USER_APPOINTMENTS: "user-appointments",
   ADMIN_DOCTORS: "admin-doctors",
   ADMIN_MEDICINES: "admin-medicines",
+  ADMIN_TESTS: "admin-tests",
 };

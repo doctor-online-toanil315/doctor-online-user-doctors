@@ -4,13 +4,13 @@ import {
   ApiResponseWithPaginate,
   AppointmentType,
 } from "../types";
-import { baseQuery } from "./baseQuery";
+import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
 
 const BASE_URL = "/appointments";
 
 export const AppointmentAPI = createApi({
   reducerPath: "AppointmentAPI",
-  baseQuery: baseQuery,
+  baseQuery: baseQueryWithReAuth,
   keepUnusedDataFor: 500,
   endpoints: (builder) => ({
     getAppointmentByUser: builder.query<
