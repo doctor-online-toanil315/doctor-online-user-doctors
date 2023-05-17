@@ -10,6 +10,7 @@ import {
   TopContainer,
   TopDoctorContainer,
 } from "./styled";
+import { forceNavigate } from "src/lib/utils";
 
 const TopDoctor = () => {
   const { t } = useTranslation();
@@ -31,7 +32,11 @@ const TopDoctor = () => {
       <Row className="row-antd" gutter={[25, 25]}>
         {doctors?.data.map((doctor) => {
           return (
-            <Col key={doctor.doctorId} span={12}>
+            <Col
+              key={doctor.doctorId}
+              span={12}
+              onClick={() => forceNavigate(`user-doctors/${doctor.doctorId}`)}
+            >
               <DoctorCard doctorItem={doctor} />
             </Col>
           );

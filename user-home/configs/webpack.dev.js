@@ -38,22 +38,6 @@ const devConfigs = {
       },
       shared: {
         ...packageJson.dependencies,
-        // react: {
-        //   singleton: true,
-        //   requiredVersion: packageJson.dependencies.react,
-        // },
-        // "react-dom": {
-        //   singleton: true,
-        //   requiredVersion: packageJson.dependencies["react-dom"],
-        // },
-        // "react-redux": {
-        //   singleton: true,
-        //   requiredVersion: packageJson.dependencies["react-redux"],
-        // },
-        // "@reduxjs/toolkit": {
-        //   singleton: true,
-        //   requiredVersion: packageJson.dependencies["@reduxjs/toolkit"],
-        // },
       },
     }),
     new HtmlWebpackPlugin({
