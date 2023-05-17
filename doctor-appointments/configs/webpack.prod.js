@@ -7,11 +7,14 @@ const TsconfigPathsWebpackPlugin = require("tsconfig-paths-webpack-plugin");
 const { cwd } = require("node:process");
 const { resolve } = require("node:path");
 
+const domain = process.env.PRODUCTION_DOMAIN;
+
 const devConfigs = {
-  mode: "development",
+  mode: "production",
   entry: "./src/main.tsx",
   output: {
-    publicPath: "/doctorAppointments/latest/",
+    filename: "[name].[contenthash].js",
+    publicPath: `${domain}/doctorAppointments/latest/`,
   },
   resolve: {
     plugins: [
