@@ -8,4 +8,5 @@ export const REMOTE_APP_ROUTING_PREFIX = {
   ADMIN_DOCTORS: "admin-doctors",
   ADMIN_MEDICINES: "admin-medicines",
   ADMIN_TESTS: "admin-tests",
+  USER_SETTING: "user-setting",
 };

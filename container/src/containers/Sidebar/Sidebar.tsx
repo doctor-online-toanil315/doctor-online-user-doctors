@@ -30,6 +30,12 @@ const Sidebar = () => {
           icon: null,
           label: "Appointments",
         },
+        {
+          id: 4,
+          href: "user-setting",
+          icon: null,
+          label: "Settings",
+        },
       ];
     }
 
@@ -74,6 +80,12 @@ const Sidebar = () => {
         href: "doctor-patients",
         icon: null,
         label: "Patients",
+      },
+      {
+        id: 4,
+        href: "user-setting",
+        icon: null,
+        label: "Settings",
       },
     ];
   }, [me]);
