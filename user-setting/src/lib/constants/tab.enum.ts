@@ -1,0 +1,6 @@
+export enum SETTING_TAB_ENUM {
+  MY_PROFILE = "1",
+  CHANGE_PASSWORD = "2",
+  DOCTOR_INFORMATION = "3",
+  REVIEWS = "4",
+}
