@@ -34,5 +34,9 @@
   "admin-tests": {
     "appName": "adminTests",
     "path": "/adminTests/latest/remoteEntry.js"
+  },
+  "user-setting": {
+    "appName": "userSetting",
+    "path": "/userSetting/latest/remoteEntry.js"
   }
 }

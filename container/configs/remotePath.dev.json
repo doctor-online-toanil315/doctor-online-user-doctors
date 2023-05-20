@@ -34,5 +34,9 @@
   "admin-tests": {
     "appName": "adminTests",
     "path": "http://localhost:5182/remoteEntry.js"
+  },
+  "user-setting": {
+    "appName": "userSetting",
+    "path": "http://localhost:5183/remoteEntry.js"
   }
 }
