@@ -73,14 +73,108 @@ export const StyledDoctorDetailContainer = styled.div`
 
       .education li {
         color: ${({ theme }) => theme.strongBlue};
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 8px;
+          left: -18px;
+
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: ${({ theme }) => theme.strongBlue};
+        }
       }
 
       .workAndExperience li {
         color: ${({ theme }) => theme.blue};
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 8px;
+          left: -18px;
+
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: ${({ theme }) => theme.blue};
+        }
       }
 
       .achievements li {
         color: ${({ theme }) => theme.yellow};
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 8px;
+          left: -18px;
+
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: ${({ theme }) => theme.yellow};
+        }
+      }
+
+      .education {
+        button {
+          height: 40px !important;
+          padding: 0 20px !important;
+          font-size: 13px;
+        }
+      }
+
+      .workAndExperience {
+        button {
+          height: 40px !important;
+          padding: 0 20px !important;
+          background-color: ${({ theme }) => theme.blue};
+          font-size: 13px;
+        }
+      }
+
+      .achievements {
+        button {
+          height: 40px !important;
+          padding: 0 20px !important;
+          background-color: ${({ theme }) => theme.yellow};
+          font-size: 13px;
+        }
+      }
+
+      .doctor-infos-delete {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: ${({ theme }) => `${theme.red}10`};
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+        svg {
+          width: 22px !important;
+          path {
+            fill: ${({ theme }) => theme.red};
+          }
+        }
       }
 
       ul {
@@ -122,7 +216,10 @@ export const StyledDoctorDetailContainer = styled.div`
         gap: 15px;
 
         .special-item {
-          display: block;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 6px;
 
           padding: 6px 15px;
           border-radius: 15px;
@@ -135,10 +232,28 @@ export const StyledDoctorDetailContainer = styled.div`
 
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-          cursor: pointer;
+          cursor: default;
 
           &:hover {
             background: ${({ theme }) => theme.baseGray02};
+          }
+
+          svg {
+            width: 16px !important;
+            path {
+              fill: ${({ theme }) => theme.primaryText};
+            }
+          }
+
+          .delete {
+            cursor: pointer;
+            svg {
+              width: 10px !important;
+              height: 10px !important;
+              path {
+                fill: ${({ theme }) => theme.baseGray03};
+              }
+            }
           }
         }
       }
@@ -515,6 +630,72 @@ export const StyledChangePassword = styled(StyledMyProfile)`
     width: 100%;
     button {
       width: 100% !important;
+    }
+  }
+`;
+
+export const StyledDoctorInfos = styled(StyledMyProfile)`
+  .biography {
+    .user-ctrl {
+      margin-top: 20px;
+      width: fit-content;
+      margin-left: auto;
+
+      button {
+        height: 45px !important;
+        padding: 0 40px !important;
+      }
+    }
+  }
+
+  .add-more-specialize {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 14px;
+
+    input {
+      border: none;
+      background-color: transparent;
+      &:focus {
+        outline: none;
+      }
+    }
+    .confirm {
+      cursor: pointer;
+      svg {
+        path {
+          fill: ${({ theme }) => theme.strongBlue} !important;
+        }
+      }
+    }
+
+    .cancel {
+      cursor: pointer;
+      svg {
+        width: 14px !important;
+        height: 14px !important;
+
+        path {
+          fill: ${({ theme }) => theme.red} !important;
+        }
+      }
+    }
+  }
+`;
+
+export const StyledDoctorInfoModal = styled.div`
+  .user-ctrl {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-left: auto;
+
+    button {
+      height: 50px !important;
+      padding: 0 40px !important;
     }
   }
 `;

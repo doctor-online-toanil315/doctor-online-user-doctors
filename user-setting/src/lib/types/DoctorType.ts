@@ -60,3 +60,35 @@ export interface DoctorReview extends BaseDoctorReview {
 export interface DoctorReviewDto extends BaseDoctorReview {
   doctorId: string;
 }
+
+export interface UpdateDoctorType {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  address: string;
+  certificate: string;
+  identityCardFrontSide: string;
+  identityCardBackSide: string;
+  yearOfExperience: number;
+  specialize: string;
+  specializeTitle: string;
+  price: number;
+  biography: string;
+}
+
+export interface CreateDoctorEducationType {
+  title: string;
+  date: string;
+  doctorId: string;
+}
+
+export interface CreateDoctorWorkExperience extends CreateDoctorEducationType {}
+
+export interface CreateDoctorAchievement {
+  title: string;
+  date: string;
+  description: string;
+  doctorId: string;
+}

@@ -15,6 +15,13 @@ export {
   useGetDoctorWorkExperienceQuery,
   useCreateDoctorReviewMutation,
   useGetDoctorReviewsQuery,
+  useUpdateDoctorMutation,
+  useDeleteDoctorAchievementMutation,
+  useDeleteDoctorEducationMutation,
+  useDeleteDoctorWorkExperienceMutation,
+  useCreateDoctorAchievementMutation,
+  useCreateDoctorEducationMutation,
+  useCreateDoctorWorkExperienceMutation,
 } from "./DoctorAPI";
 export {
   AppointmentAPI,
