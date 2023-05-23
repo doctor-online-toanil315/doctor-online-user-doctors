@@ -18,6 +18,8 @@ export {
   useUpdateDoctorMutation,
   useGetDoctorWorkingTimeQuery,
   useUpdateWorkingTimeMutation,
+  useGetDoctorEventsQuery,
+  useCreateEventMutation,
 } from "./DoctorAPI";
 export {
   AppointmentAPI,

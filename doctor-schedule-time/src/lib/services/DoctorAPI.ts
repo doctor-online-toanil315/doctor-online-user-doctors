@@ -10,13 +10,16 @@ import {
 import {
   CreateDoctorAchievement,
   CreateDoctorEducationType,
+  CreateDoctorEvent,
   CreateDoctorWorkExperience,
   DoctorAchievement,
   DoctorEducation,
+  DoctorEvent,
   DoctorReview,
   DoctorReviewDto,
   DoctorType,
   DoctorWorkExperience,
+  GetDoctorEvent,
   UpdateDoctorType,
 } from "../types/DoctorType";
 import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
@@ -26,7 +29,7 @@ const BASE_URL = "/doctors";
 export const DoctorAPI = createApi({
   reducerPath: "DoctorAPI",
   baseQuery: baseQueryWithReAuth,
-  tagTypes: ["Review", "Doctor", "WorkingTime"],
+  tagTypes: ["Review", "Doctor", "WorkingTime", "Event"],
   keepUnusedDataFor: 300,
   endpoints: (builder) => ({
     getDoctors: builder.query<
@@ -126,6 +129,27 @@ export const DoctorAPI = createApi({
       }),
       invalidatesTags: ["WorkingTime"],
     }),
+
+    getDoctorEvents: builder.query<
+      ApiResponseImpl<DoctorEvent[]>,
+      GetDoctorEvent
+    >({
+      query: ({ id, ...params }) => ({
+        url: `${BASE_URL}/${id}/events`,
+        method: "GET",
+        params,
+      }),
+      providesTags: ["Event"],
+    }),
+
+    createEvent: builder.mutation<void, CreateDoctorEvent>({
+      query: (body) => ({
+        url: `${BASE_URL}/events`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Event"],
+    }),
   }),
 });
 
@@ -141,4 +165,6 @@ export const {
   useUpdateDoctorMutation,
   useGetDoctorWorkingTimeQuery,
   useUpdateWorkingTimeMutation,
+  useGetDoctorEventsQuery,
+  useCreateEventMutation,
 } = DoctorAPI;

@@ -92,3 +92,27 @@ export interface CreateDoctorAchievement {
   description: string;
   doctorId: string;
 }
+
+export interface GetDoctorEvent {
+  id: string;
+  from: number;
+  to: number;
+}
+
+export interface DoctorEvent {
+  id: string;
+  type: string;
+  from: string;
+  to: string;
+  description: string;
+  note: string;
+}
+
+export interface CreateDoctorEvent {
+  type: string;
+  from: string;
+  to: string;
+  description: string;
+  note: string;
+  doctorId: string;
+}
