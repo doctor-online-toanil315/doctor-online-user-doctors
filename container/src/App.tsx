@@ -35,6 +35,9 @@ const ModuleAdminTests = React.lazy(
 const ModuleUserSetting = React.lazy(
   () => import("./remotes/UserSetting/UserSetting")
 );
+const ModuleDoctorScheduleTime = React.lazy(
+  () => import("./remotes/DoctorScheduleTime/DoctorScheduleTime")
+);
 
 export function App() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -148,6 +151,14 @@ export function App() {
               element={
                 <Suspense fallback={<LoadingOutlined />}>
                   <ModuleUserSetting />
+                </Suspense>
+              }
+            />
+            <Route
+              path="doctor-schedule-time/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleDoctorScheduleTime />
                 </Suspense>
               }
             />

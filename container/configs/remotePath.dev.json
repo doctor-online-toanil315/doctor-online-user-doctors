@@ -38,5 +38,9 @@
   "user-setting": {
     "appName": "userSetting",
     "path": "http://localhost:5183/remoteEntry.js"
+  },
+  "doctor-schedule-time": {
+    "appName": "doctorScheduleTime",
+    "path": "http://localhost:5184/remoteEntry.js"
   }
 }

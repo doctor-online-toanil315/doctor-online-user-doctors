@@ -87,6 +87,12 @@ const Sidebar = () => {
         icon: null,
         label: "Settings",
       },
+      {
+        id: 5,
+        href: "doctor-schedule-time",
+        icon: null,
+        label: "Schedule Timings",
+      },
     ];
   }, [me]);
 

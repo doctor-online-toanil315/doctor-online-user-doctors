@@ -9,3 +9,4 @@ declare module "adminDoctors/Module";
 declare module "adminMedicines/Module";
 declare module "adminTests/Module";
 declare module "userSetting/Module";
+declare module "doctorScheduleTime/Module";

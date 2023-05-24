@@ -38,5 +38,9 @@
   "user-setting": {
     "appName": "userSetting",
     "path": "/userSetting/latest/remoteEntry.js"
+  },
+  "doctor-schedule-time": {
+    "appName": "doctorScheduleTime",
+    "path": "/doctorScheduleTime/latest/remoteEntry.js"
   }
 }

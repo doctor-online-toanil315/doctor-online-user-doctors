@@ -22,5 +22,9 @@
   "user-appointments": {
     "appName": "userAppointments",
     "path": "/userAppointments/latest/remoteEntry.js"
+  },
+  "doctor-schedule-time": {
+    "appName": "doctorScheduleTime",
+    "path": "/doctorScheduleTime/latest/remoteEntry.js"
   }
 }
