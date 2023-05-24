@@ -66,8 +66,6 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
     }
   };
 
-  console.log(form.getValues());
-
   return (
     <StyledAppointmentModal>
       <FormProvider {...form}>

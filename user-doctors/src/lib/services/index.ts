@@ -9,6 +9,8 @@ export {
   useGetDoctorWorkExperienceQuery,
   useCreateDoctorReviewMutation,
   useGetDoctorReviewsQuery,
+  useGetDoctorEventsQuery,
+  useGetDoctorWorkingTimeQuery,
 } from "./DoctorAPI";
 export {
   AppointmentAPI,

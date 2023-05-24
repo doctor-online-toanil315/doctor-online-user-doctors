@@ -63,7 +63,7 @@ const DoctorReviewItem = ({ review }: DoctorReviewItemProps) => {
       <img
         className="avatar"
         src={
-          review.doctor.user?.avatar ??
+          review.user?.avatar ??
           "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?w=2000"
         }
         alt="doctor avatar"

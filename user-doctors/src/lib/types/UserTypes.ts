@@ -1,3 +1,5 @@
+import { DoctorType } from "./DoctorType";
+
 export interface UserType {
   id: string;
   email: string;
@@ -8,4 +10,5 @@ export interface UserType {
   birthday: string | null;
   address: string | null;
   role: string;
+  doctor?: DoctorType;
 }

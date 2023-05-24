@@ -45,7 +45,7 @@ const DoctorInfos = () => {
           <p>{doctorById?.data.biography}</p>
         </div>
       </Col>
-
+      <Line />
       <Col span={12}>
         <ul className="education">
           <Title>{t("education")}</Title>
