@@ -23,6 +23,7 @@ jobs:
           PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
           API_URL: ${{ secrets.API_URL }}
           CENTRAL_AUTH_APP_URL: ${{ secrets.CENTRAL_AUTH_APP_URL }}
+          PAYPAL_CLIENT_ID: ${{ secrets.PAYPAL_CLIENT_ID }}
 
       - uses: shinyinc/action-aws-cli@v1.2
       - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/userDoctors/latest
