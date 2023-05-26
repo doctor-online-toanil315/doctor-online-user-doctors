@@ -4,7 +4,7 @@ import { AppointmentType, BaseAppointmentType } from "src/lib/types";
 import { Line, StyledAppointmentModal } from "./styled";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useFormat, useModal, yup } from "doctor-online-common";
+import { theme, useFormat, useModal, yup } from "doctor-online-common";
 import { useParams } from "react-router-dom";
 import {
   useAddAppointmentMutation,
@@ -22,6 +22,7 @@ import {
 import moment from "moment";
 import SuccessFullModal from "./SuccessFullModal";
 import { FileUpload } from "../FileUpload";
+import { PayPalButtons } from "@paypal/react-paypal-js";
 
 interface Props {
   handleClose: () => void;
@@ -181,9 +182,39 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
         </div>
       </FormProvider>
       <div className="user-ctrl">
-        <Button loading={isLoading} onClick={form.handleSubmit(onSubmit)}>
+        {/* <Button loading={isLoading} onClick={form.handleSubmit(onSubmit)}>
           Confirm and Pay
-        </Button>
+        </Button> */}
+        <PayPalButtons
+          style={{
+            height: 45,
+            shape: "pill",
+            label: "checkout",
+          }}
+          onClick={async (data, actions) => {
+            const result = await form.trigger();
+            if (!result) {
+              return actions.reject();
+            }
+            return actions.resolve();
+          }}
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  description: `fee for book an appointment with Dr. ${doctorById?.data.user?.firstName} ${doctorById?.data.user?.lastName}`,
+                  amount: {
+                    value: String(doctorById?.data.price) ?? "10",
+                  },
+                },
+              ],
+            });
+          }}
+          onApprove={async (data, actions) => {
+            const order = await actions.order?.capture();
+            onSubmit(form.getValues());
+          }}
+        />
       </div>
       <Modal
         width={500}

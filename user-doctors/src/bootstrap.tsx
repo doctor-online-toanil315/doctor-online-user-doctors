@@ -13,6 +13,7 @@ import { RoutingStrategy } from "./lib/routes";
 import { Provider } from "react-redux";
 import "antd/dist/antd.css";
 import { store as mainStore } from "src/lib/redux/store";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 const increaseSpecificityPlugin = repeatClassName(3);
 
@@ -36,18 +37,22 @@ const mount = ({
       target={document.getElementById("root") as any}
       // stylisPlugins={[increaseSpecificityPlugin]}
     >
-      <ThemeProvider theme={theme}>
-        <Provider store={store} context={CommonContext}>
-          <Provider store={apiStore}>
-            <Provider store={mainStore}>
-              <ModuleUserDoctors
-                initialPathname={initialPathname}
-                routingStrategy={routingStrategy}
-              />
+      <PayPalScriptProvider
+        options={{ "client-id": process.env.PAYPAL_CLIENT_ID ?? "" }}
+      >
+        <ThemeProvider theme={theme}>
+          <Provider store={store} context={CommonContext}>
+            <Provider store={apiStore}>
+              <Provider store={mainStore}>
+                <ModuleUserDoctors
+                  initialPathname={initialPathname}
+                  routingStrategy={routingStrategy}
+                />
+              </Provider>
             </Provider>
           </Provider>
-        </Provider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </PayPalScriptProvider>
     </StyleSheetManager>
   );
 };
