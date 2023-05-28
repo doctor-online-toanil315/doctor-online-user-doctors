@@ -1,0 +1,5 @@
+export enum TEST_PRIORITY_ENUM {
+  EMARGENCY = "EMARGENCY",
+  HIGH = "HIGH",
+  LOW = "LOW",
+}
