@@ -42,5 +42,13 @@
   "doctor-schedule-time": {
     "appName": "doctorScheduleTime",
     "path": "/doctorScheduleTime/latest/remoteEntry.js"
+  },
+  "admin-dashboard": {
+    "appName": "adminDashboard",
+    "path": "/adminDashboard/latest/remoteEntry.js"
+  },
+  "admin-payment": {
+    "appName": "adminPayment",
+    "path": "/adminPayment/latest/remoteEntry.js"
   }
 }

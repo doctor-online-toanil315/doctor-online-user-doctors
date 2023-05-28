@@ -59,6 +59,12 @@ const Sidebar = () => {
           icon: null,
           label: "Lab Tests",
         },
+        {
+          id: 4,
+          href: "admin-payment",
+          icon: null,
+          label: "Payments",
+        },
       ];
     }
 

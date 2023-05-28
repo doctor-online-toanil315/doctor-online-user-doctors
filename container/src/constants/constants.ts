@@ -10,4 +10,6 @@ export const REMOTE_APP_ROUTING_PREFIX = {
   ADMIN_TESTS: "admin-tests",
   USER_SETTING: "user-setting",
   DOCTOR_SCHEDULE_TIME: "doctor-schedule-time",
+  ADMIN_DASHBOARD: "admin-dashboard",
+  ADMIN_PAYMENT: "admin-payment",
 };
