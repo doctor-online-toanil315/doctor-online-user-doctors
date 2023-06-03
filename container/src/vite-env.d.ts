@@ -11,3 +11,4 @@ declare module "adminTests/Module";
 declare module "userSetting/Module";
 declare module "doctorScheduleTime/Module";
 declare module "adminPayment/Module";
+declare module "adminDashboard/Module";

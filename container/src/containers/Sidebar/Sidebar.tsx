@@ -42,6 +42,12 @@ const Sidebar = () => {
     if (me?.data.role === ROLE_ENUM.ADMIN) {
       return [
         {
+          id: 0,
+          href: "admin-dashboard",
+          icon: null,
+          label: "Dashboard",
+        },
+        {
           id: 1,
           href: "admin-doctors",
           icon: null,
