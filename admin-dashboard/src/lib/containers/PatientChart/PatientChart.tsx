@@ -8,11 +8,11 @@ import {
   YAxis,
 } from "recharts";
 import { abbreviateNumber, formatNumber } from "src/lib/utils";
-import { StyledIncomeChart } from "./styled";
+import { StyledPatientChart } from "./styled";
 import moment from "moment";
-import { useGetIncomeByMonthsMutation } from "src/lib/services";
+import { useGetPatientByMonthsMutation } from "src/lib/services";
 
-const IncomeChart = () => {
+const PatientChart = () => {
   const monthDurations = Array(12)
     .fill(1)
     .map((_, index) => {
@@ -24,27 +24,27 @@ const IncomeChart = () => {
       ];
       return previousMonth;
     });
-  const [getIncomeByMonths, { data, isLoading }] =
-    useGetIncomeByMonthsMutation();
+  const [getPatientByMonths, { data, isLoading }] =
+    useGetPatientByMonthsMutation();
 
   useEffect(() => {
-    getIncomeByMonths(monthDurations);
+    getPatientByMonths(monthDurations);
   }, []);
 
-  const newData = [...(data ?? [])].reverse().map((income, index) => {
+  const newData = [...(data ?? [])].reverse().map((patients, index) => {
     const now = moment();
     const previousDay = now.subtract(11 - index, "months");
     return {
-      income,
+      patients,
       month: previousDay.format("MMM YYYY"),
     };
   });
 
   return (
-    <StyledIncomeChart>
+    <StyledPatientChart>
       <div style={{ textAlign: "center" }}>
-        <p className="title">This month earnings:</p>
-        <p className="number">${formatNumber(newData.at(-1)?.income)}</p>
+        <p className="title">Patients this month:</p>
+        <p className="number">{formatNumber(data?.at(-1))}</p>
       </div>
       <ResponsiveContainer width="100%" height="85%">
         <AreaChart
@@ -53,19 +53,19 @@ const IncomeChart = () => {
         >
           <Tooltip cursor={false} />
           <defs>
-            <linearGradient id="income" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8e86f0" stopOpacity={0.5} />
-              <stop offset="95%" stopColor="#796EFF" stopOpacity={0} />
+            <linearGradient id="patient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="10%" stopColor="#f5727f" stopOpacity={0.5} />
+              <stop offset="90%" stopColor="#FF5263" stopOpacity={0} />
             </linearGradient>
           </defs>
           <Area
             animationBegin={800}
             animationDuration={2000}
             type="monotone"
-            dataKey="income"
-            stroke="#796EFF"
+            dataKey="patients"
+            stroke="#FF5263"
             fillOpacity={1}
-            fill="url(#income)"
+            fill="url(#patient)"
             strokeWidth={3}
           />
 
@@ -73,13 +73,13 @@ const IncomeChart = () => {
           <YAxis
             tickFormatter={abbreviateNumber}
             tickLine={false}
-            dataKey="income"
+            dataKey="patients"
           />
           <Tooltip />
         </AreaChart>
       </ResponsiveContainer>
-    </StyledIncomeChart>
+    </StyledPatientChart>
   );
 };
 
-export default IncomeChart;
+export default PatientChart;

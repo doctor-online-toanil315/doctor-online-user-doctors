@@ -21,6 +21,13 @@ export {
   useAddConsultationMutation,
   useUpdateConsultationMutation,
   useAddTestMutation,
+  useGetAllAppointmentsQuery,
+  useGetAllPatientsQuery,
+  useGetAllIncomeQuery,
+  useGetIncomeByMonthsMutation,
+  useGetPatientByMonthsMutation,
+  useGetPatientsOfDoctorByMonthsMutation,
+  useGetReBookingRateByMonthsMutation,
 } from "./AppointmentAPI";
 export { NotificationAPI, useGetNotificationsQuery } from "./NotificationAPI";
 export {

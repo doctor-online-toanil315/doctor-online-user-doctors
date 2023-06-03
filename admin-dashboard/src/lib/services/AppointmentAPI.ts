@@ -12,6 +12,7 @@ import {
   PatientType,
   UpdateAppointmentStatus,
   UpdateConsultationType,
+  UserType,
 } from "../types";
 import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
 
@@ -24,6 +25,72 @@ export const AppointmentAPI = createApi({
   tagTypes: ["Appointment"],
   keepUnusedDataFor: 500,
   endpoints: (builder) => ({
+    getAllAppointments: builder.query<
+      ApiResponseWithPaginate<AppointmentType[]>,
+      AppointmentQueryType
+    >({
+      query: (params) => ({
+        url: `${APPOINTMENT_BASE_URL}/list`,
+        params,
+        method: "GET",
+      }),
+      providesTags: ["Appointment"],
+    }),
+
+    getAllIncome: builder.query<number, void>({
+      query: () => ({
+        url: `${APPOINTMENT_BASE_URL}/income`,
+        method: "GET",
+      }),
+    }),
+
+    getIncomeByMonths: builder.mutation<number[], number[][]>({
+      query: (body) => ({
+        url: `${APPOINTMENT_BASE_URL}/income-by-months`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    getAllPatients: builder.query<
+      ApiResponseWithPaginate<UserType[]>,
+      AppointmentQueryType
+    >({
+      query: (params) => ({
+        url: `${APPOINTMENT_BASE_URL}/list/patients`,
+        params,
+        method: "GET",
+      }),
+      providesTags: ["Appointment"],
+    }),
+
+    getPatientByMonths: builder.mutation<number[], number[][]>({
+      query: (body) => ({
+        url: `${APPOINTMENT_BASE_URL}/patient-by-months`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    getPatientsOfDoctorByMonths: builder.mutation<
+      number[],
+      { months: number[][]; doctorId: string }
+    >({
+      query: (body) => ({
+        url: `${APPOINTMENT_BASE_URL}/doctor/patient-by-months`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    getReBookingRateByMonths: builder.mutation<number[], number[][]>({
+      query: (body) => ({
+        url: `${APPOINTMENT_BASE_URL}/re-Booking-rate`,
+        method: "POST",
+        body,
+      }),
+    }),
+
     getAppointmentById: builder.query<ApiResponseImpl<AppointmentType>, string>(
       {
         query: (appointmentId: string) => ({
@@ -67,6 +134,17 @@ export const AppointmentAPI = createApi({
       query: ({ doctorId, ...params }) => ({
         url: `${APPOINTMENT_BASE_URL}/doctor/${doctorId}/patient`,
         params,
+        method: "GET",
+      }),
+      providesTags: ["Appointment"],
+    }),
+
+    getPatientOverview: builder.query<
+      { oldPatients: number; newPatients: number },
+      void
+    >({
+      query: () => ({
+        url: `${APPOINTMENT_BASE_URL}/patient-overview`,
         method: "GET",
       }),
       providesTags: ["Appointment"],
@@ -140,4 +218,12 @@ export const {
   useUpdateConsultationMutation,
   useAddMedicineMutation,
   useAddTestMutation,
+  useGetAllAppointmentsQuery,
+  useGetAllPatientsQuery,
+  useGetAllIncomeQuery,
+  useGetIncomeByMonthsMutation,
+  useGetPatientByMonthsMutation,
+  useGetPatientsOfDoctorByMonthsMutation,
+  useGetReBookingRateByMonthsMutation,
+  useGetPatientOverviewQuery,
 } = AppointmentAPI;

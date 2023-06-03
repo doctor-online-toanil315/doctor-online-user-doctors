@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Bar,
   BarChart,
@@ -10,66 +10,47 @@ import {
 import { abbreviateNumber } from "src/lib/utils";
 import { StyledContainer } from "../PatientOverview/styled";
 import { StyledReBookingChart } from "./styled";
-
-const data = [
-  {
-    month: 1,
-    value: 100,
-  },
-  {
-    month: 2,
-    value: 100,
-  },
-  {
-    month: 3,
-    value: 80,
-  },
-  {
-    month: 4,
-    value: 78,
-  },
-  {
-    month: 5,
-    value: 66,
-  },
-  {
-    month: 6,
-    value: 50,
-  },
-  {
-    month: 7,
-    value: 30,
-  },
-  {
-    month: 8,
-    value: 23,
-  },
-  {
-    month: 9,
-    value: 100,
-  },
-  {
-    month: 10,
-    value: 80,
-  },
-  {
-    month: 11,
-    value: 75,
-  },
-  {
-    month: 12,
-    value: 35,
-  },
-];
+import moment from "moment";
+import { useGetReBookingRateByMonthsMutation } from "src/lib/services";
 
 const ReBookingChart = () => {
+  const monthDurations = Array(12)
+    .fill(1)
+    .map((_, index) => {
+      const currentDay = moment();
+      const previousDay = currentDay.subtract(index, "months");
+      const previousMonth = [
+        previousDay.startOf("month").valueOf(),
+        previousDay.endOf("month").valueOf(),
+      ];
+      return previousMonth;
+    });
+  const [getReBookingRate, { data, isLoading }] =
+    useGetReBookingRateByMonthsMutation();
+
+  useEffect(() => {
+    getReBookingRate(monthDurations);
+  }, []);
+
+  const newData = [...(data ?? [])].reverse().map((value, index) => {
+    const now = moment();
+    const previousDay = now.subtract(11 - index, "months");
+    return {
+      value: value * 100,
+      month: previousDay.format("MMM YY"),
+    };
+  });
+
   return (
     <StyledReBookingChart>
       <div className="header">
         <p className="title">Re-Booking Rate</p>
       </div>
       <ResponsiveContainer width="100%" height="90%">
-        <BarChart margin={{ top: 0, left: 0, right: 0, bottom: 0 }} data={data}>
+        <BarChart
+          margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+          data={newData}
+        >
           <Bar dataKey="value" fill="#23A9F9" />
           <XAxis tickLine={false} dataKey="month" />
           <YAxis tickLine={false} dataKey="value" />
