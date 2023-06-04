@@ -9,6 +9,7 @@ import {
   AppointmentQueryType,
   AppointmentType,
   BaseAppointmentType,
+  ConsultationType,
   PatientType,
   UpdateAppointmentStatus,
   UpdateConsultationType,
@@ -90,6 +91,16 @@ export const AppointmentAPI = createApi({
       invalidatesTags: ["Appointment"],
     }),
 
+    getConsultationByUser: builder.query<
+      ApiResponseImpl<(ConsultationType & { appointment: AppointmentType })[]>,
+      string
+    >({
+      query: (userId: string) => ({
+        url: `${CONSULTATION_BASE_URL}/user/${userId}`,
+        method: "GET",
+      }),
+    }),
+
     addConsultation: builder.mutation<void, AddConsultationType>({
       query: (body) => ({
         url: `${CONSULTATION_BASE_URL}`,
@@ -140,4 +151,5 @@ export const {
   useUpdateConsultationMutation,
   useAddMedicineMutation,
   useAddTestMutation,
+  useGetConsultationByUserQuery,
 } = AppointmentAPI;

@@ -10,6 +10,7 @@ import {
   DoctorEducation,
   DoctorType,
   DoctorWorkExperience,
+  WorkingTimeType,
 } from "../types/DoctorType";
 import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
 
@@ -67,6 +68,16 @@ export const DoctorAPI = createApi({
         method: "GET",
       }),
     }),
+
+    getDoctorWorkingTime: builder.query<
+      ApiResponseImpl<WorkingTimeType>,
+      string
+    >({
+      query: (id) => ({
+        url: `${BASE_URL}/${id}/working-times`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -77,4 +88,5 @@ export const {
   useGetDoctorAchievementsQuery,
   useGetDoctorEducationQuery,
   useGetDoctorWorkExperienceQuery,
+  useGetDoctorWorkingTimeQuery,
 } = DoctorAPI;

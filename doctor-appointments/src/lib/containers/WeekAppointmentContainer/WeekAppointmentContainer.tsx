@@ -152,7 +152,6 @@ const WeekAppointmentContainer = () => {
           ref={calendarRef}
           initialDate={new Date(Number(from ?? Date.now()))}
           events={appointments?.data.map((appointment) => {
-            console.log(appointment);
             return {
               title: appointment.id,
               start: Number(appointment.startTime),

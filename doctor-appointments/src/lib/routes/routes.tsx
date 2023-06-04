@@ -4,6 +4,7 @@ import { NavigationManager } from "../HOC";
 import { HocPermissionRoute } from "../HOC/HocPermissionRoute";
 import { ListAppointments, LogConsultation } from "../pages";
 import { AppointmentDetail } from "../pages/AppointmentDetail";
+import { PatientHistory } from "../pages/PatientHistory";
 
 const routes = createRoutesFromElements(
   <Route
@@ -32,6 +33,15 @@ const routes = createRoutesFromElements(
             <HocPermissionRoute
               role={ROLE_ENUM.DOCTOR}
               component={<AppointmentDetail />}
+            />
+          }
+        />
+        <Route
+          path="history/:userId"
+          element={
+            <HocPermissionRoute
+              role={ROLE_ENUM.DOCTOR}
+              component={<PatientHistory />}
             />
           }
         />

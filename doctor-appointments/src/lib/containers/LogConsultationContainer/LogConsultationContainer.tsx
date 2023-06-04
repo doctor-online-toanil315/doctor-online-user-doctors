@@ -185,7 +185,7 @@ const LogConsultationContainer = () => {
                 <Col span={24}>
                   <FileUpload
                     baseUrl={process.env.API_URL ?? ""}
-                    label="Add Attachment (Optional)"
+                    label="Attachment (Optional)"
                     value={appointmentForm.getValues("attachment")}
                     name="attachment"
                     readonly

@@ -14,12 +14,17 @@ import { AddMedicineModal } from "../AddMedicineModal";
 import { useParams } from "react-router-dom";
 import { useGetAppointmentByIdQuery } from "src/lib/services";
 
-const PrescriptionContainer = () => {
+interface Props {
+  mode?: string;
+  availableAppointmentId?: string;
+}
+
+const PrescriptionContainer = ({ mode, availableAppointmentId }: Props) => {
   const tableInstance = Table.useTable();
   const modal = useModal();
   const { appointmentId } = useParams();
   const { data: appointmentById, isLoading } = useGetAppointmentByIdQuery(
-    appointmentId ?? "",
+    availableAppointmentId ? availableAppointmentId : appointmentId ?? "",
     {
       skip: !appointmentId,
       refetchOnMountOrArgChange: true,
@@ -56,9 +61,11 @@ const PrescriptionContainer = () => {
     <StyledPrescriptionContainer>
       <div className="header">
         <h3>Prescription</h3>
-        <Button onClick={() => modal.handleOpen()}>
-          <PlusIcon /> Add Medicine
-        </Button>
+        {mode !== "view" && (
+          <Button onClick={() => modal.handleOpen()}>
+            <PlusIcon /> Add Medicine
+          </Button>
+        )}
       </div>
       <Table
         columns={columns}

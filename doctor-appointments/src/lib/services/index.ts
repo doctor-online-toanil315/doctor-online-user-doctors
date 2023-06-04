@@ -7,6 +7,7 @@ export {
   useGetDoctorAchievementsQuery,
   useGetDoctorEducationQuery,
   useGetDoctorWorkExperienceQuery,
+  useGetDoctorWorkingTimeQuery,
 } from "./DoctorAPI";
 export {
   AppointmentAPI,
@@ -21,6 +22,7 @@ export {
   useUpdateConsultationMutation,
   useAddMedicineMutation,
   useAddTestMutation,
+  useGetConsultationByUserQuery,
 } from "./AppointmentAPI";
 export { NotificationAPI, useGetNotificationsQuery } from "./NotificationAPI";
 export { MedicineAPI, useGetMedicinesQuery } from "./MedicineAPI";

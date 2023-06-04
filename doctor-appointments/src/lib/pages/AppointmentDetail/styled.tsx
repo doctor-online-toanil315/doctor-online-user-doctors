@@ -16,6 +16,20 @@ export const StyledAppointmentDetail = styled.div`
     cursor: pointer;
   }
 
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    a {
+      font-weight: 500;
+      font-size: 14px;
+      color: ${({ theme }) => theme.strongBlue};
+      font-style: italic;
+    }
+  }
+
   h1 {
     font-weight: 700;
     font-size: 22px;

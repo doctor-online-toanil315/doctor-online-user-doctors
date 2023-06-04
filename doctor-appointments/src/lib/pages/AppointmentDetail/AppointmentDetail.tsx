@@ -14,7 +14,11 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
 import { theme, useFormat } from "doctor-online-common";
-import { useGetAppointmentByIdQuery } from "src/lib/services";
+import {
+  useGetAppointmentByIdQuery,
+  useGetDoctorWorkingTimeQuery,
+  useGetMeQuery,
+} from "src/lib/services";
 import {
   StyledAppointmentDetail,
   StyledAppointmentForm,
@@ -30,10 +34,18 @@ const AppointmentDetail = () => {
   const navigate = useNavigate();
   const { appointmentId } = useParams();
   const format = useFormat();
+  const { data: currentUserLogin } = useGetMeQuery();
   const { data: appointmentById } = useGetAppointmentByIdQuery(
     appointmentId ?? "",
     {
       skip: !appointmentId,
+      refetchOnMountOrArgChange: true,
+    }
+  );
+  const { data: workingTime } = useGetDoctorWorkingTimeQuery(
+    currentUserLogin?.data.doctor?.id ?? "",
+    {
+      skip: !currentUserLogin?.data.doctor?.id,
       refetchOnMountOrArgChange: true,
     }
   );
@@ -43,46 +55,54 @@ const AppointmentDetail = () => {
       {
         id: 1,
         day: "Monday",
-        startTime: "08:00 AM",
-        endTime: "05:00 PM",
+        startTime: workingTime?.data.monFrom,
+        endTime: workingTime?.data.monTo,
+        isClosed: !workingTime?.data.isMonOpen,
       },
       {
         id: 2,
         day: "Tuesday",
-        startTime: "08:00 AM",
-        endTime: "05:00 PM",
+        startTime: workingTime?.data.tueFrom,
+        endTime: workingTime?.data.tueTo,
+        isClosed: !workingTime?.data.isTueOpen,
       },
       {
         id: 3,
         day: "Wednesday",
-        startTime: "08:00 AM",
-        endTime: "05:00 PM",
+        startTime: workingTime?.data.wedFrom,
+        endTime: workingTime?.data.wedTo,
+        isClosed: !workingTime?.data.isWedOpen,
       },
       {
         id: 4,
         day: "Thursday",
-        startTime: "08:00 AM",
-        endTime: "05:00 PM",
+        startTime: workingTime?.data.thuFrom,
+        endTime: workingTime?.data.thuTo,
+        isClosed: !workingTime?.data.isThuOpen,
       },
       {
         id: 5,
         day: "Friday",
-        startTime: "08:00 AM",
-        endTime: "05:00 PM",
+        startTime: workingTime?.data.friFrom,
+        endTime: workingTime?.data.friTo,
+        isClosed: !workingTime?.data.isFriOpen,
       },
       {
         id: 6,
         day: "Saturday",
-        startTime: "08:00 AM",
-        endTime: "05:00 PM",
+        startTime: workingTime?.data.satFrom,
+        endTime: workingTime?.data.satTo,
+        isClosed: !workingTime?.data.isSatOpen,
       },
       {
         id: 7,
         day: "Sunday",
-        isClosed: true,
+        startTime: workingTime?.data.sunFrom,
+        endTime: workingTime?.data.sunTo,
+        isClosed: !workingTime?.data.isSunOpen,
       },
     ];
-  }, []);
+  }, [workingTime]);
 
   useEffect(() => {
     if (appointmentById?.data) {
@@ -108,7 +128,12 @@ const AppointmentDetail = () => {
       </div>
       <div className="body">
         <div className="left">
-          <h1>{t("appointmentDetail")}</h1>
+          <div className="title">
+            <h1>{t("appointmentDetail")}</h1>
+            <Link to={`history/${appointmentById?.data.user.id}`}>
+              View patient history
+            </Link>
+          </div>
           <StyledAppointmentForm>
             <FormProvider {...form}>
               <Row gutter={[30, 30]}>
@@ -166,7 +191,7 @@ const AppointmentDetail = () => {
                 <Col span={24}>
                   <FileUpload
                     baseUrl={process.env.API_URL ?? ""}
-                    label="Add Attachment (Optional)"
+                    label="Attachment (Optional)"
                     value={form.getValues("attachment")}
                     name="attachment"
                     readonly

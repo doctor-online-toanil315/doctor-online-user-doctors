@@ -14,12 +14,17 @@ import { useGetAppointmentByIdQuery } from "src/lib/services";
 import { useModal } from "doctor-online-common";
 import { AddLabTestModal } from "../AddLabTestModal";
 
-const LabTestContainer = () => {
+interface Props {
+  mode?: string;
+  availableAppointmentId?: string;
+}
+
+const LabTestContainer = ({ mode, availableAppointmentId }: Props) => {
   const tableInstance = Table.useTable();
   const modal = useModal();
   const { appointmentId } = useParams();
   const { data: appointmentById, isLoading } = useGetAppointmentByIdQuery(
-    appointmentId ?? "",
+    availableAppointmentId ? availableAppointmentId : appointmentId ?? "",
     {
       skip: !appointmentId,
       refetchOnMountOrArgChange: true,
@@ -50,9 +55,11 @@ const LabTestContainer = () => {
     <StyledPrescriptionContainer>
       <div className="header">
         <h3>Lab Test</h3>
-        <Button onClick={() => modal.handleOpen()}>
-          <PlusIcon /> Add Test
-        </Button>
+        {mode !== "view" && (
+          <Button onClick={() => modal.handleOpen()}>
+            <PlusIcon /> Add Test
+          </Button>
+        )}
       </div>
       <Table
         columns={columns}
