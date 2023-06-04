@@ -20,3 +20,4 @@ export {
   useLazyGetAppointmentByDoctorQuery,
 } from "./AppointmentAPI";
 export { NotificationAPI, useGetNotificationsQuery } from "./NotificationAPI";
+export { PaymentAPI, useCreatePaymentUrlMutation } from "./PaymentAPI";

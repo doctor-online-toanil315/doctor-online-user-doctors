@@ -4,6 +4,7 @@ import {
   AuthAPI,
   DoctorAPI,
   NotificationAPI,
+  PaymentAPI,
 } from "../services";
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   [DoctorAPI.reducerPath]: DoctorAPI.reducer,
   [AppointmentAPI.reducerPath]: AppointmentAPI.reducer,
   [NotificationAPI.reducerPath]: NotificationAPI.reducer,
+  [PaymentAPI.reducerPath]: PaymentAPI.reducer,
 });
 
 export const store = configureStore({
@@ -20,7 +22,8 @@ export const store = configureStore({
       .concat(AuthAPI.middleware)
       .concat(DoctorAPI.middleware)
       .concat(AppointmentAPI.middleware)
-      .concat(NotificationAPI.middleware),
+      .concat(NotificationAPI.middleware)
+      .concat(PaymentAPI.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

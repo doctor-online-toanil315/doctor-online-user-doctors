@@ -8,3 +8,4 @@ export * from "./LabTestType";
 export * from "./MedicineType";
 export * from "./PrescriptionType";
 export * from "./NotificationType";
+export * from "./PaymentType";

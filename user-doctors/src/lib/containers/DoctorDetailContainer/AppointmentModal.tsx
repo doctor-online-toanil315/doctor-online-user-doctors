@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AppointmentType, BaseAppointmentType } from "src/lib/types";
 import { Line, StyledAppointmentModal } from "./styled";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { theme, useFormat, useModal, yup } from "doctor-online-common";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import {
   useAddAppointmentMutation,
+  useCreatePaymentUrlMutation,
   useGetDoctorByIdQuery,
   useGetMeQuery,
 } from "src/lib/services";
@@ -40,6 +41,10 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
   });
   const format = useFormat();
   const successfullModal = useModal();
+  const [createPaymentUrl, { isLoading: vnpayCheckOutLoading }] =
+    useCreatePaymentUrlMutation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { vnp_ResponseCode } = Object.fromEntries(searchParams.entries());
 
   const form = useForm({
     defaultValues: {
@@ -53,6 +58,13 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
     ),
   });
 
+  useEffect(() => {
+    if (vnp_ResponseCode === "00") {
+      setSearchParams(new URLSearchParams());
+      onSubmit(form.getValues());
+    }
+  }, [searchParams]);
+
   const onSubmit = ({ reasonForAppointment }: Partial<BaseAppointmentType>) => {
     if (doctorId) {
       addAppointment({
@@ -63,6 +75,20 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
         .unwrap()
         .then(() => {
           successfullModal.handleOpen();
+        });
+    }
+  };
+
+  const vnpayCheckout = () => {
+    if (doctorById?.data.price && doctorId) {
+      createPaymentUrl({
+        amount: doctorById?.data.price,
+        doctorId,
+      })
+        .unwrap()
+        .then((vnpUrl) => {
+          console.log(vnpUrl);
+          window.location.href = vnpUrl as string;
         });
     }
   };
@@ -215,6 +241,9 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
             onSubmit(form.getValues());
           }}
         />
+        <Button loading={vnpayCheckOutLoading} onClick={() => vnpayCheckout()}>
+          Check out with VNPAY
+        </Button>
       </div>
       <Modal
         width={500}

@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import { LikeIcon, StarGold, Tabs, VerifyIcon } from "doctor-online-components";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DOCTOR_TAB_ENUM } from "src/lib/constants";
 import DoctorAvailableTime from "./DoctorAvailableTime";
@@ -8,7 +8,7 @@ import DoctorInfos from "./DoctorInfos";
 import DoctorReviewes from "./DoctorReviewes";
 import { Line, StyledDoctorDetailContainer, Title } from "./styled";
 import { useGetDoctorByIdQuery } from "src/lib/services";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const DoctorDetailContainer = () => {
   const { t } = useTranslation();
@@ -18,6 +18,8 @@ const DoctorDetailContainer = () => {
     skip: !doctorId,
     refetchOnMountOrArgChange: true,
   });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { vnp_ResponseCode } = Object.fromEntries(searchParams.entries());
 
   const tabContents = useMemo(() => {
     return [
@@ -39,6 +41,12 @@ const DoctorDetailContainer = () => {
   const handleTabChange = (value: string) => {
     setActiveTab(value);
   };
+
+  useEffect(() => {
+    if (vnp_ResponseCode === "00") {
+      setActiveTab(DOCTOR_TAB_ENUM.DOCTOR_AVAILABLE_TIME);
+    }
+  }, [searchParams]);
 
   return (
     <StyledDoctorDetailContainer>

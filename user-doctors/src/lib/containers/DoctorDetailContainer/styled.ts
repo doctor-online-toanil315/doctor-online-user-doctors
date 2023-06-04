@@ -444,7 +444,12 @@ export const StyledAppointmentModal = styled.div`
     margin-top: 20px;
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    button {
+      height: 50px !important;
+    }
   }
 `;
 
