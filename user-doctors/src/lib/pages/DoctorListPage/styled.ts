@@ -43,5 +43,9 @@ export const StyledDoctorListContainer = styled.div`
 
     display: flex;
     align-items: center;
+
+    svg {
+      margin-right: 6px;
+    }
   }
 `;

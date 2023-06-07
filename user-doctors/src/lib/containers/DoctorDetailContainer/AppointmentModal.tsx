@@ -11,6 +11,7 @@ import {
   useCreatePaymentUrlMutation,
   useGetDoctorByIdQuery,
   useGetMeQuery,
+  useLazyConvertCurrencyQuery,
 } from "src/lib/services";
 import { Col, Row } from "antd";
 import {
@@ -43,8 +44,7 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
   const successfullModal = useModal();
   const [createPaymentUrl, { isLoading: vnpayCheckOutLoading }] =
     useCreatePaymentUrlMutation();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { vnp_ResponseCode } = Object.fromEntries(searchParams.entries());
+  const [convert, { data }] = useLazyConvertCurrencyQuery();
 
   const form = useForm({
     defaultValues: {
@@ -58,19 +58,16 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
     ),
   });
 
-  useEffect(() => {
-    if (vnp_ResponseCode === "00") {
-      setSearchParams(new URLSearchParams());
-      onSubmit(form.getValues());
-    }
-  }, [searchParams]);
-
-  const onSubmit = ({ reasonForAppointment }: Partial<BaseAppointmentType>) => {
+  const onSubmit = ({
+    reasonForAppointment,
+    attachment,
+  }: Partial<BaseAppointmentType>) => {
     if (doctorId) {
       addAppointment({
         ...appointmentInfos,
         doctorId,
         reasonForAppointment,
+        attachment,
       } as any)
         .unwrap()
         .then(() => {
@@ -79,11 +76,18 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
     }
   };
 
-  const vnpayCheckout = () => {
-    if (doctorById?.data.price && doctorId) {
+  const vnpayCheckout = async () => {
+    const result = await form.trigger();
+    if (doctorById?.data.price && doctorId && result) {
       createPaymentUrl({
         amount: doctorById?.data.price,
         doctorId,
+        description: JSON.stringify({
+          ...appointmentInfos,
+          doctorId,
+          reasonForAppointment: form.getValues("reasonForAppointment"),
+          attachment: form.getValues("attachment"),
+        }),
       })
         .unwrap()
         .then((vnpUrl) => {
@@ -224,13 +228,25 @@ const AppointmentModal = ({ handleClose, appointmentInfos }: Props) => {
             }
             return actions.resolve();
           }}
-          createOrder={(data, actions) => {
+          createOrder={async (data, actions) => {
+            const convertedDoctorPrice = await convert({
+              amount: doctorById?.data.price ?? 0,
+              api_key: "e1ceeab7918c369a7d9a76801d78ab1ee3cf3a50",
+              format: "json",
+              from: "VND",
+              to: "USD",
+            }).unwrap();
             return actions.order.create({
               purchase_units: [
                 {
                   description: `fee for book an appointment with Dr. ${doctorById?.data.user?.firstName} ${doctorById?.data.user?.lastName}`,
                   amount: {
-                    value: String(doctorById?.data.price) ?? "10",
+                    value:
+                      String(
+                        Math.ceil(
+                          Number(convertedDoctorPrice.rates.USD.rate_for_amount)
+                        )
+                      ) ?? "10",
                   },
                 },
               ],

@@ -12,12 +12,14 @@ import AppointmentModal from "./AppointmentModal";
 import { Modal } from "doctor-online-components";
 import { AppointmentType, BaseAppointmentType } from "src/lib/types";
 import {
+  useAddAppointmentMutation,
   useGetDoctorEventsQuery,
   useGetDoctorWorkingTimeQuery,
   useGetMeQuery,
   useLazyGetAppointmentByDoctorQuery,
 } from "src/lib/services";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import SuccessFullModal from "./SuccessFullModal";
 
 const DoctorAvailableTime = () => {
   const { t } = useTranslation();
@@ -61,6 +63,13 @@ const DoctorAvailableTime = () => {
       refetchOnMountOrArgChange: true,
     }
   );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { vnp_ResponseCode, vnp_OrderInfo } = Object.fromEntries(
+    searchParams.entries()
+  );
+  const successfullModal = useModal();
+  const [addAppointment, { isLoading }] = useAddAppointmentMutation();
+
   const dayNumber = new Date(currentDay).getDay();
   const [startHour, startMinute] =
     (dayNumber === 0
@@ -111,6 +120,17 @@ const DoctorAvailableTime = () => {
       to: String(endWorkingDay),
     });
   }, [startWorkingDay, endWorkingDay, doctorId]);
+
+  useEffect(() => {
+    if (vnp_ResponseCode === "00" && vnp_OrderInfo) {
+      addAppointment(JSON.parse(vnp_OrderInfo))
+        .unwrap()
+        .then(() => {
+          setSearchParams(new URLSearchParams());
+          successfullModal.handleOpen();
+        });
+    }
+  }, [searchParams]);
 
   const timeSlots = useMemo(() => {
     const minuteUnit = 1000 * 60 * 30;
@@ -215,6 +235,17 @@ const DoctorAvailableTime = () => {
         <AppointmentModal
           appointmentInfos={appointmentInfos}
           handleClose={appointmentModal.handleClose}
+        />
+      </Modal>
+      <Modal
+        width={500}
+        onCancel={successfullModal.handleClose}
+        open={successfullModal.isOpen}
+      >
+        <SuccessFullModal
+          handleCancel={() => {
+            successfullModal.handleClose();
+          }}
         />
       </Modal>
     </StyledDoctorAvailableTimeContainer>

@@ -4,6 +4,8 @@ import {
   ApiResponseImpl,
   ApiResponseWithPaginate,
   CreatePaymentUrl,
+  CurrencyConversionParams,
+  CurrencyConversionResult,
   NotificationType,
 } from "../types";
 import { baseQuery, baseQueryWithReAuth } from "./baseQuery";
@@ -16,12 +18,23 @@ export const PaymentAPI = createApi({
   endpoints: (builder) => ({
     createPaymentUrl: builder.mutation<string, CreatePaymentUrl>({
       query: (body) => ({
-        url: `${BASE_URL}/create-payment-url`,
+        url: `${BASE_URL}/create_payment_url`,
         body,
         method: "POST",
+      }),
+    }),
+    convertCurrency: builder.query<
+      CurrencyConversionResult,
+      CurrencyConversionParams
+    >({
+      query: (params) => ({
+        url: `https://api.getgeoapi.com/v2/currency/convert`,
+        params,
+        method: "GET",
       }),
     }),
   }),
 });
 
-export const { useCreatePaymentUrlMutation } = PaymentAPI;
+export const { useCreatePaymentUrlMutation, useLazyConvertCurrencyQuery } =
+  PaymentAPI;

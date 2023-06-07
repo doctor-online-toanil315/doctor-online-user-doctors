@@ -7,9 +7,7 @@ import { StyledDoctorListContainer } from "./styled";
 const DoctorListPage = () => {
   return (
     <StyledDoctorListContainer>
-      <p className="total-result">
-        156 matches found for : Dentist In Sylhet, Bangladesh
-      </p>
+      <p className="total-result">156 matches found</p>
       <span className="advertisement">
         <VerifyIcon />
         Book appointments with minimum wait-time & verified doctor details

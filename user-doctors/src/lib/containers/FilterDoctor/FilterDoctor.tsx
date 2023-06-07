@@ -1,22 +1,27 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { StyledFilterDoctorContainer, StyledToolTipSlider } from "./styled";
 import { Checkbox, Slider } from "doctor-online-components";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
+import { useSearchParams } from "react-router-dom";
+import { useDebounceWithoutDependencies } from "src/lib/hooks";
 
 const FilterDoctor = () => {
   const form = useForm({
     defaultValues: {
-      consultationFee: [10, 10],
-      specialList: [],
+      consultationFee: [0],
+      specialList: [""],
     },
   });
   const { t } = useTranslation();
-
-  const handleSliderChange = (value: number[]) => {
-    form.setValue("consultationFee", value);
-  };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const {
+    specialList: specialListParams,
+    fromPrice,
+    toPrice,
+  } = Object.fromEntries(searchParams.entries());
+  const { setDebounce } = useDebounceWithoutDependencies(300);
 
   const handleSpecialItemCheck = (e: CheckboxChangeEvent) => {
     const checkedSpecial = new Set(form.getValues("specialList") as string[]);
@@ -25,13 +30,24 @@ const FilterDoctor = () => {
     } else {
       checkedSpecial.add(e.target.name ?? "");
     }
-    console.log(checkedSpecial);
 
-    form.setValue("specialList", Array.from(checkedSpecial) as any);
+    const arrSpecial = Array.from(checkedSpecial);
+    if (arrSpecial.length) {
+      searchParams.append("specialList", arrSpecial as any);
+    } else {
+      searchParams.delete("specialList");
+    }
+    setSearchParams(searchParams);
   };
 
   const handleSliderAfterChange = (value: number[]) => {
-    form.setValue("consultationFee", value);
+    setDebounce(() => {
+      searchParams.delete("fromPrice");
+      searchParams.delete("toPrice");
+      searchParams.append("fromPrice", String(value[0]));
+      searchParams.append("toPrice", String(value[1]));
+      setSearchParams(searchParams);
+    });
   };
 
   const specialList = useMemo(() => {
@@ -48,21 +64,32 @@ const FilterDoctor = () => {
     ];
   }, []);
 
+  useEffect(() => {
+    if (fromPrice && toPrice) {
+      form.setValue("consultationFee", [Number(fromPrice), Number(toPrice)]);
+    } else {
+      form.setValue("consultationFee", [100000, 300000]);
+    }
+    form.setValue("specialList", specialListParams?.split(",") ?? []);
+  }, [searchParams]);
+
   return (
     <StyledFilterDoctorContainer>
       <FormProvider {...form}>
         <div className="form-group">
           <h3>{t("consultationFee")}</h3>
           <Slider
-            onChange={handleSliderChange}
-            min={10}
-            max={500}
-            value={[100, 300]}
+            onAfterChange={handleSliderAfterChange}
+            onChange={(value) => form.setValue("consultationFee", value)}
+            min={50000}
+            max={500000}
+            step={10000}
+            value={form.getValues("consultationFee") as [number, number]}
             range
             name="consultationFee"
             tooltip={{
               open: true,
-              formatter: (value) => <span>${value}</span>,
+              formatter: (value) => <span>{value?.toLocaleString()} VND</span>,
               placement: "bottom",
             }}
           />
@@ -73,7 +100,11 @@ const FilterDoctor = () => {
             {specialList.map((special) => {
               return (
                 <div className="special-item">
-                  <Checkbox name={special} onChange={handleSpecialItemCheck} />
+                  <Checkbox
+                    checked={form.getValues("specialList").includes(special)}
+                    name={special}
+                    onChange={handleSpecialItemCheck}
+                  />
                   <span>{special}</span>
                 </div>
               );

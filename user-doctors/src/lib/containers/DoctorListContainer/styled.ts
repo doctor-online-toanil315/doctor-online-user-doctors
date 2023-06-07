@@ -2,9 +2,49 @@ import styled from "styled-components";
 
 export const StyledDoctorListContainer = styled.div`
   flex: 1;
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 15px;
+
+  .ant-pagination {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+
+    .ant-pagination-item-link,
+    .ant-pagination-item {
+      border-radius: 4px;
+      vertical-align: middle;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ant-pagination-item:hover a {
+      color: ${({ theme }) => theme.strongBlue};
+    }
+
+    .ant-pagination-item:hover {
+      border-color: ${({ theme }) => theme.strongBlue};
+    }
+
+    .ant-pagination-next:hover .ant-pagination-item-link {
+      border-color: ${({ theme }) => theme.strongBlue};
+      color: ${({ theme }) => theme.strongBlue};
+    }
+
+    .ant-pagination-item-active {
+      border-color: ${({ theme }) => theme.strongBlue};
+    }
+
+    .ant-pagination-item-active a {
+      color: ${({ theme }) => theme.strongBlue};
+    }
+  }
+
+  .doctor-list {
+    min-height: 80vh;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 15px;
+  }
 `;
 
 export const StyledDoctorCardContainer = styled.div`
