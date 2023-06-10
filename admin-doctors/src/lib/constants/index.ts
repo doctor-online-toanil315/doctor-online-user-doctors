@@ -10,3 +10,4 @@ export * from "./methodOfIntake.enum";
 export * from "./formMedicine.enum";
 export * from "./when.enum";
 export * from "./testPriority.enum";
+export * from "./doctorTab.enum";

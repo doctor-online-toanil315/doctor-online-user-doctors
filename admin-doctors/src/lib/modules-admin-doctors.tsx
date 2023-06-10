@@ -5,6 +5,7 @@ import i18n from "./i18n/config";
 import { createRouter, RoutingStrategy } from "./routes";
 import "./index.css";
 import { useInitApp } from "./hooks";
+import { ACCESS_TOKEN } from "./constants";
 
 /* eslint-disable-next-line */
 export interface ModuleAdminDoctorsProps {
@@ -19,7 +20,7 @@ export function ModuleAdminDoctors({
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const currentUserLogin = useInitApp(iframeRef);
 
-  if (!currentUserLogin) {
+  if (!currentUserLogin && !sessionStorage.getItem(ACCESS_TOKEN)) {
     const hiddenStyle = {
       position: "absolute",
       opacity: "0",

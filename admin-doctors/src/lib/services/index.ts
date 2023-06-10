@@ -8,6 +8,8 @@ export {
   useGetDoctorEducationQuery,
   useGetDoctorWorkExperienceQuery,
   useAddDoctorMutation,
+  useGetDoctorReviewsQuery,
+  useDeleteDoctorMutation,
 } from "./DoctorAPI";
 export {
   AppointmentAPI,

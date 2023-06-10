@@ -3,6 +3,7 @@ import { createRoutesFromElements, Outlet, Route } from "react-router-dom";
 import { NavigationManager } from "../HOC";
 import { HocPermissionRoute } from "../HOC/HocPermissionRoute";
 import { ListDoctors } from "../pages/ListDoctors";
+import { DoctorDetail } from "../pages";
 
 const routes = createRoutesFromElements(
   <Route
@@ -20,6 +21,15 @@ const routes = createRoutesFromElements(
           <HocPermissionRoute
             role={ROLE_ENUM.ADMIN}
             component={<ListDoctors />}
+          />
+        }
+      />
+      <Route
+        path=":doctorId"
+        element={
+          <HocPermissionRoute
+            role={ROLE_ENUM.ADMIN}
+            component={<DoctorDetail />}
           />
         }
       />

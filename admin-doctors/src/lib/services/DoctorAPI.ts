@@ -9,6 +9,7 @@ import {
   CreateDoctorType,
   DoctorAchievement,
   DoctorEducation,
+  DoctorReview,
   DoctorType,
   DoctorWorkExperience,
 } from "../types/DoctorType";
@@ -79,6 +80,21 @@ export const DoctorAPI = createApi({
       }),
       invalidatesTags: ["Doctors"],
     }),
+
+    getDoctorReviews: builder.query<ApiResponseImpl<DoctorReview[]>, string>({
+      query: (id) => ({
+        url: `${BASE_URL}/${id}/reviews`,
+        method: "GET",
+      }),
+    }),
+
+    deleteDoctor: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `${BASE_URL}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Doctors"],
+    }),
   }),
 });
 
@@ -90,4 +106,6 @@ export const {
   useGetDoctorEducationQuery,
   useGetDoctorWorkExperienceQuery,
   useAddDoctorMutation,
+  useGetDoctorReviewsQuery,
+  useDeleteDoctorMutation,
 } = DoctorAPI;

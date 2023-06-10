@@ -1,16 +1,8 @@
-import React, {
-  ChangeEvent,
-  ChangeEventHandler,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { StyledDoctorInfos, StyledMyAppointmentsContainer } from "./styled";
+import { ColumnType } from "antd/lib/table";
+import { useModal } from "doctor-online-common";
 import {
-  AddIcon,
   Button,
   DeleteIcon,
-  EditIcon,
   EyeIcon,
   ImportIcon,
   Input,
@@ -19,19 +11,20 @@ import {
   SearchIcon,
   StarGold,
   Table,
+  openNotification,
 } from "doctor-online-components";
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Link, useSearchParams } from "react-router-dom";
-import { ColumnType } from "antd/lib/table";
-import { AppointmentType } from "src/lib/types";
-import moment from "moment";
-import { useGetDoctorsQuery, useGetMeQuery } from "src/lib/services";
 import { useDebounceWithoutDependencies } from "src/lib/hooks";
+import { useDeleteDoctorMutation, useGetDoctorsQuery } from "src/lib/services";
 import { DoctorType } from "src/lib/types/DoctorType";
-import { useModal } from "doctor-online-common";
+import * as XLSX from "xlsx";
 import { AddDoctorModal } from "../AddDoctorModal";
 import { ImportDoctorsModal } from "../ImportDoctorsModal.tsx";
-import * as XLSX from "xlsx";
+import { StyledDoctorInfos, StyledMyAppointmentsContainer } from "./styled";
+import { ConfirmModal } from "../ConfirmModal";
+import { DOCTOR_TAB_ENUM } from "src/lib/constants";
 
 const ListDoctorsContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -52,7 +45,10 @@ const ListDoctorsContainer = () => {
   const { setDebounce } = useDebounceWithoutDependencies(300);
   const modal = useModal();
   const importModal = useModal();
+  const confirmModal = useModal();
   const [importData, setImportData] = useState<unknown[]>([]);
+  const [selectedDoctor, setSelectedDoctor] = useState<string | null>(null);
+  const [deleteDoctor, { isLoading }] = useDeleteDoctorMutation();
 
   const columns: ColumnType<DoctorType>[] = [
     {
@@ -118,15 +114,18 @@ const ListDoctorsContainer = () => {
       align: "center",
       render: (_, record) => (
         <div className="user-ctrl">
-          <Link className="action" to={`/${record.id}`}>
+          <Link className="action" to={`/${record.doctorId}`}>
             <EyeIcon />
           </Link>
-          <Link className="action" to={`/${record.id}`}>
-            <EditIcon />
-          </Link>
-          <Link className="action" to={`/${record.id}`}>
+          <div
+            className="action"
+            onClick={() => {
+              setSelectedDoctor(record.doctorId);
+              confirmModal.handleOpen();
+            }}
+          >
             <DeleteIcon />
-          </Link>
+          </div>
         </div>
       ),
     },
@@ -167,6 +166,19 @@ const ListDoctorsContainer = () => {
         event.target.value = "";
       };
     }
+  };
+
+  const handleDelete = (doctorId: string) => {
+    deleteDoctor(doctorId)
+      .unwrap()
+      .then(() => {
+        openNotification({
+          type: "success",
+          message: "Delete doctor successfully.",
+        });
+        confirmModal.handleClose();
+        setSelectedDoctor(null);
+      });
   };
 
   return (
@@ -230,6 +242,17 @@ const ListDoctorsContainer = () => {
         <ImportDoctorsModal
           data={importData}
           handleClose={importModal.handleClose}
+        />
+      </Modal>
+      <Modal
+        width={500}
+        destroyOnClose
+        open={confirmModal.isOpen}
+        onCancel={confirmModal.handleClose}
+      >
+        <ConfirmModal
+          handleClose={confirmModal.handleClose}
+          handleSubmit={() => selectedDoctor && handleDelete(selectedDoctor)}
         />
       </Modal>
     </StyledMyAppointmentsContainer>
