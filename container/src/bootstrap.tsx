@@ -24,15 +24,15 @@ Object.defineProperty(increaseSpecificityPlugin, "name", {
 });
 
 root.render(
-  <Provider store={commonStore} context={CommonContext}>
-    <Provider store={apiStore}>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
+    <Provider store={commonStore} context={CommonContext}>
+      <Provider store={apiStore}>
+        <Provider store={store}>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </ThemeProvider>
+        </Provider>
       </Provider>
     </Provider>
-  </Provider>
+  </ThemeProvider>
 );

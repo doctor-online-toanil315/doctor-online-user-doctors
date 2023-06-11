@@ -234,3 +234,55 @@ export const StyledReceiveCallRequest = styled.div`
     padding: 0 40px !important;
   }
 `;
+
+export const StyledReminderLogo = styled.div`
+  margin-bottom: 15px;
+  img {
+    height: 30px;
+  }
+`;
+
+export const StyledReminderDescription = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 15px;
+
+  .bot {
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+
+    h3 {
+      margin-bottom: 0;
+    }
+
+    p {
+      color: ${({ theme }) => theme.baseGray03};
+    }
+
+    .user-ctrl {
+      margin-top: 10px;
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 15px;
+      justify-content: flex-end;
+
+      button {
+        height: 30px !important;
+        padding: 0 20px !important;
+
+        span {
+          font-size: 14px !important;
+        }
+      }
+    }
+  }
+`;
