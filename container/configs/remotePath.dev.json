@@ -50,5 +50,9 @@
   "admin-payment": {
     "appName": "adminPayment",
     "path": "http://localhost:5186/remoteEntry.js"
+  },
+  "doctor-blogs": {
+    "appName": "doctorBlogs",
+    "path": "http://localhost:5187/remoteEntry.js"
   }
 }

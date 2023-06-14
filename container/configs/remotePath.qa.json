@@ -50,5 +50,9 @@
   "admin-payment": {
     "appName": "adminPayment",
     "path": "/adminPayment/latest/remoteEntry.js"
+  },
+  "doctor-blogs": {
+    "appName": "doctorBlogs",
+    "path": "/doctorBlogs/latest/remoteEntry.js"
   }
 }

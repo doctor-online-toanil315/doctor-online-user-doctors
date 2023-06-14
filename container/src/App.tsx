@@ -44,6 +44,9 @@ const ModuleAdminPayment = React.lazy(
 const ModuleAdminDashboard = React.lazy(
   () => import("./remotes/AdminDashboard/AdminDashboard")
 );
+const ModuleDoctorBlogs = React.lazy(
+  () => import("./remotes/DoctorBlogs/DoctorBlogs")
+);
 
 export function App() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -181,6 +184,14 @@ export function App() {
               element={
                 <Suspense fallback={<LoadingOutlined />}>
                   <ModuleAdminDashboard />
+                </Suspense>
+              }
+            />
+            <Route
+              path="doctor-blogs/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleDoctorBlogs />
                 </Suspense>
               }
             />

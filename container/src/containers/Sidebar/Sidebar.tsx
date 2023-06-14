@@ -105,6 +105,12 @@ const Sidebar = () => {
         icon: null,
         label: "Schedule Timings",
       },
+      {
+        id: 6,
+        href: "doctor-blogs",
+        icon: null,
+        label: "Blogs",
+      },
     ];
   }, [me]);
 

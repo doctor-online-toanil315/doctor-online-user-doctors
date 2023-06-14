@@ -12,4 +12,5 @@ export const REMOTE_APP_ROUTING_PREFIX = {
   DOCTOR_SCHEDULE_TIME: "doctor-schedule-time",
   ADMIN_DASHBOARD: "admin-dashboard",
   ADMIN_PAYMENT: "admin-payment",
+  DOCTOR_BLOGS: "doctor-blogs",
 };
