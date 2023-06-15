@@ -54,5 +54,9 @@
   "doctor-blogs": {
     "appName": "doctorBlogs",
     "path": "/doctorBlogs/latest/remoteEntry.js"
+  },
+  "user-blogs": {
+    "appName": "userBlogs",
+    "path": "/userBlogs/latest/remoteEntry.js"
   }
 }

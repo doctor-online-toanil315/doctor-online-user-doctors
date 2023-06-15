@@ -36,6 +36,12 @@ const Sidebar = () => {
           icon: null,
           label: "Settings",
         },
+        {
+          id: 5,
+          href: "user-blogs",
+          icon: null,
+          label: "Blogs",
+        },
       ];
     }
 

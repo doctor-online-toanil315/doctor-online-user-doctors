@@ -13,3 +13,4 @@ declare module "doctorScheduleTime/Module";
 declare module "adminPayment/Module";
 declare module "adminDashboard/Module";
 declare module "doctorBlogs/Module";
+declare module "userBlogs/Module";

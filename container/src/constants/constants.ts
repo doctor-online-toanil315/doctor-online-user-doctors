@@ -13,4 +13,5 @@ export const REMOTE_APP_ROUTING_PREFIX = {
   ADMIN_DASHBOARD: "admin-dashboard",
   ADMIN_PAYMENT: "admin-payment",
   DOCTOR_BLOGS: "doctor-blogs",
+  USER_BLOGS: "user-blogs",
 };

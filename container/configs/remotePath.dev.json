@@ -54,5 +54,9 @@
   "doctor-blogs": {
     "appName": "doctorBlogs",
     "path": "http://localhost:5187/remoteEntry.js"
+  },
+  "user-blogs": {
+    "appName": "userBlogs",
+    "path": "http://localhost:5187/remoteEntry.js"
   }
 }
