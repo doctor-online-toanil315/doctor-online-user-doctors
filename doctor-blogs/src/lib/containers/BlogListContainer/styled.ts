@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StyledBlogListContainer = styled.div`
+  padding: 20px;
+
   .header {
     display: flex;
     flex-flow: row nowrap;

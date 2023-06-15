@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const StyledPreviewBlogContainer = styled.div`
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-sizing: 0 2px 5px rgba(0, 0, 0, 0.1);
+
   .category {
     margin-bottom: 25px;
     .category-item {

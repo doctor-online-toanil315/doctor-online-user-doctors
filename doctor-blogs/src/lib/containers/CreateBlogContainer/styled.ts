@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StyledCreateBlogContainer = styled.div`
+  padding: 20px;
+
   .header {
     h1 {
       font-weight: 700;
