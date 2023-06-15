@@ -4,6 +4,7 @@ export const StyledWorkingTimeContainer = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
 
   h2 {
     font-weight: 600;

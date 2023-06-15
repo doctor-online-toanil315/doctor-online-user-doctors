@@ -9,10 +9,10 @@ const DoctorScheduleTimeContainer = () => {
     <div>
       <Title>Schedule Timings</Title>
       <Row gutter={30}>
-        <Col span={16}>
+        <Col span={15}>
           <DoctorEventContainer />
         </Col>
-        <Col span={8}>
+        <Col span={9}>
           <WorkingTimeContainer />
         </Col>
       </Row>
