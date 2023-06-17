@@ -29,7 +29,9 @@ export default function NavigationManager({
 
   useEffect(() => {
     window.dispatchEvent(
-      new CustomEvent("[user-doctors] navigated", { detail: location.pathname })
+      new CustomEvent("[user-doctors] navigated", {
+        detail: location.pathname + (location.search ?? ""),
+      })
     );
   }, [location]);
 
