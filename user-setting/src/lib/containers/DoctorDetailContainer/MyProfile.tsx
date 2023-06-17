@@ -187,6 +187,12 @@ const MyProfile = () => {
               name="birthday"
               format={format}
               value={moment(Number(form.getValues("birthday")))}
+              onChange={(value) => {
+                form.setValue("birthday", String(value?.valueOf()), {
+                  shouldValidate: true,
+                });
+                console.log(form.getValues("birthday"));
+              }}
               required
               allowClear={false}
             />
