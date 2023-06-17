@@ -1,13 +1,9 @@
 import {
   CalendarIcon,
-  PaperIcon,
   PaymentIcon,
   PeopleIcon,
   RoundedPersonIcon,
-  VideoIcon,
 } from "doctor-online-components";
-import React from "react";
-import { StyledAdminOverview } from "./styled";
 import {
   useGetAllAppointmentsQuery,
   useGetAllIncomeQuery,
@@ -15,6 +11,7 @@ import {
   useGetDoctorsQuery,
 } from "src/lib/services";
 import { abbreviateNumber } from "src/lib/utils";
+import { StyledAdminOverview } from "./styled";
 
 const AdminOverview = () => {
   const { data: appointments } = useGetAllAppointmentsQuery({
@@ -66,7 +63,7 @@ const AdminOverview = () => {
         </div>
         <div className="data">
           <p>Income</p>
-          <h2>${abbreviateNumber(income ?? 0)}</h2>
+          <h2>{abbreviateNumber(income ?? 0)} VND</h2>
         </div>
       </div>
     </StyledAdminOverview>
