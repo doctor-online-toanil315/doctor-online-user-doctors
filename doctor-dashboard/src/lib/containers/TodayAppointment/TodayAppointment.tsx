@@ -43,8 +43,6 @@ const TodayAppointment = () => {
     refetchAppointments();
   }, [JSON.stringify(form.getValues())]);
 
-  console.log(form.getValues());
-
   return (
     <StyledContainer>
       <div className="header">

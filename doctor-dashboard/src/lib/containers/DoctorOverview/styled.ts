@@ -10,7 +10,7 @@ export const StyledDoctorOverview = styled.div`
 
   .overview-item {
     width: 25%;
-    padding: 30px;
+    padding: 15px 30px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 

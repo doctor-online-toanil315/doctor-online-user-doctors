@@ -16,5 +16,6 @@ export {
   useLazyGetAppointmentByDoctorQuery,
   useUpdateAppointmentMutation,
   useGetPatientOfDoctorQuery,
+  useGetConsultationByDoctorQuery,
 } from "./AppointmentAPI";
 export { NotificationAPI, useGetNotificationsQuery } from "./NotificationAPI";

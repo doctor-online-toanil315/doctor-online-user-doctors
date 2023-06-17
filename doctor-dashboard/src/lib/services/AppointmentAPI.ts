@@ -72,6 +72,12 @@ export const AppointmentAPI = createApi({
       }),
       invalidatesTags: ["Appointment"],
     }),
+    getConsultationByDoctor: builder.query<number, string>({
+      query: (doctorId: string) => ({
+        url: `consultions/doctor/${doctorId}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -82,4 +88,5 @@ export const {
   useLazyGetAppointmentByDoctorQuery,
   useUpdateAppointmentMutation,
   useGetPatientOfDoctorQuery,
+  useGetConsultationByDoctorQuery,
 } = AppointmentAPI;
