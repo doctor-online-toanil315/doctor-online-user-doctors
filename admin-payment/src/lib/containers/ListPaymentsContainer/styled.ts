@@ -186,16 +186,20 @@ export const StyledPaymentModal = styled.div`
 
   .right {
     text-align: right;
+    margin-left: auto;
   }
 
   .total {
     span {
       display: inline-block;
       &:first-child {
+        font-size: 16px;
+        font-weight: 500;
         min-width: 100px;
         text-align: left;
       }
       &.bold {
+        font-size: 18px;
         font-weight: 700;
       }
     }
