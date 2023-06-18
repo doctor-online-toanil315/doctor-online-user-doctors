@@ -42,5 +42,9 @@
   "user-blogs": {
     "appName": "userBlogs",
     "path": "/userBlogs/latest/remoteEntry.js"
+  },
+  "admin-survey": {
+    "appName": "adminSurvey",
+    "path": "/adminSurvey/latest/remoteEntry.js"
   }
 }

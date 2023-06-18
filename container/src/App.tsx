@@ -50,6 +50,9 @@ const ModuleDoctorBlogs = React.lazy(
 const ModuleUserBlogs = React.lazy(
   () => import("./remotes/UserBlogs/UserBlogs")
 );
+const ModuleAdminSurvey = React.lazy(
+  () => import("./remotes/AdminSurvey/AdminSurvey")
+);
 
 export function App() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -203,6 +206,14 @@ export function App() {
               element={
                 <Suspense fallback={<LoadingOutlined />}>
                   <ModuleUserBlogs />
+                </Suspense>
+              }
+            />
+            <Route
+              path="admin-survey/*"
+              element={
+                <Suspense fallback={<LoadingOutlined />}>
+                  <ModuleAdminSurvey />
                 </Suspense>
               }
             />

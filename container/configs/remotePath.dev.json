@@ -58,5 +58,9 @@
   "user-blogs": {
     "appName": "userBlogs",
     "path": "http://localhost:5187/remoteEntry.js"
+  },
+  "admin-survey": {
+    "appName": "adminSurvey",
+    "path": "http://localhost:5188/remoteEntry.js"
   }
 }

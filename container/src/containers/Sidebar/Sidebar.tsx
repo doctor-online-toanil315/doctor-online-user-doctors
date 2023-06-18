@@ -77,6 +77,12 @@ const Sidebar = () => {
           icon: null,
           label: "Payments",
         },
+        {
+          id: 5,
+          href: "admin-survey",
+          icon: null,
+          label: "Surveys",
+        },
       ];
     }
 
