@@ -44,7 +44,7 @@ const PatientHistoryContainer = () => {
         </div>
         <h1>Patient History</h1>
         <Row gutter={420}>
-          <Col span={8}>
+          <Col span={9}>
             <Timeline mode={"left"}>
               {data?.data.map((consultation) => {
                 return (
@@ -73,7 +73,7 @@ const PatientHistoryContainer = () => {
               })}
             </Timeline>
           </Col>
-          <Col span={16}>
+          <Col span={15}>
             <h3>
               Meet with{" "}
               {selectedConsultation?.appointment.doctor.specializeTitle}

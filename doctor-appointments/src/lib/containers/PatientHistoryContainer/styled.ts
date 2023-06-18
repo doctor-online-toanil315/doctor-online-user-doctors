@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const StyledPatientHistoryContainer = styled.div`
+  margin-top: 15px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
   .ant-timeline.ant-timeline-label
     .ant-timeline-item-left
     .ant-timeline-item-content {
