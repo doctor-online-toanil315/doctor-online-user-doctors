@@ -78,6 +78,16 @@ export const AppointmentAPI = createApi({
         method: "GET",
       }),
     }),
+    getPatientOverview: builder.query<
+      { oldPatients: number; newPatients: number },
+      void
+    >({
+      query: () => ({
+        url: `${BASE_URL}/patient-overview`,
+        method: "GET",
+      }),
+      providesTags: ["Appointment"],
+    }),
   }),
 });
 
@@ -89,4 +99,5 @@ export const {
   useUpdateAppointmentMutation,
   useGetPatientOfDoctorQuery,
   useGetConsultationByDoctorQuery,
+  useGetPatientOverviewQuery,
 } = AppointmentAPI;

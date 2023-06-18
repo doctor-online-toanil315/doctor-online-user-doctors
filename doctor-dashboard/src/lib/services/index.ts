@@ -17,5 +17,6 @@ export {
   useUpdateAppointmentMutation,
   useGetPatientOfDoctorQuery,
   useGetConsultationByDoctorQuery,
+  useGetPatientOverviewQuery,
 } from "./AppointmentAPI";
 export { NotificationAPI, useGetNotificationsQuery } from "./NotificationAPI";

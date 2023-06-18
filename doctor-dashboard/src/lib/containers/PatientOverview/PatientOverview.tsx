@@ -3,9 +3,12 @@ import { StyledContainer } from "../styled";
 import { useTranslation } from "react-i18next";
 import { PersonIcon, TrendingUpIcon } from "doctor-online-components";
 import { StyledPatientOverview } from "./styled";
+import { useGetPatientOverviewQuery } from "src/lib/services";
+import { abbreviateNumber } from "src/lib/utils/formatNumber.util";
 
 const PatientOverview = () => {
   const { t } = useTranslation();
+  const { data } = useGetPatientOverviewQuery();
 
   return (
     <StyledContainer>
@@ -20,7 +23,7 @@ const PatientOverview = () => {
                 <PersonIcon />
               </div>
               <div className="info">
-                <p>24.4k</p>
+                <p>{abbreviateNumber(data?.newPatients ?? 0)}</p>
                 <span>{t("newPatient")}</span>
               </div>
             </div>
@@ -35,7 +38,7 @@ const PatientOverview = () => {
                 <PersonIcon />
               </div>
               <div className="info">
-                <p>166.4k</p>
+                <p>{abbreviateNumber(data?.oldPatients ?? 0)}</p>
                 <span>{t("oldPatient")}</span>
               </div>
             </div>
