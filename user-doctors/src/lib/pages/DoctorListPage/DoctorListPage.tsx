@@ -7,7 +7,7 @@ import { StyledDoctorListContainer } from "./styled";
 const DoctorListPage = () => {
   return (
     <StyledDoctorListContainer>
-      <p className="total-result">156 matches found</p>
+      <p className="total-result">All matches found</p>
       <span className="advertisement">
         <VerifyIcon />
         Book appointments with minimum wait-time & verified doctor details

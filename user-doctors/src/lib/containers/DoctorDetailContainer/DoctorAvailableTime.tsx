@@ -144,7 +144,15 @@ const DoctorAvailableTime = () => {
       });
 
     return timeSlotEvery30Minute;
-  }, [currentDay, doctorId, startHour, startMinute, endHour, endMinute]);
+  }, [
+    currentDay,
+    doctorId,
+    startHour,
+    startMinute,
+    endHour,
+    endMinute,
+    workingTime,
+  ]);
 
   const handleChooseTimeSlot = (timeSlot: number) => {
     setAppointmentInfos({
@@ -208,6 +216,43 @@ const DoctorAvailableTime = () => {
                   isOccupied = true;
                 }
               });
+
+              switch (new Date(currentDay).getDay() + 1) {
+                case 1: {
+                  isOccupied = !workingTime?.data.isSunOpen || false;
+                  break;
+                }
+
+                case 2: {
+                  isOccupied = !workingTime?.data.isMonOpen || false;
+                  break;
+                }
+
+                case 3: {
+                  isOccupied = !workingTime?.data.isTueOpen || false;
+                  break;
+                }
+
+                case 4: {
+                  isOccupied = !workingTime?.data.isWedOpen || false;
+                  break;
+                }
+
+                case 5: {
+                  isOccupied = !workingTime?.data.isThuOpen || false;
+                  break;
+                }
+
+                case 6: {
+                  isOccupied = !workingTime?.data.isFriOpen || false;
+                  break;
+                }
+
+                case 7: {
+                  isOccupied = !workingTime?.data.isSatOpen || false;
+                  break;
+                }
+              }
 
               const myTimeSlot =
                 occupiedTimeSlotByStartTime?.[String(timeSlot)]?.user.id ===
