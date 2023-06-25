@@ -401,6 +401,7 @@ export const StyledDoctorReviewsItem = styled.div`
   }
 
   .review-content {
+    width: 100%;
     .header {
       display: flex;
       flex-flow: row nowrap;
