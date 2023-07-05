@@ -69,7 +69,7 @@ const useInitApp = (iframeRef: React.RefObject<HTMLIFrameElement>) => {
   const isFirstRunRef = useRef<boolean>(true);
   useEffect(() => {
     if (currentUserLogin && isFirstRunRef.current) {
-      const socket = io("http://localhost:8001", {
+      const socket = io(`http://localhost:8001`, {
         query: {
           token: sessionStorage.getItem(ACCESS_TOKEN),
         },

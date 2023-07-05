@@ -48,6 +48,7 @@ const getDevConfigs = (localApps) => ({
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+      favicon: "./public/logo.png",
     }),
   ],
   resolve: {

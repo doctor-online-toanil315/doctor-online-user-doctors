@@ -25,6 +25,16 @@ export const SidebarItemContainer = styled.div`
     &.active {
       color: ${({ theme }) => theme.strongBlue};
       background: ${({ theme }) => theme.grayBlue};
+
+      svg {
+        path {
+          stroke: ${({ theme }) => theme.strongBlue};
+        }
+
+        rect {
+          fill: ${({ theme }) => theme.strongBlue};
+        }
+      }
     }
   }
 `;

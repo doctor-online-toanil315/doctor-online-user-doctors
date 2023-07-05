@@ -1,10 +1,21 @@
 import React, { useMemo } from "react";
 import { SidebarContainer, SidebarItemContainer } from "./styled";
-import { HomeIcon, PeopleIcon } from "doctor-online-components";
+import {
+  CalendarIcon,
+  ClockIcon,
+  HomeIcon,
+  OverviewIcon,
+  PaperIcon,
+  PaymentIcon,
+  PeopleIcon,
+  Stethoscope,
+  WeekIcon,
+} from "doctor-online-components";
 import { useGetMeQuery } from "../../services";
 import { ROLE_ENUM } from "doctor-online-common";
 import { NavLink } from "react-router-dom";
 import LogoPrimary from "../../assets/logo.png";
+import { SettingIcon } from "../SettingIcon";
 
 const Sidebar = () => {
   const { data: me } = useGetMeQuery();
@@ -15,31 +26,31 @@ const Sidebar = () => {
         {
           id: 1,
           href: "user-home",
-          icon: null,
+          icon: <HomeIcon />,
           label: "Home",
         },
         {
           id: 2,
           href: "user-doctors",
-          icon: null,
+          icon: <PeopleIcon />,
           label: "Doctors",
         },
         {
           id: 3,
           href: "user-appointments",
-          icon: null,
+          icon: <CalendarIcon />,
           label: "Appointments",
         },
         {
           id: 4,
           href: "user-setting",
-          icon: null,
+          icon: <SettingIcon />,
           label: "Settings",
         },
         {
           id: 5,
           href: "user-blogs",
-          icon: null,
+          icon: <PaperIcon />,
           label: "Blogs",
         },
       ];
@@ -50,37 +61,37 @@ const Sidebar = () => {
         {
           id: 0,
           href: "admin-dashboard",
-          icon: null,
+          icon: <WeekIcon />,
           label: "Dashboard",
         },
         {
           id: 1,
           href: "admin-doctors",
-          icon: null,
+          icon: <PeopleIcon />,
           label: "Doctors",
         },
         {
           id: 2,
           href: "admin-medicines",
-          icon: null,
+          icon: <Stethoscope />,
           label: "Medicines",
         },
         {
           id: 3,
           href: "admin-tests",
-          icon: null,
+          icon: <CalendarIcon />,
           label: "Lab Tests",
         },
         {
           id: 4,
           href: "admin-payment",
-          icon: null,
+          icon: <PaymentIcon />,
           label: "Payments",
         },
         {
           id: 5,
           href: "admin-survey",
-          icon: null,
+          icon: <PaperIcon />,
           label: "Surveys",
         },
       ];
@@ -90,37 +101,31 @@ const Sidebar = () => {
       {
         id: 1,
         href: "doctor-dashboard",
-        icon: null,
+        icon: <WeekIcon />,
         label: "Home",
       },
       {
         id: 2,
         href: "doctor-appointments",
-        icon: null,
+        icon: <CalendarIcon />,
         label: "Appointments",
-      },
-      {
-        id: 3,
-        href: "doctor-patients",
-        icon: null,
-        label: "Patients",
       },
       {
         id: 4,
         href: "user-setting",
-        icon: null,
+        icon: <SettingIcon />,
         label: "Settings",
       },
       {
         id: 5,
         href: "doctor-schedule-time",
-        icon: null,
+        icon: <ClockIcon />,
         label: "Schedule Timings",
       },
       {
         id: 6,
         href: "doctor-blogs",
-        icon: null,
+        icon: <PaperIcon />,
         label: "Blogs",
       },
     ];

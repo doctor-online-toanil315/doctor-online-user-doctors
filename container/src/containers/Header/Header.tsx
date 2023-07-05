@@ -21,7 +21,7 @@ const Header = () => {
           <Select
             name="search"
             showSearch
-            label={t("homeSearch")}
+            label={t("Search Doctor...")}
             suffixIcon={<SearchIcon />}
           />
         </div>
