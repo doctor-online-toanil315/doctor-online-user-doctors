@@ -189,34 +189,6 @@ const DoctorAvailableTime = () => {
               const startTimeSlot = timeSlot;
               const endTimeSlot = startTimeSlot + 1000 * 60 * 30;
 
-              events?.data.forEach((event) => {
-                const eventFrom = Number(event.from ?? 0);
-                const eventTo = Number(event.to ?? 0);
-                if (eventFrom <= startTimeSlot && eventTo >= endTimeSlot) {
-                  isOccupied = true;
-                }
-
-                if (
-                  eventFrom <= startTimeSlot &&
-                  eventTo > startTimeSlot &&
-                  eventTo <= endTimeSlot
-                ) {
-                  isOccupied = true;
-                }
-
-                if (eventFrom >= startTimeSlot && eventTo <= endTimeSlot) {
-                  isOccupied = true;
-                }
-
-                if (
-                  eventFrom >= startTimeSlot &&
-                  eventFrom < endTimeSlot &&
-                  eventTo >= endTimeSlot
-                ) {
-                  isOccupied = true;
-                }
-              });
-
               switch (new Date(currentDay).getDay() + 1) {
                 case 1: {
                   isOccupied = !workingTime?.data.isSunOpen || false;
@@ -253,6 +225,35 @@ const DoctorAvailableTime = () => {
                   break;
                 }
               }
+
+              events?.data.forEach((event) => {
+                const eventFrom = Number(event.from ?? 0);
+                const eventTo = Number(event.to ?? 0);
+
+                if (eventFrom <= startTimeSlot && eventTo >= endTimeSlot) {
+                  isOccupied = true;
+                }
+
+                if (
+                  eventFrom <= startTimeSlot &&
+                  eventTo > startTimeSlot &&
+                  eventTo <= endTimeSlot
+                ) {
+                  isOccupied = true;
+                }
+
+                if (eventFrom >= startTimeSlot && eventTo <= endTimeSlot) {
+                  isOccupied = true;
+                }
+
+                if (
+                  eventFrom >= startTimeSlot &&
+                  eventFrom < endTimeSlot &&
+                  eventTo >= endTimeSlot
+                ) {
+                  isOccupied = true;
+                }
+              });
 
               const myTimeSlot =
                 occupiedTimeSlotByStartTime?.[String(timeSlot)]?.user.id ===
