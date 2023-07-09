@@ -12,6 +12,7 @@ export interface BaseBlogType {
 
 export interface CreateBlogType extends BaseBlogType {
   doctorId: string;
+  doctor?: DoctorType;
 }
 
 export interface BlogType extends BaseBlogType {

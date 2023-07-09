@@ -17,11 +17,11 @@ const PreviewBlogContainer = ({ blog }: Props) => {
       </div>
       <h1>{blog?.title}</h1>
       <div className="author">
-        <img src={currentUserLogin?.data.avatar ?? ""} alt="avatar" />
+        <img src={blog?.doctor?.user?.avatar ?? ""} alt="avatar" />
         <div className="author-infos">
           <p>
-            Written by {currentUserLogin?.data.firstName}{" "}
-            {currentUserLogin?.data.lastName}
+            Written by {blog?.doctor?.user?.firstName}{" "}
+            {blog?.doctor?.user?.lastName}
           </p>
           <span>Posted on {moment(Date.now()).format("MMMM DD, YYYY")}</span>
         </div>
